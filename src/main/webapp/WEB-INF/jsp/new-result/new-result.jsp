@@ -51,11 +51,18 @@
 				<h1>Novo Resultado</h1>
 			</div>
 
-			<form role="form" action="result-upload" method="POST" enctype="multipart/form-data">
+			<form role="form" action="result-upload" method="POST"
+				enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email address</label> <input
+						type="email" class="form-control" id="exampleInputEmail1"
+						placeholder="Enter email" name="email">
+				</div>
 				<div class="form-group">
 					<label for="exampleInputFile">File input</label> <input type="file"
-						name="inputFile">
-					<p class="help-block">Arquivo XML do resultado de testes de mutantes</p>
+						name="inputFile" id="exampleInputFile">
+					<p class="help-block">Arquivo XML do resultado de testes de
+						mutantes</p>
 				</div>
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>

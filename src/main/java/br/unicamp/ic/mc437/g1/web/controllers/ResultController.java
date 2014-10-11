@@ -27,7 +27,8 @@ public class ResultController {
 
 	@RequestMapping(value = "/result-upload", method = RequestMethod.POST)
 	public String renderResultUpload(
-			@RequestParam("inputFile") MultipartFile xmlFile, Model model) {
+			@RequestParam("inputFile") MultipartFile xmlFile,
+			@RequestParam("email") String email, Model model) {
 		// TODO: utilizar xmlFile e calcular número de mutantes
 
 		model.addAttribute("mutantsKilled", 0);
