@@ -1,5 +1,6 @@
-package br.unicamp.ic.mc437.g1;
+package br.unicamp.ic.mc437.g1.unit;
 
+import br.unicamp.ic.mc437.g1.*;
 import org.junit.*;
 import org.junit.runner.*;
 import org.slf4j.*;
