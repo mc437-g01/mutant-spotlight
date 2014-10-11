@@ -13,7 +13,7 @@ import org.springframework.test.context.support.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
-        classes = {MainTestConfiguration.class})
+        classes = {UnitTestsConfiguration.class})
 public class WelcomeControllerTest {
 
     private static final Logger log = LoggerFactory.getLogger(WelcomeControllerTest.class);

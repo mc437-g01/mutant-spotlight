@@ -9,5 +9,5 @@ import org.springframework.test.context.junit4.*;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @AcceptanceTest
-public class LearnJbehaveStory extends AbstractSpringJBehaveStory {
+public class ClickUploadButtonStory extends AbstractSpringJBehaveStory {
 }

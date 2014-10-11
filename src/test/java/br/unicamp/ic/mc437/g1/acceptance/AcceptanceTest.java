@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 /**
  * @author Fernando H. S. Goncalves (fernando.goncalves@movile.com)
  */
-@ContextConfiguration(classes = MainTestConfiguration.class)
+@ContextConfiguration(classes = AcceptanceTestsConfiguration.class)
 @DirtiesContext
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
