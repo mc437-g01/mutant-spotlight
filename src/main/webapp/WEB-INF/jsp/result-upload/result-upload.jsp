@@ -30,14 +30,12 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<%=request.getContextPath()%>/">Mutant
-					Spotlight</a>
+				<a class="navbar-brand" href="./">Mutant Spotlight</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="<%=request.getContextPath()%>/">Home</a></li>
-					<li class="active"><a
-						href="<%=request.getContextPath()%>/new-result">Novo Resultado</a></li>
+					<li><a href="./">Home</a></li>
+					<li><a href="./new-result">Novo Resultado</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -48,18 +46,11 @@
 
 		<div class="new-result-form">
 			<div class="page-header">
-				<h1>Novo Resultado</h1>
+				<h1>Resultados:</h1>
 			</div>
-
-			<form role="form" action="result-upload" method="POST" enctype="multipart/form-data">
-				<div class="form-group">
-					<label for="exampleInputFile">File input</label> <input type="file"
-						name="inputFile">
-					<p class="help-block">Arquivo XML do resultado de testes de mutantes</p>
-				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
 		</div>
+		
+		<p>Mutantes mortos: <%= request.getAttribute("mutantsKilled") %></p>
 
 	</div>
 	<!-- /.container -->
