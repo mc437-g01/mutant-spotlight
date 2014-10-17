@@ -17,7 +17,7 @@ Será gerado um pacote .war na pasta `target`.
 Run
 ---
 
-Baixe o servidor [Apache Tomcat](http://tomcat.apache.org/download-70.cgi), extraia o servidor e insira o pacote do build na pasta `[apache-tomcat]/webapps`. Em seguida, inicie o servidor executando `[apache-tomcat]/bin/startup`
+Baixe o servidor [Apache Tomcat](http://tomcat.apache.org/download-70.cgi), extraia o servidor e insira o pacote do build na pasta `[apache-tomcat]/webapps`. Em seguida, inicie o servidor executando `[apache-tomcat]/bin/startup.sh`
 
 
 Eclipse J2EE

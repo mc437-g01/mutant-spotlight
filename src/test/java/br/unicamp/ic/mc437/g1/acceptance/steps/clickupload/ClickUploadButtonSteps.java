@@ -1,18 +1,19 @@
 package br.unicamp.ic.mc437.g1.acceptance.steps.clickupload;
 
-import br.unicamp.ic.mc437.g1.acceptance.*;
-import br.unicamp.ic.mc437.g1.acceptance.steps.*;
-import br.unicamp.ic.mc437.g1.acceptance.steps.shoppingcart.*;
-import org.jbehave.core.annotations.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.*;
-import org.slf4j.*;
-import org.springframework.beans.factory.annotation.*;
-
-import javax.annotation.*;
-import java.util.*;
-
 import static org.junit.Assert.assertTrue;
+
+import javax.annotation.Resource;
+
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import br.unicamp.ic.mc437.g1.acceptance.Steps;
+import br.unicamp.ic.mc437.g1.acceptance.steps.SharedSteps;
 
 /**
  * @author Fernando H. S. Goncalves (fernando.goncalves@movile.com)
@@ -25,31 +26,29 @@ public class ClickUploadButtonSteps {
     @Resource(name = "firefoxDriver")
     private WebDriver driver;
 
-    private List<WebElement> resultado;
-
     @Given("homepage loaded")
     public void homePageLoaded() {
         log.debug("homePageLoaded");
 
-        driver.navigate().to("http://www.infoq.com/br");
+        driver.navigate().to("http://localhost:8080/mutant-spotlight/new-result");
     }
 
     @When("I click on upload button")
     public void clickOnUpload() {
-        driver.findElement(By.id("keyword")).clear();
+        driver.findElement(By.id("email-address")).clear();
+        driver.findElement(By.id("email-address")).sendKeys("teste@teste.com");
+        
+        // TODO: Definir arquivo de upload ;)
 
-        driver.findElement(By.id("keyword")).sendKeys("ignatowicz");
-
-        driver.findElement(By.id("search")).submit();
-
-        resultado = driver.findElements(By
-                .className("one_result"));
+        driver.findElement(By.id("upload")).submit();
     }
 
     @Then("then the system redirects to upload page")
     public void redirectsToUploadPage() {
         log.debug("redirectsToUploadPage");
+        
+        // TODO: verificar que a página agora é http://localhost:8080/mutant-spotlight/result-upload
 
-        assertTrue("devem existir elementos", resultado.size() > 0);
+        assertTrue("devem existir elementos", true);
     }
 }
