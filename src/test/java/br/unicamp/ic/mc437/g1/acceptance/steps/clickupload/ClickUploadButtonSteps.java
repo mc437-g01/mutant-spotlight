@@ -1,6 +1,6 @@
 package br.unicamp.ic.mc437.g1.acceptance.steps.clickupload;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import javax.annotation.Resource;
 
@@ -26,29 +26,48 @@ public class ClickUploadButtonSteps {
     @Resource(name = "firefoxDriver")
     private WebDriver driver;
 
-    @Given("homepage loaded")
+    @Given("upload page loaded")
     public void homePageLoaded() {
         log.debug("homePageLoaded");
 
         driver.navigate().to("http://localhost:8080/mutant-spotlight/new-result");
     }
+    
+    @When("I fill the email input")
+    public void fillEmail () {
+        driver.findElement(By.id("email-address")).clear();
+        driver.findElement(By.id("email-address")).sendKeys("teste@teste.com");
+    }
+    
+    @When("I select a file to upload")
+    public void selectFile() {
+        driver.findElement(By.id("upload-file")).clear();
+        driver.findElement(By.id("upload-file")).sendKeys("arquivo_feliz.xml");
+    }
 
     @When("I click on upload button")
     public void clickOnUpload() {
-        driver.findElement(By.id("email-address")).clear();
-        driver.findElement(By.id("email-address")).sendKeys("teste@teste.com");
-        
-        // TODO: Definir arquivo de upload ;)
-
         driver.findElement(By.id("upload")).submit();
     }
 
-    @Then("then the system redirects to upload page")
+    @Then("the system redirects to upload page")
     public void redirectsToUploadPage() {
         log.debug("redirectsToUploadPage");
         
-        // TODO: verificar que a página agora é http://localhost:8080/mutant-spotlight/result-upload
-
-        assertTrue("devem existir elementos", true);
+        assertEquals("devem existir elementos", "http://localhost:8080/mutant-spotlight/result-upload", driver.getCurrentUrl());
+    }
+    
+    @Then("the system shows an empty file error")
+    public void showsAnEmptyFileError () {
+        String hiddenAttr = driver.findElement(By.id("empty-file-error")).getAttribute("hidden");
+        
+        assertEquals("false", hiddenAttr);
+    }
+    
+    @Then("the system shows an empty email error")
+    public void showsAnEmptyEmailError () {
+        String hiddenAttr = driver.findElement(By.id("empty-email-error")).getAttribute("hidden");
+        
+        assertEquals("false", hiddenAttr);
     }
 }
