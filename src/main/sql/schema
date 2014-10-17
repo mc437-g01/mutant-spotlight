@@ -1,0 +1,47 @@
+CREATE TABLE `test_result` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `date` TIMESTAMP NOT NULL,
+  `email` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `test_set_result` (
+  `cod` varchar(20) NOT NULL,
+  `test_result_id` int(10) unsigned NOT NULL,
+  `id` int(11) NOT NULL,
+  `path` varchar(100) NOT NULL,
+  PRIMARY KEY (`cod`),
+  KEY `FK_test_set_result_test_result_idx` (`test_result_id`),
+  CONSTRAINT `FK_test_set_result_test_result` FOREIGN KEY (`test_result_id`) REFERENCES `test_result` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `test_case_result` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `test_set_result_id` VARCHAR(20) NOT NULL,
+  `type` INT NOT NULL,
+  INDEX `FK_test_case_test_set_idx` (`test_set_result_id` ASC),
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_test_case_test_set`
+    FOREIGN KEY (`test_set_result_id`)
+    REFERENCES `test`.`test_set_result` (`cod`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+CREATE TABLE `test_output` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `test_case_id` INT UNSIGNED NOT NULL,
+  `dead` TINYINT NOT NULL,
+  `dead_index` INT NOT NULL,
+  `eval_failed` VARCHAR(100) NOT NULL,
+  `mutant_key` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FK_output_idx` (`test_case_id` ASC),
+  CONSTRAINT `FK_output`
+    FOREIGN KEY (`test_case_id`)
+    REFERENCES `test`.`test_case_result` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+
+
+
