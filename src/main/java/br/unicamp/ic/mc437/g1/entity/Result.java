@@ -8,6 +8,8 @@ public class Result {
 	
 	private String fileContent;
 	
+	private String name;
+	
 	public Integer getId () {
 		return id;
 	}
@@ -31,5 +33,12 @@ public class Result {
 	public void setFileContent (String fileContent) {
 		this.fileContent = fileContent;
 	}
-
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
 }

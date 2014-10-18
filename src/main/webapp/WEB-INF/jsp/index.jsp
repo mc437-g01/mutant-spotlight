@@ -4,15 +4,18 @@
 <html>
 <head>
 <link rel='stylesheet'
-	href='<%=org.webjars.AssetLocator.getWebJarPath("css/bootstrap.min.css")%>'>
+	href='<%=org.webjars.AssetLocator
+					.getWebJarPath("css/bootstrap.min.css")%>'>
 <!-- <link rel='stylesheet'
-	href='<%=org.webjars.AssetLocator.getWebJarPath("css/bootstrap-theme.min.css")%>'> -->
+	href='<%=org.webjars.AssetLocator
+					.getWebJarPath("css/bootstrap-theme.min.css")%>'> -->
 <link rel='stylesheet'
 	href='<%=request.getContextPath()%>/css/index.css'>
 <script type='text/javascript'
 	src='<%=org.webjars.AssetLocator.getWebJarPath("jquery.min.js")%>'></script>
 <script type='text/javascript'
-	src='<%=org.webjars.AssetLocator.getWebJarPath("js/bootstrap.min.js")%>'></script>
+	src='<%=org.webjars.AssetLocator
+					.getWebJarPath("js/bootstrap.min.js")%>'></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mutant Spotlight</title>
 </head>
@@ -34,6 +37,8 @@
 					<li class="active"><a href="<%=request.getContextPath()%>/">Home</a></li>
 					<li><a href="<%=request.getContextPath()%>/new-result">Novo
 							Resultado</a></li>
+					<li><a href="<%=request.getContextPath()%>/result-list">Resultados
+							Enviados</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -46,14 +51,10 @@
 			<h1>Mutant Spotlight</h1>
 			<br>
 			<p class="lead">
-				Faça o upload do resultados do seu teste de mutações.<br>
-				<br>
+				Faça o upload do resultados do seu teste de mutações.<br> <br>
 				<a href="<%=request.getContextPath()%>/new-result">
-					<button
-						type="button"
-						class="btn btn-default btn-lg">
-						Registrar novo resultado
-					</button>
+					<button type="button" class="btn btn-default btn-lg">
+						Registrar novo resultado</button>
 				</a>
 
 			</p>

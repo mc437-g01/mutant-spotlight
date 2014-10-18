@@ -38,6 +38,8 @@
 					<li><a href="<%=request.getContextPath()%>/">Home</a></li>
 					<li class="active"><a
 						href="<%=request.getContextPath()%>/new-result">Novo Resultado</a></li>
+					<li><a href="<%=request.getContextPath()%>/result-list">Resultados
+							Enviados</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->

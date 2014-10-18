@@ -1,5 +1,8 @@
 package br.unicamp.ic.mc437.g1.web.controllers;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +37,22 @@ public class ResultController {
 		model.addAttribute("mutantsKilled", 0);
 
 		return "result-upload/result-upload";
+	}
+	
+	@RequestMapping("/result-list")
+	public String renderResultList(Model model) {
+		//TODO: get result list:
+		List<Result> results = new LinkedList<Result>();
+		for (int i = 0; i < 10; i++) {
+			Result res = new Result();
+			res.setId(i);
+			res.setName("Result: "+i);
+			results.add(res);
+		}
+		
+		model.addAttribute("results", results);
+		
+		return "result-list/result-list";
 	}
 
 	public Result save(Result result) {

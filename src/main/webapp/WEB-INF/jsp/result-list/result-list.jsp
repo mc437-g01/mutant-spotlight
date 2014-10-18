@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="java.util.List,br.unicamp.ic.mc437.g1.entity.Result"
+	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -36,8 +38,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="./">Home</a></li>
 					<li><a href="./new-result">Novo Resultado</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/result-list">Resultados Enviados</a></li>
+					<li class="active"><a
+						href="<%=request.getContextPath()%>/result-list">Resultados
+							Enviados</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
@@ -48,11 +51,31 @@
 
 		<div class="new-result-form">
 			<div class="page-header">
-				<h1>Resultados:</h1>
+				<h1>Resultados :</h1>
 			</div>
 		</div>
-		
-		<p>Mutantes mortos: <%= request.getAttribute("mutantsKilled") %></p>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td><b>ID</b></td>
+					<td><b>Nome</b></td>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					List<Result>results = (List<Result>)request.getAttribute("results");
+					for (Result r : results) {
+				%>
+				<tr id="result<%= r.getId() %>">
+					<td><%= r.getId() %></td>
+					<td><a href="<%=request.getContextPath()%>/result/<%=r.getId()%>"><%= r.getName() %></a></td>
+				</tr>
+				<%
+					}
+				%>
+			</tbody>
+		</table>
 
 	</div>
 	<!-- /.container -->
