@@ -16,4 +16,4 @@ Then the system redirects me to an error page
 Scenario: Try to view a protected result
 Given homepage loaded
 When I load a protected result url
-Then the system redirects me to an error page 
+Then the system redirects me to an error page
