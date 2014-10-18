@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import br.unicamp.ic.mc437.g1.entity.Result;
+import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
-import br.unicamp.ic.mc437.g1.web.controllers.result.to.TestResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
