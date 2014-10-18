@@ -68,7 +68,7 @@
 					for (Result r : results) {
 				%>
 				<tr id="result<%= r.getId() %>">
-					<td><%= r.getId() %></td>
+					<td style="width:25px;"><%= r.getId() %></td>
 					<td><a href="<%=request.getContextPath()%>/result/<%=r.getId()%>"><%= r.getName() %></a></td>
 				</tr>
 				<%
