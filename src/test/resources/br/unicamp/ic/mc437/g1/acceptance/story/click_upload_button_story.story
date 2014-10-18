@@ -23,3 +23,10 @@ Given upload page loaded
 When I select a file to upload
 And I click on upload button
 Then the system shows an empty email error
+
+Scenario: click on upload button with a file that is not on xml format
+Given upload page loaded
+When I fill the email input
+And I select a file to upload
+And I click on upload button
+Then the system shows an invalid file error

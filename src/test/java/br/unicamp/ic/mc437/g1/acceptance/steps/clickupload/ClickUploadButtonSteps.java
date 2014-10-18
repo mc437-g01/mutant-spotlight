@@ -9,13 +9,16 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.internal.FileExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
 import br.unicamp.ic.mc437.g1.acceptance.steps.SharedSteps;
+
 import org.springframework.beans.factory.annotation.Value;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -77,6 +80,13 @@ public class ClickUploadButtonSteps {
     @Then("the system shows an empty email error")
     public void showsAnEmptyEmailError () {
         String hiddenAttr = driver.findElement(By.id("empty-email-error")).getAttribute("hidden");
+        
+        assertEquals("false", hiddenAttr);
+    }
+    
+    @Then("the system shows an invalid file error")
+    public void showsAnInvalidFileError () {
+    	String hiddenAttr = driver.findElement(By.id("invalid-file-error")).getAttribute("hidden");
         
         assertEquals("false", hiddenAttr);
     }
