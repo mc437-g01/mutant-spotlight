@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
 
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
 import br.unicamp.ic.mc437.g1.acceptance.steps.SharedSteps;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.io.IOException;
 
 /**
  * @author Fernando H. S. Goncalves (fernando.goncalves@movile.com)
@@ -26,11 +29,17 @@ public class ClickUploadButtonSteps {
     @Resource(name = "firefoxDriver")
     private WebDriver driver;
 
+    @Value("classpath:acceptance/step_files/test_result_1.xml")
+    private org.springframework.core.io.Resource testResult1Resource;
+
+    @Value("${server.endpoint}")
+    private String serverEndpoint;
+
     @Given("upload page loaded")
     public void homePageLoaded() {
         log.debug("homePageLoaded");
 
-        driver.navigate().to("http://localhost:8080/mutant-spotlight/new-result");
+        driver.navigate().to(serverEndpoint + "/new-result");
     }
     
     @When("I fill the email input")
@@ -40,9 +49,10 @@ public class ClickUploadButtonSteps {
     }
     
     @When("I select a file to upload")
-    public void selectFile() {
-        driver.findElement(By.id("upload-file")).clear();
-        driver.findElement(By.id("upload-file")).sendKeys("arquivo_feliz.xml");
+    public void selectFile() throws IOException {
+//        driver.findElement(By.id("upload-file")).clear();
+
+        driver.findElement(By.id("upload-file")).sendKeys(testResult1Resource.getFile().getAbsolutePath());
     }
 
     @When("I click on upload button")
@@ -54,7 +64,7 @@ public class ClickUploadButtonSteps {
     public void redirectsToUploadPage() {
         log.debug("redirectsToUploadPage");
         
-        assertEquals("devem existir elementos", "http://localhost:8080/mutant-spotlight/result-upload", driver.getCurrentUrl());
+        assertEquals("devem existir elementos", serverEndpoint + "/result-upload", driver.getCurrentUrl());
     }
     
     @Then("the system shows an empty file error")

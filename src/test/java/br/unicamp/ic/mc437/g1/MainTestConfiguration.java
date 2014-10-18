@@ -1,16 +1,15 @@
 package br.unicamp.ic.mc437.g1;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.*;
-import org.openqa.selenium.firefox.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.*;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * @author Fernando H. S. Goncalves (fernando.goncalves@movile.com)
  */
 @Configuration
 @ComponentScan
+@PropertySource("classpath:test.properties")
 public class MainTestConfiguration {
-
 }
