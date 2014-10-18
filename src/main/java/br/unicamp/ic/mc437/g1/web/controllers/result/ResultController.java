@@ -1,5 +1,6 @@
 package br.unicamp.ic.mc437.g1.web.controllers.result;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import br.unicamp.ic.mc437.g1.entity.TestCaseResult;
+import br.unicamp.ic.mc437.g1.entity.TestOutput;
+import br.unicamp.ic.mc437.g1.entity.TestSetResult;
 
 @Controller
 public class ResultController {
@@ -31,8 +35,42 @@ public class ResultController {
 
 	@RequestMapping("/result/{id}")
 	public String renderResult(@PathVariable String id, Model model) {
-		model.addAttribute("id", id);
-
+		int intId = Integer.parseInt(id);
+		model.addAttribute("id", intId);
+		
+		//TODO: get Result and TestCaseResult
+		TestResult res = new TestResult();
+		/*
+		List<TestSetResult> testSetResults = new LinkedList<TestSetResult>();
+		res.setTestSetResults(testSetResults);
+		
+		TestSetResult set = new TestSetResult();
+		testSetResults.add(set);
+		set.setId(0);
+		List<TestCaseResult> testCaseResults = new LinkedList<TestCaseResult>();
+		set.setTestCaseResults(testCaseResults);
+		
+		TestCaseResult testCase = new TestCaseResult();
+		testCaseResults.add(testCase);
+		testCase.setId(0);
+		List<TestOutput> testOutputs = new LinkedList<TestOutput>();
+		testCase.setTestOutputs(testOutputs);
+		
+		TestOutput out = new TestOutput();
+		out.setId(0);
+		out.setDead(true);
+		out.setMutantKey("key1");
+		testOutputs.add(out);
+		
+		out = new TestOutput();
+		out.setId(1);
+		out.setDead(false);
+		out.setMutantKey("key2");
+		testOutputs.add(out);
+		*/
+		
+		model.addAttribute("result", res);
+		
 		return "result/result";
 	}
 

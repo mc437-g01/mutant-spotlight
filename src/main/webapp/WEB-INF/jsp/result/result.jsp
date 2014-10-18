@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.List,br.unicamp.ic.mc437.g1.entity.Result"%>
+	import="java.util.List,br.unicamp.ic.mc437.g1.entity.TestResult,
+	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,11 +52,48 @@
 
 		<div class="new-result-form">
 			<div class="page-header">
-				<h1>Resultados :</h1>
+				<h1>
+					Resultados do Test Case
+					<%=request.getAttribute("id")%>:
+				</h1>
 			</div>
 		</div>
 
-		<p><%=request.getAttribute("id")%></p>
+		<%
+			TestResult res = (TestResult) request.getAttribute("result");
+			List<TestSetResult> sets = res.getTestSetResults();
+			for (TestSetResult set : sets) {
+		%>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Set
+				<%=set.getId()%>:
+			</div>
+			<table class="table table-bordered">
+			<thead>
+			<tr>
+			<td>#</td>
+			<td>Vivo?</td>
+			</tr>
+			</thead>
+			<tbody>
+				<%
+					List<TestCaseResult> cases = set.getTestCaseResults();
+						for (TestCaseResult testCase : cases) {
+				%>
+					<tr><td>1</td><td>2</td></tr>
+				<%
+					}
+				%>
+			</tbody>
+			</table>
+		</div>
+
+		<%
+			}
+		%>
+
 
 	</div>
 	<!-- /.container -->
