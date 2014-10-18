@@ -2,6 +2,7 @@ package br.unicamp.ic.mc437.g1.web.controllers;
 
 import static org.junit.Assert.*;
 
+import br.unicamp.ic.mc437.g1.web.controllers.result.ResultController;
 import org.junit.Before;
 import org.junit.Test;
 
