@@ -18,7 +18,7 @@ When I fill the email input
 And I click on upload button
 Then the system shows an empty file error
 
-Scenario: click on upload button without selecting file
+Scenario: click on upload button without filling email
 Given upload page loaded
 When I select a file to upload
 And I click on upload button
