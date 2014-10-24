@@ -7,8 +7,10 @@ import java.util.List;
 import br.unicamp.ic.mc437.g1.entity.Result;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+
 import br.unicamp.ic.mc437.g1.entity.TestCaseResult;
 import br.unicamp.ic.mc437.g1.entity.TestOutput;
 import br.unicamp.ic.mc437.g1.entity.TestSetResult;
@@ -32,42 +35,23 @@ public class ResultController {
 
 		return "new-result/new-result";
 	}
+    
+    @Value("classpath:acceptance/step_files/test_result_1.xml")
+	org.springframework.core.io.Resource testResult1Resource;
 
 	@RequestMapping("/result/{id}")
 	public String renderResult(@PathVariable String id, Model model) {
 		int intId = Integer.parseInt(id);
 		model.addAttribute("id", intId);
 		
-		//TODO: get Result and TestCaseResult
-		TestResult res = new TestResult();
-		/*
-		List<TestSetResult> testSetResults = new LinkedList<TestSetResult>();
-		res.setTestSetResults(testSetResults);
-		
-		TestSetResult set = new TestSetResult();
-		testSetResults.add(set);
-		set.setId(0);
-		List<TestCaseResult> testCaseResults = new LinkedList<TestCaseResult>();
-		set.setTestCaseResults(testCaseResults);
-		
-		TestCaseResult testCase = new TestCaseResult();
-		testCaseResults.add(testCase);
-		testCase.setId(0);
-		List<TestOutput> testOutputs = new LinkedList<TestOutput>();
-		testCase.setTestOutputs(testOutputs);
-		
-		TestOutput out = new TestOutput();
-		out.setId(0);
-		out.setDead(true);
-		out.setMutantKey("key1");
-		testOutputs.add(out);
-		
-		out = new TestOutput();
-		out.setId(1);
-		out.setDead(false);
-		out.setMutantKey("key2");
-		testOutputs.add(out);
-		*/
+		//TODO: carregar TestResult e deletar código abaixo e arquivo:
+		TestResult res;
+		try {
+			res = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "error50x";
+		}
 		
 		model.addAttribute("result", res);
 		
@@ -77,13 +61,15 @@ public class ResultController {
 	@RequestMapping(value = "/result-upload", method = RequestMethod.POST)
 	public String renderResultUpload(
 			@RequestParam("inputFile") MultipartFile xmlFile,
-			@RequestParam("email") String email, Model model) throws IOException {
+			@RequestParam("email") String email,
+			@RequestParam("name") String name,
+			Model model) throws IOException {
 		// TODO: utilizar xmlFile e calcular número de mutantes
 
         log.debug("{}", xmlFile);
 
         TestResult testResult = XmlUtils.readValue(xmlFile.getInputStream(), TestResult.class);
-
+        testResult.setEmail(email);
         log.debug("{}", testResult);
 
 		model.addAttribute("mutantsKilled", 0);

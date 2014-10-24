@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.List,br.unicamp.ic.mc437.g1.entity.TestResult,
+	import="java.util.List,br.unicamp.ic.mc437.g1.entity.TestResult,br.unicamp.ic.mc437.g1.entity.TestOutput,
 	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -70,24 +70,46 @@
 				Set
 				<%=set.getId()%>:
 			</div>
-			<table class="table table-bordered">
-			<thead>
-			<tr>
-			<td>#</td>
-			<td>Vivo?</td>
-			</tr>
-			</thead>
-			<tbody>
+			<div class="panel-body">
+				
 				<%
 					List<TestCaseResult> cases = set.getTestCaseResults();
 						for (TestCaseResult testCase : cases) {
 				%>
-					<tr><td>1</td><td>2</td></tr>
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Test Case
+						<%=testCase.getId()%>:
+					</div>
+					<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>Vivo?</td>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							List<TestOutput> outputs = testCase.getTestOutputs();
+									for (TestOutput output : outputs) {
+						%>
+						<tr>
+							<td><%=output.getId()%></td>
+							<td><%=output.getDead()? "Sim" : "Não"%></td>
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+					</table>
+				</div>
 				<%
 					}
 				%>
-			</tbody>
+				
 			</table>
+			</div>
 		</div>
 
 		<%
