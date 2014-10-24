@@ -38,7 +38,7 @@ public class ViewResultSteps {
     public void resultPageLoaded() {
         log.debug("resultsPageLoaded");
 
-        driver.navigate().to("http://localhost:8080/mutant-spotlight/results");
+        driver.navigate().to("http://localhost:8080/mutant-spotlight/result-list");
     }
 	
 	@When("I click a single result to view")
@@ -49,39 +49,47 @@ public class ViewResultSteps {
 		
 		//getting a random row in the table
 		Random rand = new Random();
-		int random_row = rand.nextInt((baseTable.getSize().height) + 1);
-		String url = tableRows.get(random_row).findElement(By.xpath("/td[1]")).getAttribute("href");
-		url = url.replace("http://localhost:8080/mutant-spotlight/view_result/", "");
-		this.random_result_url = "http://localhost:8080/mutant-spotlight/view_result/".concat(url);
-		tableRows.get(random_row).findElement(By.xpath("/td[1]")).click();		
-		
+		int rowCount = driver.findElements(By.xpath("//table[@id='result_table']/tbody/tr")).size();
+		int random_row = rand.nextInt((rowCount) + 1);
+		WebElement row = tableRows.get(random_row);
+		List<WebElement> tds = row.findElements(By.tagName("td"));
+		WebElement td = tds.get(1);
+		String url = td.findElement(By.tagName("a")).getAttribute("href");
+		url = url.replace("http://localhost:8080/mutant-spotlight/result/", "");
+		url = url.replace("localhost:8080/mutant-spotlight/result/", "");
+		url = url.replace("/mutant-spotlight/result/", "");
+		this.random_result_url = "http://localhost:8080/mutant-spotlight/result/".concat(url);
+		td.findElement(By.tagName("a")).click();
     }
 	
 	@Then("the system redirects me to a page that shows me the informations of the chosen result")
 	public void redirectsToSingleResultPage() {
 		log.debug("redirectsToSingleResultPage");
-        
+        System.out.println(driver.getCurrentUrl());
         assertEquals("The urls are different", this.random_result_url, driver.getCurrentUrl());
     }
 	
+	@Pending
 	@Given("homepage loaded")
     public void homePageLoaded() {
         driver.navigate().to("http://localhost:8080/mutant-spotlight/");
     }
 	
+	@Pending
 	@When("I load a non-existent result url")
 	public void loadNonExistentResultUrl(){
 		driver.navigate().to("http://localhost:8080/mutant-spotlight/view_result/h40fn903_non_existent");
 		
 	}
 	
+	@Pending
 	@Then("the system redirects me to an error page")
 	public void redirectsErrorPage(){
 		assertEquals("The error page was not correctly loaded", "http://localhost:8080/mutant-spotlight/view_result/view_result_error", driver.getCurrentUrl());
 	}
 	
-	@When("When I load a protected result url")
 	@Pending
+	@When("When I load a protected result url")
 	public void protectedResultUrl(){
 				
 	}
