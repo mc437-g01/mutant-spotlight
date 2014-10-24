@@ -58,8 +58,8 @@
 		<table class="table table-striped" id="result_table">
 			<thead>
 				<tr>
-					<td><b>ID</b></td>
-					<td><b>Nome</b></td>
+					<th>ID</th>
+					<th>Nome</th>
 				</tr>
 			</thead>
 			<tbody>

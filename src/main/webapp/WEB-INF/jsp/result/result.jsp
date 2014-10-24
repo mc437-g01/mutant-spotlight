@@ -82,11 +82,14 @@
 						Test Case
 						<%=testCase.getId()%>:
 					</div>
-					<table class="table table-bordered">
+					<table class="table">
 					<thead>
 						<tr>
-							<td>#</td>
-							<td>Vivo?</td>
+							<th>#</th>
+							<th>Chave</th>
+							<th>Morto?</th>
+							<th>Índice</th>
+							<th>Eval Falhou?</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,8 +98,11 @@
 									for (TestOutput output : outputs) {
 						%>
 						<tr>
-							<td><%=output.getId()%></td>
+							<td style="width:25px;"><%=output.getId()%></td>
+							<td><%=output.getMutantKey()%></td>
 							<td><%=output.getDead()? "Sim" : "Não"%></td>
+							<td><%=output.getDeathIndex()%></td>
+							<td><%=output.getEvalFailed() %></td>
 						</tr>
 						<%
 							}
