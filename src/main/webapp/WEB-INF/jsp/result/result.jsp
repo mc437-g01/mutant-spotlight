@@ -70,34 +70,46 @@
 				Set
 				<%=set.getId()%>:
 			</div>
-			<table class="table table-bordered">
-				<thead>
-					<tr>
-						<td>#</td>
-						<td>Vivo?</td>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						List<TestCaseResult> cases = set.getTestCaseResults();
-							for (TestCaseResult testCase : cases) {
-					%>
-					<%
-						List<TestOutput> outputs = testCase.getTestOutputs();
-								for (TestOutput output : outputs) {
-					%>
-					<tr>
-						<td><%=output.getId()%></td>
-						<td><%=output.getDead()%></td>
-					</tr>
-					<%
-						}
-					%>
-					<%
-						}
-					%>
-				</tbody>
+			<div class="panel-body">
+				
+				<%
+					List<TestCaseResult> cases = set.getTestCaseResults();
+						for (TestCaseResult testCase : cases) {
+				%>
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Test Case
+						<%=testCase.getId()%>:
+					</div>
+					<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>#</td>
+							<td>Vivo?</td>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							List<TestOutput> outputs = testCase.getTestOutputs();
+									for (TestOutput output : outputs) {
+						%>
+						<tr>
+							<td><%=output.getId()%></td>
+							<td><%=output.getDead()? "Sim" : "Não"%></td>
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+					</table>
+				</div>
+				<%
+					}
+				%>
+				
 			</table>
+			</div>
 		</div>
 
 		<%

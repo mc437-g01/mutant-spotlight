@@ -25,7 +25,7 @@ public class TestCaseResult {
     private String testCaseKey;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @XmlElement(name = "testCaseExecutionOutput_MutantList")
+    @XmlElement(name = "testCaseExecutingOutput_MutantList")
     private List<TestOutput> testOutputs;
 
     public Integer getId() {
