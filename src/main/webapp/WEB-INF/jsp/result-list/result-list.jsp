@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"
 	import="java.util.List,br.unicamp.ic.mc437.g1.entity.Result"
 	%>
+<%@ page import="br.unicamp.ic.mc437.g1.entity.TestResult" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,8 +65,8 @@
 			</thead>
 			<tbody>
 				<%
-					List<Result>results = (List<Result>)request.getAttribute("results");
-					for (Result r : results) {
+					List<TestResult> results = (List<TestResult>)request.getAttribute("results");
+					for (TestResult r : results) {
 				%>
 				<tr id="result<%= r.getId() %>">
 					<td style="width:25px;"><%= r.getId() %></td>
