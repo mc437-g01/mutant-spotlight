@@ -85,7 +85,7 @@ public class ResultController {
         log.debug("{}", xmlFile);
 
         TestResult testResult = XmlUtils.readValue(xmlFile.getInputStream(), TestResult.class);
-
+        testResult.setEmail(email);
         log.debug("{}", testResult);
 
 		model.addAttribute("mutantsKilled", 0);

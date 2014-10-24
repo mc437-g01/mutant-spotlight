@@ -1,13 +1,22 @@
 package br.unicamp.ic.mc437.g1.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.List;
 
+@Entity
 @XmlRootElement(name = "iTestResult")
 public class TestResult {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @XmlElement(name = "_date")
@@ -15,15 +24,21 @@ public class TestResult {
 
     private String email;
 
+    private String name;
+
+    @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "testSetResults")
     private List<TestSetResult> testSetResults;
 
+    @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_imutants")
     private List<Mutant> mutants;
 
+    @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_imodel")
     private List<ResultModel> models;
 
+    @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_itestCases")
     private List<TestCase> testCase;
 
@@ -83,12 +98,21 @@ public class TestResult {
         this.testCase = testCase;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "TestResult{" +
                 "id=" + id +
                 ", date=" + date +
                 ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
                 ", testSetResults=" + testSetResults +
                 ", mutants=" + mutants +
                 ", models=" + models +

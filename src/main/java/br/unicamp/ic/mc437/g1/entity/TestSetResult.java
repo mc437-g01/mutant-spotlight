@@ -1,14 +1,23 @@
 package br.unicamp.ic.mc437.g1.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@Entity
 @XmlRootElement
 public class TestSetResult {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @XmlElement(name = "id")
@@ -20,6 +29,7 @@ public class TestSetResult {
     @XmlElement(name = "path")
     private String path;
 
+    @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "testCaseResults")
     private List<TestCaseResult> testCaseResults;
 
@@ -62,7 +72,6 @@ public class TestSetResult {
     public void setTestCaseResults(List<TestCaseResult> testCaseResults) {
         this.testCaseResults = testCaseResults;
     }
-
 
     @Override
     public String toString() {
