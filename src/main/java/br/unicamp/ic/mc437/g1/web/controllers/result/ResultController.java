@@ -77,7 +77,9 @@ public class ResultController {
 	@RequestMapping(value = "/result-upload", method = RequestMethod.POST)
 	public String renderResultUpload(
 			@RequestParam("inputFile") MultipartFile xmlFile,
-			@RequestParam("email") String email, Model model) throws IOException {
+			@RequestParam("email") String email,
+			@RequestParam("name") String name,
+			Model model) throws IOException {
 		// TODO: utilizar xmlFile e calcular número de mutantes
 
         log.debug("{}", xmlFile);

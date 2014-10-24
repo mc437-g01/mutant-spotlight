@@ -62,6 +62,12 @@
 						placeholder="Enter email" name="email">
 				</div>
 				<div class="form-group">
+					<label for="exampleInputName">Nome do Test Case</label>
+					<input id="name"
+						type="text" class="form-control" id="exampleInputName"
+						placeholder="Enter name" name="name">
+				</div>
+				<div class="form-group">
 					<label for="exampleInputFile">File input</label>
 					<input id="upload-file" type="file"
 						name="inputFile" id="exampleInputFile">
