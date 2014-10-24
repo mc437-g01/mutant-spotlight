@@ -9,7 +9,9 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 @Entity
@@ -18,10 +20,11 @@ public class TestSetResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @XmlElement(name = "id")
-    private Integer identifier;
+    private String identifier;
 
     @XmlElement(name = "cod")
     private String cod;
@@ -49,11 +52,11 @@ public class TestSetResult {
         this.id = id;
     }
 
-    public Integer getIdentifier() {
+    public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(Integer identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 

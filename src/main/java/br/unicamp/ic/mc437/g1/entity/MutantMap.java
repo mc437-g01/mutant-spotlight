@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,7 @@ public class MutantMap {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @XmlAttribute(name = "isMutant")
@@ -31,7 +33,7 @@ public class MutantMap {
 
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "state")
-    private List<MutantMapState> state;
+    private List<MutantMapState> mutantMapStates;
 
     public Integer getId() {
         return id;
@@ -57,12 +59,12 @@ public class MutantMap {
         this.name = name;
     }
 
-    public List<MutantMapState> getState() {
-        return state;
+    public List<MutantMapState> getMutantMapStates() {
+        return mutantMapStates;
     }
 
-    public void setState(List<MutantMapState> state) {
-        this.state = state;
+    public void setMutantMapStates(List<MutantMapState> state) {
+        this.mutantMapStates = state;
     }
 
     @Override
@@ -71,7 +73,7 @@ public class MutantMap {
                 "id=" + id +
                 ", isMutant=" + isMutant +
                 ", name='" + name + '\'' +
-                ", state=" + state +
+                ", state=" + mutantMapStates +
                 '}';
     }
 }

@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -20,6 +22,7 @@ public class Mutant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @XmlElement(name = "buildFlag")
@@ -38,6 +41,7 @@ public class Mutant {
     @XmlElement(name = "implementation")
     private List<MutantImplementation> implementatios;
 
+    @OneToOne(cascade = CascadeType.ALL)
     @XmlElement(name = "map")
     private MutantMap map;
 

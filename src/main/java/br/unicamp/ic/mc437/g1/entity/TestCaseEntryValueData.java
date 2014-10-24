@@ -5,10 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Created by fernandogoncalves on 10/17/14.
@@ -19,6 +19,7 @@ public class TestCaseEntryValueData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @XmlElement(name = "event")
@@ -26,7 +27,7 @@ public class TestCaseEntryValueData {
 
     @OneToOne(cascade = CascadeType.ALL)
     @XmlElement(name = "testOutput")
-    private TestCaseEntryValueDataTestOutput testOutput;
+    private TestCaseEntryValueDataTestOutput testCaseEntryValueDataTestOutput;
 
     @XmlElement(name = "processed")
     private Boolean processed;
@@ -47,12 +48,12 @@ public class TestCaseEntryValueData {
         this.event = event;
     }
 
-    public TestCaseEntryValueDataTestOutput getTestOutput() {
-        return testOutput;
+    public TestCaseEntryValueDataTestOutput getTestCaseEntryValueDataTestOutput() {
+        return testCaseEntryValueDataTestOutput;
     }
 
-    public void setTestOutput(TestCaseEntryValueDataTestOutput testOutput) {
-        this.testOutput = testOutput;
+    public void setTestCaseEntryValueDataTestOutput(TestCaseEntryValueDataTestOutput testOutput) {
+        this.testCaseEntryValueDataTestOutput = testOutput;
     }
 
     public Boolean getProcessed() {
@@ -68,7 +69,7 @@ public class TestCaseEntryValueData {
         return "TestCaseEntryValueData{" +
                 "id=" + id +
                 ", event='" + event + '\'' +
-                ", testOutput=" + testOutput +
+                ", testOutput=" + testCaseEntryValueDataTestOutput +
                 ", processed=" + processed +
                 '}';
     }

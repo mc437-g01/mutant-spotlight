@@ -1,5 +1,7 @@
 package br.unicamp.ic.mc437.g1.entity;
 
+import br.unicamp.ic.mc437.g1.util.StrangeDateAdapter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,13 +22,17 @@ public class TestResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @XmlElement(name = "_date")
-    private Calendar date;
+    @XmlJavaTypeAdapter(StrangeDateAdapter.class)
+    private Date date;
 
+    @XmlTransient
     private String email;
 
+    @XmlTransient
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -36,11 +45,11 @@ public class TestResult {
 
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_imodel")
-    private List<ResultModel> models;
+    private List<ResultModel> resultModels;
 
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_itestCases")
-    private List<TestCase> testCase;
+    private List<TestCase> testCases;
 
     public Integer getId() {
         return id;
@@ -50,11 +59,11 @@ public class TestResult {
         this.id = id;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -82,20 +91,20 @@ public class TestResult {
         this.mutants = mutants;
     }
 
-    public List<ResultModel> getModels() {
-        return models;
+    public List<ResultModel> getResultModels() {
+        return resultModels;
     }
 
-    public void setModels(List<ResultModel> models) {
-        this.models = models;
+    public void setResultModels(List<ResultModel> models) {
+        this.resultModels = models;
     }
 
-    public List<TestCase> getTestCase() {
-        return testCase;
+    public List<TestCase> getTestCases() {
+        return testCases;
     }
 
-    public void setTestCase(List<TestCase> testCase) {
-        this.testCase = testCase;
+    public void setTestCases(List<TestCase> testCase) {
+        this.testCases = testCase;
     }
 
     public String getName() {
@@ -115,8 +124,8 @@ public class TestResult {
                 ", name='" + name + '\'' +
                 ", testSetResults=" + testSetResults +
                 ", mutants=" + mutants +
-                ", models=" + models +
-                ", testCase=" + testCase +
+                ", models=" + resultModels +
+                ", testCase=" + testCases +
                 '}';
     }
 }

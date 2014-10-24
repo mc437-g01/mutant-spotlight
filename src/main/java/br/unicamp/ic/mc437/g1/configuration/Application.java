@@ -1,4 +1,4 @@
-package br.unicamp.ic.mc437.g1;
+package br.unicamp.ic.mc437.g1.configuration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan("br.unicamp.ic.mc437.g1")
 public class Application extends SpringBootServletInitializer {
 	
 	@Override

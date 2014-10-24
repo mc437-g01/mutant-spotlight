@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**
@@ -19,11 +20,12 @@ public class TestCase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "entry")
-    private List<TestCaseEntry> entries;
+    private List<TestCaseEntry> testCaseEntries;
 
     public Integer getId() {
         return id;
@@ -33,19 +35,19 @@ public class TestCase {
         this.id = id;
     }
 
-    public List<TestCaseEntry> getEntries() {
-        return entries;
+    public List<TestCaseEntry> getTestCaseEntries() {
+        return testCaseEntries;
     }
 
-    public void setEntries(List<TestCaseEntry> entries) {
-        this.entries = entries;
+    public void setTestCaseEntries(List<TestCaseEntry> entries) {
+        this.testCaseEntries = entries;
     }
 
     @Override
     public String toString() {
         return "TestCase{" +
                 "id=" + id +
-                ", entries=" + entries +
+                ", entries=" + testCaseEntries +
                 '}';
     }
 }

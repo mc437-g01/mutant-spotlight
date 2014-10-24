@@ -16,6 +16,8 @@
         <jbehave.version>3.9.5</jbehave.version>
         <selenium.version>2.43.1</selenium.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
+        <spring.version>4.0.5.RELEASE</spring.version>
+        <h2.version>1.4.182</h2.version>
     </properties>
 
 	<dependencies>
@@ -24,8 +26,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
-		<dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>webjars-locator</artifactId>
 		    <version>0.1</version>

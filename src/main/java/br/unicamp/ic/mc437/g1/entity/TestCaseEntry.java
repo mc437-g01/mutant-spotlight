@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Created by fernandogoncalves on 10/17/14.
@@ -18,6 +19,7 @@ public class TestCaseEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @XmlTransient
     private Integer id;
 
     @XmlElement(name = "key")
@@ -25,7 +27,7 @@ public class TestCaseEntry {
 
     @OneToOne(cascade = CascadeType.ALL)
     @XmlElement(name = "value")
-    private TestCaseEntryValue value;
+    private TestCaseEntryValue testCaseEntryValue;
 
     public Integer getId() {
         return id;
@@ -43,12 +45,12 @@ public class TestCaseEntry {
         this.key = key;
     }
 
-    public TestCaseEntryValue getValue() {
-        return value;
+    public TestCaseEntryValue getTestCaseEntryValue() {
+        return testCaseEntryValue;
     }
 
-    public void setValue(TestCaseEntryValue value) {
-        this.value = value;
+    public void setTestCaseEntryValue(TestCaseEntryValue value) {
+        this.testCaseEntryValue = value;
     }
 
     @Override
@@ -56,7 +58,7 @@ public class TestCaseEntry {
         return "TestCaseEntry{" +
                 "id=" + id +
                 ", key='" + key + '\'' +
-                ", value=" + value +
+                ", value=" + testCaseEntryValue +
                 '}';
     }
 }
