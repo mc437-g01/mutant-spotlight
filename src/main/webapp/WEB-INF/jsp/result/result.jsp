@@ -53,7 +53,7 @@
 		<div class="new-result-form">
 			<div class="page-header">
 				<h1>
-					Resultados do Test Case
+					Resultados de Test Case
 					<%=request.getAttribute("id")%>:
 				</h1>
 			</div>
@@ -72,6 +72,10 @@
 			</div>
 			<div class="panel-body">
 				
+				<p><b>Cod:</b> <%=set.getCod()%></p>
+				<p><b>Identifier:</b> <%=set.getIdentifier()%></p>
+				<p><b>Path:</b> <%=set.getPath()%></p>
+				<br/>
 				<%
 					List<TestCaseResult> cases = set.getTestCaseResults();
 						for (TestCaseResult testCase : cases) {
@@ -82,7 +86,11 @@
 						Test Case
 						<%=testCase.getId()%>:
 					</div>
-					<table class="table">
+					<div class="panel-body">
+						<p><b>Path:</b> <%=testCase.getPath()%></p>
+						<p><b>Key:</b> <%=testCase.getTestCaseKey()%></p>
+					</div>
+					<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -102,7 +110,7 @@
 							<td><%=output.getMutantKey()%></td>
 							<td><%=output.getDead()? "Sim" : "Não"%></td>
 							<td><%=output.getDeathIndex()%></td>
-							<td><%=output.getEvalFailed() %></td>
+							<td><%=output.getEvalFailed()%></td>
 						</tr>
 						<%
 							}
