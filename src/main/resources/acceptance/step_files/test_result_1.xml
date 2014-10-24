@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<iTestResult>
+    <_date>2014_09_28_00_27_46</_date>
+    <testSetResults xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="iTestSetResult">
+        <id>D:\tmp\MGEO\TESTE_00\Tests\TS_01</id>
+        <cod>TS_01</cod>
+        <path>D:\tmp\MGEO\TESTE_00\Tests\TS_01</path>
+        <testCaseResults xsi:type="iTestCaseResult">
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>true</dead>
+                <deathIndex>0</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$0.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>false</dead>
+                <deathIndex>0</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$1.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <path>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_01.ecase</path>
+            <_testCaseKey>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_01.ecase</_testCaseKey>
+        </testCaseResults>
+        <testCaseResults xsi:type="iTestCaseResult">
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>true</dead>
+                <deathIndex>0</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$0.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>true</dead>
+                <deathIndex>1</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$1.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <path>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_02.ecase</path>
+            <_testCaseKey>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_02.ecase</_testCaseKey>
+        </testCaseResults>
+    </testSetResults>
+    <testSetResults xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="iTestSetResult">
+        <id>D:\tmp\MGEO\TESTE_00\Tests\TS_02</id>
+        <cod>TS_02</cod>
+        <path>D:\tmp\MGEO\TESTE_00\Tests\TS_02</path>
+        <testCaseResults xsi:type="iTestCaseResult">
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>true</dead>
+                <deathIndex>0</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$0.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>false</dead>
+                <deathIndex>0</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$1.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <path>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_01.ecase</path>
+            <_testCaseKey>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_01.ecase</_testCaseKey>
+        </testCaseResults>
+        <testCaseResults xsi:type="iTestCaseResult">
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>true</dead>
+                <deathIndex>0</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$0.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <testCaseExecutingOutput_MutantList xsi:type="iTestCaseExecutingOutput_Mutant_G">
+                <dead>true</dead>
+                <deathIndex>1</deathIndex>
+                <evalFailed>false</evalFailed>
+                <mutantKey>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$1.mmap</mutantKey>
+            </testCaseExecutingOutput_MutantList>
+            <path>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_02.ecase</path>
+            <_testCaseKey>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_02.ecase</_testCaseKey>
+        </testCaseResults>
+    </testSetResults>
+    <_imutants initialState="Map00::state_0" id="0" isMutant="false">
+        <buildFlag>false</buildFlag>
+        <contextId>TESTE_00</contextId>
+        <convFlag>true</convFlag>
+        <ignoreErrors>true</ignoreErrors>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>public class Map00Impl {&#xD;
+&#xD;
+	public Map00Impl() {&#xD;
+		&#xD;
+	}&#xD;
+&#xD;
+	private TESTE_00 context;&#xD;
+&#xD;
+	public Map00Impl(TESTE_00 context) {&#xD;
+		this.context = context;&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>package statemutest;&#xD;
+&#xD;
+public class TESTE_00 {&#xD;
+	private TESTE_00_FSM _TESTE_00_FSM;&#xD;
+	private Map00Impl _Map00;&#xD;
+	private java.util.HashMap&lt;String, Object&gt; _objectMap;&#xD;
+&#xD;
+	public TESTE_00() {&#xD;
+		_TESTE_00_FSM = new TESTE_00_FSM(this);&#xD;
+		_objectMap = new java.util.HashMap&lt;&gt;();&#xD;
+		try {&#xD;
+			_Map00 = Map00Impl.class.getConstructor(Code.class, TESTE_00.class).newInstance(Code.this, this);&#xD;
+		}&#xD;
+		catch(Exception e) {&#xD;
+			_Map00 = new Map00Impl();&#xD;
+		}&#xD;
+		_objectMap.put(&quot;Map00&quot;, _Map00);&#xD;
+&#xD;
+		_TESTE_00_FSM.setDebugStream(System.err);&#xD;
+		_TESTE_00_FSM.setDebugFlag(true);&#xD;
+		_TESTE_00_FSM.enterStartState();&#xD;
+	}&#xD;
+&#xD;
+	private class Utils {
+	        public Object invokeMethod(Object object, String name, Object[] params)
+	        {
+           try
+	            {
+	                java.lang.reflect.Method method = null;                       
+                        
+	                for(java.lang.reflect.Method m : object.getClass().getMethods())
+	                {
+	                    if(m.getName().equals(name))
+	                    {
+	                        method = m;
+	                        break;
+	                    }
+	                }
+	
+	                if(method != null)
+	                {
+	                    return method.invoke(object, params);
+	                }
+	                else
+	                    return null;
+	            }
+	            catch(Exception e)
+	            {
+	                return null;
+	            }
+	        }
+	        
+	        public Object getState(Object object)
+	        {
+	            try
+	            {
+	                Object ret1 = invokeMethod(object, &quot;getState&quot;, null);
+                        
+                        if(ret1 == null)
+                            throw new Exception();
+                        else
+                            return ret1;
+	            }
+	            catch(Exception e1)
+	            {
+	                try
+	                {
+	                    return invokeMethod(object, &quot;getPreviousState&quot;, null);
+	                }
+	                catch(Exception e2)
+	                {
+	                    return null;
+	                }
+	            }
+	        }
+	        
+	        public String getStateName(Object object)
+	        {
+	            try
+	            {
+	                String aux = invokeMethod(object, &quot;getName&quot;, null).toString();
+	                
+	                return aux.substring(0, aux.indexOf(&quot;.&quot;));
+	            }
+	            catch(Exception e)
+	            {
+	                return &quot;&quot;;
+	            }
+	        }
+	    }&#xD;
+&#xD;
+	public void event() {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, &quot;event&quot;, new Object[] {  });&#xD;
+	}&#xD;
+&#xD;
+	public void triggerEvent(String event, Object... params) {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, event, params);&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <map id="0" isMutant="false">
+            <name>Map00</name>
+            <state id="0" isMutant="false">
+                <name>state_0</name>
+            </state>
+            <state id="1" isMutant="false">
+                <name>state_1</name>
+                <transition id="0" isMutant="false">
+                    <event>event</event>
+                    <guard id="6" isMutant="false">
+                        <cloneGlobalIndexAsTransitionIndex>false</cloneGlobalIndexAsTransitionIndex>
+                        <condition></condition>
+                        <globalIndex>0</globalIndex>
+                        <popArgs></popArgs>
+                        <pushState></pushState>
+                        <targetState>state_2</targetState>
+                        <transitionType>SET</transitionType>
+                        <tIndex>2</tIndex>
+                    </guard>
+                </transition>
+            </state>
+            <state id="4" isMutant="false">
+                <name>state_2</name>
+            </state>
+        </map>
+        <name>TESTE_00_FSM</name>
+        <path>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$0.mmap</path>
+    </_imutants>
+    <_imutants initialState="Map00::state_0" id="0" isMutant="false">
+        <buildFlag>false</buildFlag>
+        <contextId>TESTE_00</contextId>
+        <convFlag>true</convFlag>
+        <ignoreErrors>true</ignoreErrors>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>public class Map00Impl {&#xD;
+&#xD;
+	public Map00Impl() {&#xD;
+		&#xD;
+	}&#xD;
+&#xD;
+	private TESTE_00 context;&#xD;
+&#xD;
+	public Map00Impl(TESTE_00 context) {&#xD;
+		this.context = context;&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>package statemutest;&#xD;
+&#xD;
+public class TESTE_00 {&#xD;
+	private TESTE_00_FSM _TESTE_00_FSM;&#xD;
+	private Map00Impl _Map00;&#xD;
+	private java.util.HashMap&lt;String, Object&gt; _objectMap;&#xD;
+&#xD;
+	public TESTE_00() {&#xD;
+		_TESTE_00_FSM = new TESTE_00_FSM(this);&#xD;
+		_objectMap = new java.util.HashMap&lt;&gt;();&#xD;
+		try {&#xD;
+			_Map00 = Map00Impl.class.getConstructor(Code.class, TESTE_00.class).newInstance(Code.this, this);&#xD;
+		}&#xD;
+		catch(Exception e) {&#xD;
+			_Map00 = new Map00Impl();&#xD;
+		}&#xD;
+		_objectMap.put(&quot;Map00&quot;, _Map00);&#xD;
+&#xD;
+		_TESTE_00_FSM.setDebugStream(System.err);&#xD;
+		_TESTE_00_FSM.setDebugFlag(true);&#xD;
+		_TESTE_00_FSM.enterStartState();&#xD;
+	}&#xD;
+&#xD;
+	private class Utils {
+	        public Object invokeMethod(Object object, String name, Object[] params)
+	        {
+           try
+	            {
+	                java.lang.reflect.Method method = null;                       
+                        
+	                for(java.lang.reflect.Method m : object.getClass().getMethods())
+	                {
+	                    if(m.getName().equals(name))
+	                    {
+	                        method = m;
+	                        break;
+	                    }
+	                }
+	
+	                if(method != null)
+	                {
+	                    return method.invoke(object, params);
+	                }
+	                else
+	                    return null;
+	            }
+	            catch(Exception e)
+	            {
+	                return null;
+	            }
+	        }
+	        
+	        public Object getState(Object object)
+	        {
+	            try
+	            {
+	                Object ret1 = invokeMethod(object, &quot;getState&quot;, null);
+                        
+                        if(ret1 == null)
+                            throw new Exception();
+                        else
+                            return ret1;
+	            }
+	            catch(Exception e1)
+	            {
+	                try
+	                {
+	                    return invokeMethod(object, &quot;getPreviousState&quot;, null);
+	                }
+	                catch(Exception e2)
+	                {
+	                    return null;
+	                }
+	            }
+	        }
+	        
+	        public String getStateName(Object object)
+	        {
+	            try
+	            {
+	                String aux = invokeMethod(object, &quot;getName&quot;, null).toString();
+	                
+	                return aux.substring(0, aux.indexOf(&quot;.&quot;));
+	            }
+	            catch(Exception e)
+	            {
+	                return &quot;&quot;;
+	            }
+	        }
+	    }&#xD;
+&#xD;
+	public void event() {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, &quot;event&quot;, new Object[] {  });&#xD;
+	}&#xD;
+&#xD;
+	public void triggerEvent(String event, Object... params) {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, event, params);&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <map id="0" isMutant="false">
+            <name>Map00</name>
+            <state id="0" isMutant="false">
+                <name>state_0</name>
+                <transition id="0" isMutant="false">
+                    <event>event</event>
+                    <guard id="3" isMutant="false">
+                        <cloneGlobalIndexAsTransitionIndex>false</cloneGlobalIndexAsTransitionIndex>
+                        <condition></condition>
+                        <globalIndex>0</globalIndex>
+                        <popArgs></popArgs>
+                        <pushState></pushState>
+                        <targetState>state_1</targetState>
+                        <transitionType>SET</transitionType>
+                        <tIndex>1</tIndex>
+                    </guard>
+                </transition>
+            </state>
+            <state id="1" isMutant="false">
+                <name>state_1</name>
+            </state>
+            <state id="4" isMutant="false">
+                <name>state_2</name>
+            </state>
+        </map>
+        <name>TESTE_00_FSM</name>
+        <path>D:\tmp\MGEO\TESTE_00\Build\MUT$TraArcDel$1.mmap</path>
+    </_imutants>
+    <_imodels initialState="Map00::state_0" id="0" isMutant="false">
+        <buildFlag>false</buildFlag>
+        <contextId>TESTE_00</contextId>
+        <convFlag>true</convFlag>
+        <ignoreErrors>false</ignoreErrors>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>public class Map00Impl {&#xD;
+&#xD;
+	public Map00Impl() {&#xD;
+		&#xD;
+	}&#xD;
+&#xD;
+	private TESTE_00 context;&#xD;
+&#xD;
+	public Map00Impl(TESTE_00 context) {&#xD;
+		this.context = context;&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>package statemutest;&#xD;
+&#xD;
+public class TESTE_00 {&#xD;
+	private TESTE_00_FSM _TESTE_00_FSM;&#xD;
+	private Map00Impl _Map00;&#xD;
+	private java.util.HashMap&lt;String, Object&gt; _objectMap;&#xD;
+&#xD;
+	public TESTE_00() {&#xD;
+		_TESTE_00_FSM = new TESTE_00_FSM(this);&#xD;
+		_objectMap = new java.util.HashMap&lt;&gt;();&#xD;
+		try {&#xD;
+			_Map00 = Map00Impl.class.getConstructor(Code.class, TESTE_00.class).newInstance(Code.this, this);&#xD;
+		}&#xD;
+		catch(Exception e) {&#xD;
+			_Map00 = new Map00Impl();&#xD;
+		}&#xD;
+		_objectMap.put(&quot;Map00&quot;, _Map00);&#xD;
+&#xD;
+		_TESTE_00_FSM.setDebugStream(System.err);&#xD;
+		_TESTE_00_FSM.setDebugFlag(true);&#xD;
+		_TESTE_00_FSM.enterStartState();&#xD;
+	}&#xD;
+&#xD;
+	private class Utils {
+	        public Object invokeMethod(Object object, String name, Object[] params)
+	        {
+           try
+	            {
+	                java.lang.reflect.Method method = null;                       
+                        
+	                for(java.lang.reflect.Method m : object.getClass().getMethods())
+	                {
+	                    if(m.getName().equals(name))
+	                    {
+	                        method = m;
+	                        break;
+	                    }
+	                }
+	
+	                if(method != null)
+	                {
+	                    return method.invoke(object, params);
+	                }
+	                else
+	                    return null;
+	            }
+	            catch(Exception e)
+	            {
+	                return null;
+	            }
+	        }
+	        
+	        public Object getState(Object object)
+	        {
+	            try
+	            {
+	                Object ret1 = invokeMethod(object, &quot;getState&quot;, null);
+                        
+                        if(ret1 == null)
+                            throw new Exception();
+                        else
+                            return ret1;
+	            }
+	            catch(Exception e1)
+	            {
+	                try
+	                {
+	                    return invokeMethod(object, &quot;getPreviousState&quot;, null);
+	                }
+	                catch(Exception e2)
+	                {
+	                    return null;
+	                }
+	            }
+	        }
+	        
+	        public String getStateName(Object object)
+	        {
+	            try
+	            {
+	                String aux = invokeMethod(object, &quot;getName&quot;, null).toString();
+	                
+	                return aux.substring(0, aux.indexOf(&quot;.&quot;));
+	            }
+	            catch(Exception e)
+	            {
+	                return &quot;&quot;;
+	            }
+	        }
+	    }&#xD;
+&#xD;
+	public void event() {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, &quot;event&quot;, new Object[] {  });&#xD;
+	}&#xD;
+&#xD;
+	public void triggerEvent(String event, Object... params) {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, event, params);&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <map id="0" isMutant="false">
+            <name>Map00</name>
+            <state id="0" isMutant="false">
+                <name>state_0</name>
+                <transition id="0" isMutant="false">
+                    <event>event</event>
+                    <guard id="3" isMutant="false">
+                        <cloneGlobalIndexAsTransitionIndex>false</cloneGlobalIndexAsTransitionIndex>
+                        <condition></condition>
+                        <globalIndex>0</globalIndex>
+                        <popArgs></popArgs>
+                        <pushState></pushState>
+                        <targetState>state_1</targetState>
+                        <transitionType>SET</transitionType>
+                        <tIndex>1</tIndex>
+                    </guard>
+                </transition>
+            </state>
+            <state id="1" isMutant="false">
+                <name>state_1</name>
+                <transition id="0" isMutant="false">
+                    <event>event</event>
+                    <guard id="6" isMutant="false">
+                        <cloneGlobalIndexAsTransitionIndex>false</cloneGlobalIndexAsTransitionIndex>
+                        <condition></condition>
+                        <globalIndex>0</globalIndex>
+                        <popArgs></popArgs>
+                        <pushState></pushState>
+                        <targetState>state_2</targetState>
+                        <transitionType>SET</transitionType>
+                        <tIndex>2</tIndex>
+                    </guard>
+                </transition>
+            </state>
+            <state id="4" isMutant="false">
+                <name>state_2</name>
+            </state>
+        </map>
+        <name>TESTE_00_FSM</name>
+        <path>D:\tmp\MGEO\TESTE_00\Build\TESTE_00.gmap</path>
+    </_imodels>
+    <_itestCases>
+        <entry>
+            <key>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_01.ecase</key>
+            <value id="0">
+                <data id="0">
+                    <event>event</event>
+                    <testOutput expectedFault="false" id="0">
+                        <enterState></enterState>
+                        <enterTransition></enterTransition>
+                        <leavingState></leavingState>
+                        <output></output>
+                    </testOutput>
+                    <processed>false</processed>
+                </data>
+                <name>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_01.ecase</name>
+            </value>
+        </entry>
+        <entry>
+            <key>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_02.ecase</key>
+            <value id="0">
+                <data id="0">
+                    <event>event</event>
+                    <testOutput expectedFault="false" id="0">
+                        <enterState></enterState>
+                        <enterTransition></enterTransition>
+                        <leavingState></leavingState>
+                        <output></output>
+                    </testOutput>
+                    <processed>false</processed>
+                </data>
+                <data id="0">
+                    <event>event</event>
+                    <testOutput expectedFault="false" id="0">
+                        <enterState></enterState>
+                        <enterTransition></enterTransition>
+                        <leavingState></leavingState>
+                        <output></output>
+                    </testOutput>
+                    <processed>false</processed>
+                </data>
+                <name>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_02.ecase</name>
+            </value>
+        </entry>
+        <entry>
+            <key>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_01.ecase</key>
+            <value id="0">
+                <data id="0">
+                    <event>event</event>
+                    <testOutput expectedFault="false" id="0">
+                        <enterState></enterState>
+                        <enterTransition></enterTransition>
+                        <leavingState></leavingState>
+                        <output></output>
+                    </testOutput>
+                    <processed>false</processed>
+                </data>
+                <name>D:\tmp\MGEO\TESTE_00\Tests\TS_01\TC_01.ecase</name>
+            </value>
+        </entry>
+        <entry>
+            <key>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_02.ecase</key>
+            <value id="0">
+                <data id="0">
+                    <event>event</event>
+                    <testOutput expectedFault="false" id="0">
+                        <enterState></enterState>
+                        <enterTransition></enterTransition>
+                        <leavingState></leavingState>
+                        <output></output>
+                    </testOutput>
+                    <processed>false</processed>
+                </data>
+                <data id="0">
+                    <event>event</event>
+                    <testOutput expectedFault="false" id="0">
+                        <enterState></enterState>
+                        <enterTransition></enterTransition>
+                        <leavingState></leavingState>
+                        <output></output>
+                    </testOutput>
+                    <processed>false</processed>
+                </data>
+                <name>D:\tmp\MGEO\TESTE_00\Tests\TS_02\TC_02.ecase</name>
+            </value>
+        </entry>
+    </_itestCases>
+    <_imodel initialState="Map00::state_0" id="0" isMutant="false">
+        <buildFlag>false</buildFlag>
+        <contextId>TESTE_00</contextId>
+        <convFlag>true</convFlag>
+        <ignoreErrors>false</ignoreErrors>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>public class Map00Impl {&#xD;
+&#xD;
+	public Map00Impl() {&#xD;
+		&#xD;
+	}&#xD;
+&#xD;
+	private TESTE_00 context;&#xD;
+&#xD;
+	public Map00Impl(TESTE_00 context) {&#xD;
+		this.context = context;&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <implementation type="text/java" id="0" isMutant="false">
+            <content>package statemutest;&#xD;
+&#xD;
+public class TESTE_00 {&#xD;
+	private TESTE_00_FSM _TESTE_00_FSM;&#xD;
+	private Map00Impl _Map00;&#xD;
+	private java.util.HashMap&lt;String, Object&gt; _objectMap;&#xD;
+&#xD;
+	public TESTE_00() {&#xD;
+		_TESTE_00_FSM = new TESTE_00_FSM(this);&#xD;
+		_objectMap = new java.util.HashMap&lt;&gt;();&#xD;
+		try {&#xD;
+			_Map00 = Map00Impl.class.getConstructor(Code.class, TESTE_00.class).newInstance(Code.this, this);&#xD;
+		}&#xD;
+		catch(Exception e) {&#xD;
+			_Map00 = new Map00Impl();&#xD;
+		}&#xD;
+		_objectMap.put(&quot;Map00&quot;, _Map00);&#xD;
+&#xD;
+		_TESTE_00_FSM.setDebugStream(System.err);&#xD;
+		_TESTE_00_FSM.setDebugFlag(true);&#xD;
+		_TESTE_00_FSM.enterStartState();&#xD;
+	}&#xD;
+&#xD;
+	private class Utils {
+	        public Object invokeMethod(Object object, String name, Object[] params)
+	        {
+           try
+	            {
+	                java.lang.reflect.Method method = null;                       
+                        
+	                for(java.lang.reflect.Method m : object.getClass().getMethods())
+	                {
+	                    if(m.getName().equals(name))
+	                    {
+	                        method = m;
+	                        break;
+	                    }
+	                }
+	
+	                if(method != null)
+	                {
+	                    return method.invoke(object, params);
+	                }
+	                else
+	                    return null;
+	            }
+	            catch(Exception e)
+	            {
+	                return null;
+	            }
+	        }
+	        
+	        public Object getState(Object object)
+	        {
+	            try
+	            {
+	                Object ret1 = invokeMethod(object, &quot;getState&quot;, null);
+                        
+                        if(ret1 == null)
+                            throw new Exception();
+                        else
+                            return ret1;
+	            }
+	            catch(Exception e1)
+	            {
+	                try
+	                {
+	                    return invokeMethod(object, &quot;getPreviousState&quot;, null);
+	                }
+	                catch(Exception e2)
+	                {
+	                    return null;
+	                }
+	            }
+	        }
+	        
+	        public String getStateName(Object object)
+	        {
+	            try
+	            {
+	                String aux = invokeMethod(object, &quot;getName&quot;, null).toString();
+	                
+	                return aux.substring(0, aux.indexOf(&quot;.&quot;));
+	            }
+	            catch(Exception e)
+	            {
+	                return &quot;&quot;;
+	            }
+	        }
+	    }&#xD;
+&#xD;
+	public void event() {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, &quot;event&quot;, new Object[] {  });&#xD;
+	}&#xD;
+&#xD;
+	public void triggerEvent(String event, Object... params) {&#xD;
+		new Utils().invokeMethod(_TESTE_00_FSM, event, params);&#xD;
+	}&#xD;
+}&#xD;
+</content>
+        </implementation>
+        <map id="0" isMutant="false">
+            <name>Map00</name>
+            <state id="0" isMutant="false">
+                <name>state_0</name>
+                <transition id="0" isMutant="false">
+                    <event>event</event>
+                    <guard id="3" isMutant="false">
+                        <cloneGlobalIndexAsTransitionIndex>false</cloneGlobalIndexAsTransitionIndex>
+                        <condition></condition>
+                        <globalIndex>0</globalIndex>
+                        <popArgs></popArgs>
+                        <pushState></pushState>
+                        <targetState>state_1</targetState>
+                        <transitionType>SET</transitionType>
+                        <tIndex>1</tIndex>
+                    </guard>
+                </transition>
+            </state>
+            <state id="1" isMutant="false">
+                <name>state_1</name>
+                <transition id="0" isMutant="false">
+                    <event>event</event>
+                    <guard id="6" isMutant="false">
+                        <cloneGlobalIndexAsTransitionIndex>false</cloneGlobalIndexAsTransitionIndex>
+                        <condition></condition>
+                        <globalIndex>0</globalIndex>
+                        <popArgs></popArgs>
+                        <pushState></pushState>
+                        <targetState>state_2</targetState>
+                        <transitionType>SET</transitionType>
+                        <tIndex>2</tIndex>
+                    </guard>
+                </transition>
+            </state>
+            <state id="4" isMutant="false">
+                <name>state_2</name>
+            </state>
+        </map>
+        <name>TESTE_00_FSM</name>
+        <path>D:\tmp\MGEO\TESTE_00\Build\TESTE_00.gmap</path>
+    </_imodel>
+</iTestResult>
