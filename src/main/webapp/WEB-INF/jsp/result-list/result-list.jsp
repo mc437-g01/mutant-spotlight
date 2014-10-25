@@ -59,7 +59,7 @@
 		<table class="table table-striped" id="result_table">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>ID</<th>
 					<th>Nome</th>
 				</tr>
 			</thead>
