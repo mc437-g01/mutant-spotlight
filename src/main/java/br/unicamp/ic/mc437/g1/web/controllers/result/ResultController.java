@@ -35,13 +35,16 @@ public class ResultController {
 
 		return "new-result/new-result";
 	}
-    
-	@RequestMapping("/result/{id}")
-	public String renderResult(@PathVariable Integer id, Model model) {
-		model.addAttribute("id", id);
+
+    @RequestMapping("/result/{id}")
+    public String renderResult(@PathVariable Integer id, Model model) {
+        return renderResult(testResultDAO.findById(id), model);
+    }
+
+    private String renderResult(TestResult testResult, Model model) {
+        model.addAttribute("id", testResult.getId());
 		
-		//TODO: get Result and TestCaseResult
-		model.addAttribute("result", testResultDAO.findById(id));
+		model.addAttribute("result", testResult);
 
 		return "result/result";
 	}
@@ -57,15 +60,19 @@ public class ResultController {
         log.debug("{}", xmlFile);
 
         TestResult testResult = XmlUtils.readValue(xmlFile.getInputStream(), TestResult.class);
+        if (testResult == null) {
+            return "error/invalid-file-error";
+        }
+
         testResult.setEmail(email);
         testResult.setName(name);
         log.debug("{}", testResult);
 
-        testResultDAO.save(testResult);
+        testResult = testResultDAO.save(testResult);
 
 		model.addAttribute("mutantsKilled", 0);
 
-		return "result-upload/result-upload";
+		return renderResult(testResult, model);
 	}
 	
 	@RequestMapping("/result-list")
@@ -74,11 +81,4 @@ public class ResultController {
 		
 		return "result-list/result-list";
 	}
-
-	public Result save(Result result) {
-		result.setId(1);
-
-		return result;
-	}
-
 }

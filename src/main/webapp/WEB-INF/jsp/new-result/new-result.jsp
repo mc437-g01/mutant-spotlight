@@ -1,3 +1,5 @@
+<%@ page import="java.util.Objects" %>
+<%@ page import="static java.lang.Boolean.parseBoolean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -53,9 +55,21 @@
 				<h1>Novo Resultado</h1>
 			</div>
 
+            <div id="empty-file-error" class="alert alert-danger hidden">
+                O arquivo está vazio
+            </div>
+
+            <div id="empty-email-error" class="alert alert-danger hidden">
+                O email é obrigatório
+            </div>
+
+            <div id="empty-name-error" class="alert alert-danger hidden">
+                O nome é obrigatório
+            </div>
+
 			<form role="form" action="result-upload" method="POST"
-				enctype="multipart/form-data">
-				<div class="form-group">
+				enctype="multipart/form-data" onsubmit="return validateForm()">
+                    <div class="form-group">
 					<label for="exampleInputEmail1">Email address</label>
 					<input id="email-address"
 						type="email" class="form-control" id="exampleInputEmail1"
@@ -80,6 +94,35 @@
 
 	</div>
 	<!-- /.container -->
+
+    <script type="application/javascript">
+        function validateForm() {
+            var valid = true;
+
+            if (!$('#upload-file').val()) {
+                $('#empty-file-error').removeClass("hidden");
+                valid = false;
+            } else {
+                $('#empty-file-error').addClass("hidden");
+            }
+
+            if (!$('#email-address').val()) {
+                $('#empty-email-error').removeClass("hidden");
+                valid = false;
+            } else {
+                $('#empty-email-error').addClass("hidden");
+            }
+
+            if (!$('#name').val()) {
+                $('#empty-name-error').removeClass("hidden");
+                valid = false;
+            } else {
+                $('#empty-name-error').addClass("hidden");
+            }
+
+            return valid;
+        }
+    </script>
 
 </body>
 

@@ -60,7 +60,7 @@ public class JpaConfiguration {
     Properties additionalProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", "create-drop");
+                setProperty("hibernate.hbm2ddl.auto", "none");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
                 setProperty("hibernate.onnection.useUnicode", "true");
                 setProperty("hibernate.connection.characterEncoding", "UTF-8");
