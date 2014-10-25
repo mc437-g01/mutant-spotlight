@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.List,br.unicamp.ic.mc437.g1.entity.TestResult,br.unicamp.ic.mc437.g1.entity.TestOutput,
-	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult"%>
+	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult,
+	br.unicamp.ic.mc437.g1.entity.Mutant,br.unicamp.ic.mc437.g1.entity.MutantImplementation"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,6 +19,13 @@
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/<%=org.webjars.AssetLocator
 					.getWebJarPath("js/bootstrap.min.js")%>'></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/syntax_highlight/styles/default.css">
+<script
+	src="<%=request.getContextPath()%>/syntax_highlight/highlight.pack.js"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mutant Spotlight</title>
 </head>
@@ -71,58 +79,155 @@
 				<%=set.getId()%>:
 			</div>
 			<div class="panel-body">
-				
-				<p><b>Cod:</b> <%=set.getCod()%></p>
-				<p><b>Identifier:</b> <%=set.getIdentifier()%></p>
-				<p><b>Path:</b> <%=set.getPath()%></p>
-				<br/>
+
+				<p>
+					<b>Cod:</b>
+					<%=set.getCod()%></p>
+				<p>
+					<b>Identifier:</b>
+					<%=set.getIdentifier()%></p>
+				<p>
+					<b>Path:</b>
+					<%=set.getPath()%></p>
+				<br />
 				<%
 					List<TestCaseResult> cases = set.getTestCaseResults();
 						for (TestCaseResult testCase : cases) {
 				%>
-				
+
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Test Case
 						<%=testCase.getId()%>:
 					</div>
 					<div class="panel-body">
-						<p><b>Path:</b> <%=testCase.getPath()%></p>
-						<p><b>Key:</b> <%=testCase.getTestCaseKey()%></p>
+						<p>
+							<b>Path:</b>
+							<%=testCase.getPath()%></p>
+						<p>
+							<b>Key:</b>
+							<%=testCase.getTestCaseKey()%></p>
 					</div>
 					<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Chave</th>
-							<th>Morto?</th>
-							<th>Índice</th>
-							<th>Eval Falhou?</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							List<TestOutput> outputs = testCase.getTestOutputs();
-									for (TestOutput output : outputs) {
-						%>
-						<tr>
-							<td style="width:25px;"><%=output.getId()%></td>
-							<td><%=output.getMutantKey()%></td>
-							<td><%=output.getDead()? "Sim" : "Não"%></td>
-							<td><%=output.getDeathIndex()%></td>
-							<td><%=output.getEvalFailed()%></td>
-						</tr>
-						<%
-							}
-						%>
-					</tbody>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Chave</th>
+								<th>Morto?</th>
+								<th>Índice</th>
+								<th>Eval Falhou?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								List<TestOutput> outputs = testCase.getTestOutputs();
+										for (TestOutput output : outputs) {
+							%>
+							<tr>
+								<td style="width: 25px;"><%=output.getId()%></td>
+								<td><%=output.getMutantKey()%></td>
+								<td><%=output.getDead() ? "Sim" : "Não"%></td>
+								<td><%=output.getDeathIndex()%></td>
+								<td><%=output.getEvalFailed()%></td>
+							</tr>
+							<%
+								}
+							%>
+						</tbody>
 					</table>
 				</div>
 				<%
 					}
 				%>
-				
-			</table>
+			</div>
+		</div>
+
+		<%
+			}
+		%>
+
+		<h3>Mutants:</h3>
+
+		<%
+			List<Mutant> mutants = res.getMutants();
+			for (Mutant mutant : mutants) {
+		%>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				Mutante
+				<%=mutant.getName()%>:
+			</div>
+			<div class="panel-body">
+				<p>
+					<b>Context ID:</b>
+					<%=mutant.getContextId()%></p>
+				<p>
+					<b>Build Flag:</b>
+					<%=mutant.getBuildFlag()%></p>
+				<p>
+					<b>Conv Flag:</b>
+					<%=mutant.getConvFlag()%></p>
+				<p>
+					<b>Ignore Error:</b>
+					<%=mutant.getIgnoreErrors()%></p>
+				<p><b>Implementações:</b></p>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Implementação</th>
+							<th>Is Mutant?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							List<MutantImplementation> implementations = mutant
+										.getImplementatios();
+								for (MutantImplementation implementation : implementations) {
+						%>
+						<tr>
+							<td><%=implementation.getId()%></td>
+							<td><a href="#" data-toggle="modal"
+								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
+							<td><%=implementation.getIsMutant()%></td>
+
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+				<%
+					for (MutantImplementation implementation : implementations) {
+				%>
+				<div class="modal fade" id="myModal<%=implementation.getId()%>"
+					tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel<%=implementation.getId()%>"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title"
+									id="myModalLabel<%=implementation.getId()%>">Implementação:</h4>
+							</div>
+							<div class="modal-body">
+								<pre>
+									<code><%=implementation.getContent()%></code>
+								</pre>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%
+					}
+				%>
 			</div>
 		</div>
 
