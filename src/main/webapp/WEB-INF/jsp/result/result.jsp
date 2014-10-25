@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"
 	import="java.util.List,br.unicamp.ic.mc437.g1.entity.TestResult,br.unicamp.ic.mc437.g1.entity.TestOutput,
 	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult,
-	br.unicamp.ic.mc437.g1.entity.Mutant,br.unicamp.ic.mc437.g1.entity.MutantImplementation"%>
+	br.unicamp.ic.mc437.g1.entity.Mutant,br.unicamp.ic.mc437.g1.entity.MutantImplementation,
+	br.unicamp.ic.mc437.g1.entity.ResultModel,br.unicamp.ic.mc437.g1.entity.TestCase,
+	br.unicamp.ic.mc437.g1.entity.TestCaseEntry"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -232,6 +234,126 @@
 		</div>
 
 		<%
+			}
+		%>
+		
+		<h3>Result Models:</h3>
+
+		<%
+			List<ResultModel> models = res.getResultModels();
+			for (ResultModel model : models) {
+		%>
+			<div class="panel panel-default">
+			<div class="panel-heading">
+				Modelo
+				<%=model.getName()%>:
+			</div>
+			<div class="panel-body">
+			
+				<p><b>Implementações:</b></p>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Implementação</th>
+							<th>Is Mutant?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							List<MutantImplementation> implementations = model.getImplementatios();
+							for (MutantImplementation implementation : implementations) {
+						%>
+						<tr>
+							<td><%=implementation.getId()%></td>
+							<td><a href="#" data-toggle="modal"
+								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
+							<td><%=implementation.getIsMutant()%></td>
+
+						</tr>
+						<%
+							}
+						%>
+					</tbody>
+				</table>
+				<%
+					for (MutantImplementation implementation : implementations) {
+				%>
+				<div class="modal fade" id="myModal<%=implementation.getId()%>"
+					tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel<%=implementation.getId()%>"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title"
+									id="myModalLabel<%=implementation.getId()%>">Implementação:</h4>
+							</div>
+							<div class="modal-body">
+								<pre>
+									<code><%=implementation.getContent()%></code>
+								</pre>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%
+					}
+				%>
+			</div>
+		</div>
+		<%
+			}
+		%>
+		
+		<h3>Test Cases:</h3>
+
+		<%
+			List<TestCase> testCases = res.getTestCases();
+			for (TestCase testCase : testCases) {
+				%>
+				<div class="panel panel-default">
+				<div class="panel-heading">
+					Test Case
+					<%=testCase.getId()%>:
+				</div>
+				<div class="panel-body">
+				
+					<p><b>Entries:</b></p>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Key</th>
+								<th>Content</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+								List<TestCaseEntry> entries = testCase.getTestCaseEntries();
+								for (TestCaseEntry entry : entries) {
+							%>
+							<tr>
+								<td><%=entry.getId()%></td>
+								<td><%= entry.getKey() %></td>
+								<td><%= entry.getTestCaseEntryValue().toString()%></td>
+
+							</tr>
+							<%
+								}
+							%>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<%
 			}
 		%>
 
