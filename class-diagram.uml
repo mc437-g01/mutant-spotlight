@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>br.unicamp.ic.mc437.g1</OriginalElement>
+  <nodes>
+    <node x="439.74999999999994" y="929.0">br.unicamp.ic.mc437.g1.entity.Mutant</node>
+    <node x="372.75" y="538.0">br.unicamp.ic.mc437.g1.entity.MutantMapState</node>
+    <node x="0.0" y="1714.0">br.unicamp.ic.mc437.g1.configuration.JpaConfiguration</node>
+    <node x="113.75" y="538.0">br.unicamp.ic.mc437.g1.entity.TestCaseEntryValueData</node>
+    <node x="611.75" y="744.0">br.unicamp.ic.mc437.g1.entity.MutantImplementation</node>
+    <node x="888.6041666666666" y="1219.0">br.unicamp.ic.mc437.g1.entity.TestSetResult</node>
+    <node x="93.75" y="311.0">br.unicamp.ic.mc437.g1.entity.TestCaseEntryValueDataTestOutput</node>
+    <node x="501.75" y="1724.5">br.unicamp.ic.mc437.g1.model.dao.TestResultDAO</node>
+    <node x="646.25" y="1261.5">br.unicamp.ic.mc437.g1.util.StrangeDateAdapter</node>
+    <node x="624.5" y="1877.0">br.unicamp.ic.mc437.g1.web.controllers.result.ResultController</node>
+    <node x="1458.6041666666665" y="0.0">br.unicamp.ic.mc437.g1.web.controllers.HomeController</node>
+    <node x="453.2302350427349" y="1282.5">br.unicamp.ic.mc437.g1.entity.ResultModel</node>
+    <node x="888.6041666666666" y="723.0">br.unicamp.ic.mc437.g1.entity.TestOutput</node>
+    <node x="123.75" y="744.0">br.unicamp.ic.mc437.g1.entity.TestCaseEntryValue</node>
+    <node x="1704.6041666666665" y="0.0">br.unicamp.ic.mc437.g1.configuration.Application</node>
+    <node x="358.5" y="1887.5">br.unicamp.ic.mc437.g1.model.dao.TestResultDAOImpl</node>
+    <node x="475.24999999999994" y="1445.0">br.unicamp.ic.mc437.g1.entity.TestResult</node>
+    <node x="898.6041666666666" y="981.5">br.unicamp.ic.mc437.g1.entity.TestCaseResult</node>
+    <node x="312.75" y="0.0">br.unicamp.ic.mc437.g1.entity.StateTransitionGuard</node>
+    <node x="372.75" y="332.0">br.unicamp.ic.mc437.g1.entity.StateTransition</node>
+    <node x="778.5" y="1714.0">br.unicamp.ic.mc437.g1.util.XmlUtils</node>
+    <node x="372.75" y="733.5">br.unicamp.ic.mc437.g1.entity.MutantMap</node>
+    <node x="123.75" y="992.0">br.unicamp.ic.mc437.g1.entity.TestCaseEntry</node>
+    <node x="1172.6041666666665" y="0.0">br.unicamp.ic.mc437.g1.web.controllers.GlobalExceptionController</node>
+    <node x="133.75" y="1250.5">br.unicamp.ic.mc437.g1.entity.TestCase</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="br.unicamp.ic.mc437.g1.model.dao.TestResultDAOImpl" target="br.unicamp.ic.mc437.g1.entity.TestResult">
+      <point x="0.0" y="-46.0" />
+      <point x="481.5" y="1689.0" />
+      <point x="525.0833333333333" y="1689.0" />
+      <point x="-99.66666666666663" y="109.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.StateTransition" target="br.unicamp.ic.mc437.g1.entity.StateTransitionGuard">
+      <point x="-54.75" y="-67.5" />
+      <point x="427.5" y="286.0" />
+      <point x="397.5" y="286.0" />
+      <point x="-84.75" y="130.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.web.controllers.result.ResultController" target="br.unicamp.ic.mc437.g1.util.XmlUtils">
+      <point x="95.66666666666663" y="-56.5" />
+      <point x="863.6666666666666" y="1852.0" />
+      <point x="916.5" y="1852.0" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestResult" target="br.unicamp.ic.mc437.g1.entity.ResultModel">
+      <point x="-33.222222222222285" y="-109.5" />
+      <point x="591.5277777777776" y="1395.0" />
+      <point x="530.4802350427349" y="1395.0" />
+      <point x="25.75" y="14.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestCase" target="br.unicamp.ic.mc437.g1.entity.TestCaseEntry">
+      <point x="-44.75" y="-46.5" />
+      <point x="178.5" y="1194.0" />
+      <point x="173.5" y="1194.0" />
+      <point x="-49.75" y="57.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestResult" target="br.unicamp.ic.mc437.g1.util.StrangeDateAdapter">
+      <point x="66.44444444444446" y="-109.5" />
+      <point x="691.1944444444443" y="1405.0" />
+      <point x="740.25" y="1405.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.Mutant" target="br.unicamp.ic.mc437.g1.entity.MutantMap">
+      <point x="-119.625" y="-120.0" />
+      <point x="479.62499999999994" y="904.0" />
+      <point x="427.5" y="904.0" />
+      <point x="-54.75" y="67.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.MutantMapState" target="br.unicamp.ic.mc437.g1.entity.StateTransition">
+      <point x="-54.75" y="-67.5" />
+      <point x="-54.75" y="67.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.model.dao.TestResultDAOImpl" target="br.unicamp.ic.mc437.g1.configuration.JpaConfiguration">
+      <point x="-82.0" y="-46.0" />
+      <point x="399.5" y="1852.0" />
+      <point x="235.5" y="1852.0" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestCaseEntry" target="br.unicamp.ic.mc437.g1.entity.TestCaseEntryValue">
+      <point x="49.75" y="-57.0" />
+      <point x="49.75" y="57.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestSetResult" target="br.unicamp.ic.mc437.g1.entity.TestCaseResult">
+      <point x="59.75" y="-78.0" />
+      <point x="1067.8541666666665" y="1194.0" />
+      <point x="1062.8541666666665" y="1194.0" />
+      <point x="54.75" y="67.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestResult" target="br.unicamp.ic.mc437.g1.entity.TestCase">
+      <point x="-132.8888888888889" y="-109.5" />
+      <point x="491.86111111111103" y="1425.0" />
+      <point x="178.5" y="1425.0" />
+      <point x="-44.75" y="46.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.Mutant" target="br.unicamp.ic.mc437.g1.entity.MutantImplementation">
+      <point x="119.625" y="-120.0" />
+      <point x="718.875" y="904.0" />
+      <point x="761.0" y="904.0" />
+      <point x="49.75" y="57.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.web.controllers.result.ResultController" target="br.unicamp.ic.mc437.g1.model.dao.TestResultDAO">
+      <point x="-95.66666666666674" y="-56.5" />
+      <point x="672.3333333333333" y="1852.0" />
+      <point x="686.25" y="1852.0" />
+      <point x="61.5" y="46.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.ResultModel" target="br.unicamp.ic.mc437.g1.entity.Mutant">
+      <point x="0.0" y="-14.5" />
+      <point x="504.7302350427349" y="1194.0" />
+      <point x="492.91666666666663" y="1194.0" />
+      <point x="-106.33333333333333" y="120.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.model.dao.TestResultDAO" target="br.unicamp.ic.mc437.g1.entity.TestResult">
+      <point x="0.0" y="-46.0" />
+      <point x="0.0" y="109.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.MutantMap" target="br.unicamp.ic.mc437.g1.entity.MutantMapState">
+      <point x="-54.75" y="-67.5" />
+      <point x="-54.75" y="67.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestCaseResult" target="br.unicamp.ic.mc437.g1.entity.TestOutput">
+      <point x="-54.75" y="-67.5" />
+      <point x="953.3541666666666" y="904.0" />
+      <point x="948.3541666666666" y="904.0" />
+      <point x="-59.75" y="78.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestCaseEntryValueData" target="br.unicamp.ic.mc437.g1.entity.TestCaseEntryValueDataTestOutput">
+      <point x="54.75" y="-67.5" />
+      <point x="278.0" y="513.0" />
+      <point x="288.0" y="513.0" />
+      <point x="64.75" y="88.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.model.dao.TestResultDAOImpl" target="br.unicamp.ic.mc437.g1.model.dao.TestResultDAO">
+      <point x="82.0" y="-46.0" />
+      <point x="-61.5" y="46.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestResult" target="br.unicamp.ic.mc437.g1.entity.Mutant">
+      <point x="33.22222222222217" y="-109.5" />
+      <point x="657.9722222222222" y="1425.0" />
+      <point x="635.75" y="1425.0" />
+      <point x="635.75" y="1194.0" />
+      <point x="705.5833333333333" y="1194.0" />
+      <point x="106.33333333333331" y="120.0" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.web.controllers.result.ResultController" target="br.unicamp.ic.mc437.g1.entity.TestResult">
+      <point x="0.0" y="-56.5" />
+      <point x="768.0" y="1689.0" />
+      <point x="724.4166666666667" y="1689.0" />
+      <point x="99.66666666666674" y="109.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestCaseEntryValue" target="br.unicamp.ic.mc437.g1.entity.TestCaseEntryValueData">
+      <point x="-49.75" y="-57.0" />
+      <point x="173.5" y="698.0" />
+      <point x="168.5" y="698.0" />
+      <point x="-54.75" y="67.5" />
+    </edge>
+    <edge source="br.unicamp.ic.mc437.g1.entity.TestResult" target="br.unicamp.ic.mc437.g1.entity.TestSetResult">
+      <point x="132.8888888888889" y="-109.5" />
+      <point x="757.6388888888889" y="1425.0" />
+      <point x="1067.8541666666665" y="1425.0" />
+      <point x="59.75" y="78.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4482587064676617" x="930.0" y="995.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
