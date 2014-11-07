@@ -3,6 +3,7 @@ package br.unicamp.ic.mc437.g1.entity;
 import br.unicamp.ic.mc437.g1.util.StrangeDateAdapter;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
