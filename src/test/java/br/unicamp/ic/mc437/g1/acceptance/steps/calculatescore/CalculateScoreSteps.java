@@ -1,15 +1,68 @@
 package br.unicamp.ic.mc437.g1.acceptance.steps.calculatescore;
 
-import br.unicamp.ic.mc437.g1.acceptance.Steps;
-import br.unicamp.ic.mc437.g1.acceptance.steps.SharedSteps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.List;
 
-/**
- * @author Fernando H. S. Goncalves (fernando.goncalves@movile.com)
- */
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Pending;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
+
+import br.unicamp.ic.mc437.g1.acceptance.Steps;
+
 @Steps
 public class CalculateScoreSteps {
+	@Given("there is the test $testId in the system")
+	@Pending
+	public void givenThereIsTheTestInTheSystem(int testId) {
+		// TODO
+	}
 
-    private static final Logger log = LoggerFactory.getLogger(CalculateScoreSteps.class);
+	@Given("the test list page loaded")
+	@Pending
+	public void givenTheTestListPageLoaded() {
+		// TODO
+	}
+
+	@Then("the system redirects to result show page")
+	@Pending
+	public void thenTheSystemRedirectsToResultShowPage() {
+		// TODO
+	}
+
+	@Then("the calculated score for test result is $score%")
+	@Pending
+	public void thenTheCalculatedScoreForTestResultIs(int score) {
+		// TODO
+	}
+
+	@When("I choose a test")
+	@Pending
+	public void whenIChooseATest() {
+		// TODO
+	}
+
+	@Then("show the calulated scores for test sets")
+	@Pending
+	public void thenShowTheCalulatedScoresForTestSets() {
+		// TODO
+	}
+
+	@When("I choose the test $testId")
+	@Pending
+	public void whenIChooseTheTest(int testId) {
+		// TODO
+	}
+
+	@Then("show the calculated score for test result")
+	@Pending
+	public void thenShowTheCalculatedScoreForTestResult() {
+		// TODO
+	}
+
+	@Then("the calulated scores for test sets is:$rows")
+	@Pending
+	public void thenTheCalulatedScoresForTestSetsIs(
+			List<TestSetScore> testSetScores) {
+		// TODO
+	}
 }
