@@ -2,8 +2,8 @@ Meta:
 
 Narrative:
 As a user
-I want to perform an action
-So that I can achieve a business goal
+I want to perform upload a file
+So that I can check the store and retrieve of the file information
 
 Scenario: click on upload button with all info
 Given upload page loaded

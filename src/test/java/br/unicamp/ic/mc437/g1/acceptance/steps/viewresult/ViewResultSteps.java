@@ -31,7 +31,7 @@ import org.springframework.beans.factory.annotation.Value;
  */
 @Steps
 public class ViewResultSteps {
-	private static final Logger log = LoggerFactory.getLogger(SharedSteps.class);
+	private static final Logger log = LoggerFactory.getLogger(ViewResultSteps.class);
 	
 	//url of the random chosen result
 	private String random_result_url;

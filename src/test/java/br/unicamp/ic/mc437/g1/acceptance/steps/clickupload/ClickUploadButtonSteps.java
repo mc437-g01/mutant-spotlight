@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 @Steps
 public class ClickUploadButtonSteps {
 
-    private static final Logger log = LoggerFactory.getLogger(SharedSteps.class);
+    private static final Logger log = LoggerFactory.getLogger(ClickUploadButtonSteps.class);
 
     @Resource(name = "firefoxDriver")
     private WebDriver driver;
