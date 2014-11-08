@@ -2,6 +2,8 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.visualizegraph;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.jbehave.core.annotations.Given;
@@ -25,7 +27,7 @@ public class VisualizeGraphSteps {
 	
 	@Then("the percentage of the graph in green for each test case will be: $rows")
 	@Pending
-	public void thenThePercentageOfTheGraphInGreenForEachTestCaseWillBe(String rows) {
+	public void thenThePercentageOfTheGraphInGreenForEachTestCaseWillBe(List<TestCaseRow> rows) {
 		// TODO
 	}
 
