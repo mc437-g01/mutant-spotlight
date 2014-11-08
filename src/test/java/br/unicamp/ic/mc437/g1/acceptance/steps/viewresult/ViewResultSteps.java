@@ -3,6 +3,7 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.viewresult;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import javax.annotation.Resource;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
+
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
@@ -18,11 +20,13 @@ import org.jbehave.core.annotations.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
 import br.unicamp.ic.mc437.g1.acceptance.steps.SharedSteps;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -57,6 +61,11 @@ public class ViewResultSteps {
             testResult1 = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
             testResult1.setName("test result 1");
             testResult1.setEmail("test@email.com");
+            Calendar calendar = Calendar.getInstance();
+            calendar.clear();
+            calendar.set(2014, 11, 7);
+            
+            testResult1.setDate(calendar.getTime());
             testResult1 = testResultDAO.save(testResult1);
         }
     }
@@ -119,6 +128,36 @@ public class ViewResultSteps {
 	@Then("the system redirects me to an error page")
 	public void redirectsErrorPage() {
 		assertEquals("The error page was not correctly loaded", "http://localhost:8080/mutant-spotlight/error/error", driver.getCurrentUrl());
+	}
+	
+	@When("I type $criteria on filter input")
+	public void typeCriteria(String criteria) {
+		driver.findElement(By.id("criteria")).sendKeys(criteria);
+	}
+	
+	@When("I select the $filterType filter")
+	public void selectNameFilter(String filterType) {
+		new Select(driver.findElement(By.id("filter-type"))).selectByValue(filterType);
+	}
+	
+	@When("I click the search button")
+	public void clickSearchButton() {
+		driver.findElement(By.id("search")).click();
+	}
+	
+	@Then("the system lists only results named $resultName")
+	public void listsResultsWithName(String resultName) {
+		
+	}
+	
+	@Then("the system lists only results uploaded by $email")
+	public void listsResultsUploadedBy(String email) {
+		
+	}
+	
+	@Then("the system lists only results uploaded on $date")
+	public void listsResultsUploadedOn(String date) {
+		
 	}
 	
 }
