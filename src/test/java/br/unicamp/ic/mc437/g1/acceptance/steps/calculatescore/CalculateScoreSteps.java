@@ -40,11 +40,16 @@ public class CalculateScoreSteps {
 
     private Map<String, TestResult> loadedTestResults;
 
+    private WebElement fileLinkFound;
+
     @Autowired
     private TestResultDAO testResultDAO;
 
     @Value("${server.endpoint}")
     private String serverEndpoint;
+
+    private int testResultScore;
+    private Map<Integer, Integer> testSetScoreMap;
 
     public CalculateScoreSteps() {
         loadedTestResults = new HashMap<String, TestResult>();
@@ -68,7 +73,7 @@ public class CalculateScoreSteps {
             }
         }
         if (!testResultFound) {
-            //testResultDAO.save(testResultLoaded);
+            testResultDAO.save(testResultLoaded);
         }
 
         loadedTestResults.put(testFileName, testResultLoaded);
@@ -89,7 +94,10 @@ public class CalculateScoreSteps {
         WebElement tableRow = tableRows.get(randomRow);
         List<WebElement> tds = tableRow.findElements(By.tagName("td"));
         WebElement td = tds.get(1);
-        td.findElement(By.tagName("a")).click();
+
+        fileLinkFound = td.findElement(By.tagName("a"));
+
+        Assert.assertNotNull("The file was not found in the test result list", fileLinkFound);
     }
 
     @When("I choose the test $testFileName")
@@ -98,42 +106,68 @@ public class CalculateScoreSteps {
         for (WebElement tableRow : tableRows) {
             List<WebElement> tds = tableRow.findElements(By.tagName("td"));
             WebElement nameTd = tds.get(1); // get the name column
-            nameTd.findElement(By.tagName("label"));
+            String currentTestFileName = nameTd.findElement(By.tagName("a")).getText();
+            if (testFileName.equals(currentTestFileName)) {
+                fileLinkFound = nameTd;
+                break;
+            }
         }
+        Assert.assertNotNull("The file was not found in the test result list", fileLinkFound);
 
     }
 
 	@Then("the system redirects to result show page")
-	@Pending
 	public void thenTheSystemRedirectsToResultShowPage() {
-		// TODO
+        fileLinkFound.click(); // redirects to found test file
 	}
+
+    @Then("show the calculated score for test result")
+    public void thenShowTheCalculatedScoreForTestResult() {
+        WebElement testResultScoreElement = driver.findElement(By.id("test_result_score"));
+        testResultScore = parseInt(testResultScoreElement.getText());
+    }
+
+    private Integer parseInt(Object value) {
+        if (value instanceof Integer) {
+            return (Integer) value;
+        }
+        try {
+            return Integer.valueOf(value.toString());
+        } catch (Exception e) {
+            // ignore
+        }
+        return null;
+    }
+
+    @Then("show the calculated scores for test sets")
+    public void thenShowTheCalculatedScoresForTestSets() {
+        List<WebElement> testSetScoreElements = driver.findElements(By.xpath("//div[@id='test_set_score']"));
+        for (final WebElement testSetScoreElement : testSetScoreElements) {
+            Integer testSetId = parseInt(testSetScoreElement.getAttribute("test_set_id"));
+            Integer score = parseInt(testSetScoreElement.getText());
+
+            Assert.assertNotNull("TestSetId must not be null", testSetId);
+            Assert.assertNotNull("Score of testSetId " + testSetId + " must not be null", score);
+            testSetScoreMap.put(testSetId, score);
+        }
+    }
 
 	@Then("the calculated score for test result is $score%")
 	@Pending
 	public void thenTheCalculatedScoreForTestResultIs(int score) {
-		// TODO
+		Assert.assertEquals(testResultScore, score);
 	}
 
-	@Then("show the calulated scores for test sets")
+	@Then("the calculated scores for test sets is:$rows")
 	@Pending
-	public void thenShowTheCalulatedScoresForTestSets() {
-		// TODO
+	public void thenTheCalculatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
+        for (final TestSetScore testSetScore : testSetScores) {
+            int score = testSetScoreMap.get(testSetScore.getTestSetId());
+            Assert.assertEquals(score, testSetScore.getScore());
+        }
 	}
 
-	@Then("show the calculated score for test result")
-	@Pending
-	public void thenShowTheCalculatedScoreForTestResult() {
-		// TODO
-	}
-
-	@Then("the calulated scores for test sets is:$rows")
-	@Pending
-	public void thenTheCalulatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
-		// TODO
-	}
-
-    public List<WebElement> retrieveTableRows() {
+    private List<WebElement> retrieveTableRows() {
         //getting the table
         WebElement baseTable = driver.findElement(By.id("result_table"));
         WebElement tBody = baseTable.findElement(By.tagName("tbody"));
