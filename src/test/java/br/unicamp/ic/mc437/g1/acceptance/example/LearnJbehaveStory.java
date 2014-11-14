@@ -1,6 +1,7 @@
-package br.unicamp.ic.mc437.g1.acceptance.story;
+package br.unicamp.ic.mc437.g1.acceptance.example;
 
 import br.unicamp.ic.mc437.g1.acceptance.*;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.runner.*;
 import org.springframework.test.context.junit4.*;
 
