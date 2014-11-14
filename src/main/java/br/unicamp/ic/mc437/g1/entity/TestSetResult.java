@@ -78,6 +78,11 @@ public class TestSetResult {
     public void setTestCaseResults(List<TestCaseResult> testCaseResults) {
         this.testCaseResults = testCaseResults;
     }
+    
+   
+    public void setScore (int scr){
+    		this.score = scr;
+    }
 
     public Integer getScore() {
         return score;
@@ -98,4 +103,5 @@ public class TestSetResult {
                 ", score=" + score +
                 '}';
     }
+    
 }

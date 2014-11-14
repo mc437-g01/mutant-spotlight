@@ -1,14 +1,21 @@
 package br.unicamp.ic.mc437.g1.web.controllers.result;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import br.unicamp.ic.mc437.g1.entity.Result;
+import br.unicamp.ic.mc437.g1.entity.TestCaseResult;
+import br.unicamp.ic.mc437.g1.entity.TestOutput;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
+import br.unicamp.ic.mc437.g1.entity.TestSetResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +70,42 @@ public class ResultController {
         if (testResult == null) {
             return "error/invalid-file-error";
         }
+        
+        int dead;
+        int total;
+        int score;
+        Map<String,Boolean> mapDead = new HashMap<String,Boolean>();
+        for (TestSetResult testSetResult:testResult.getTestSetResults()){
+        		dead = 0;
+        		total = 0;
+        		for ( TestCaseResult testCaseResult:testSetResult.getTestCaseResults()){
+        				for(TestOutput testOutput:testCaseResult.getTestOutputs()){
+        					if ( testOutput.getDead()){
+        						dead++;
+        						mapDead.put(testOutput.getMutantKey(), testOutput.getDead());
+        					}
+        					else{
+        						if (!mapDead.containsKey(testOutput.getMutantKey())){
+        							mapDead.put(testOutput.getMutantKey(), testOutput.getDead());
+        						}
+        					}
+        					total++;
+        				}	
+        		}
+        		score = dead*100/total;
+        		testSetResult.setScore(score);
+        }
+        dead = 0;
+        for (Boolean it:mapDead.values()){
+        	if(it)
+        		dead++;
+        }
+        total = mapDead.size();
+        score = dead*100/total;
+        
+        testResult.setScore(score);
+        
+       
 
         testResult.setEmail(email);
         testResult.setName(name);
@@ -81,4 +124,10 @@ public class ResultController {
 		
 		return "result-list/result-list";
 	}
+	
+
+		
+		
+	}
+	
 }

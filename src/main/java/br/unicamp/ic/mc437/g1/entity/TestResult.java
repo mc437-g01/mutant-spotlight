@@ -35,6 +35,9 @@ public class TestResult {
 
     @XmlTransient
     private String name;
+    
+    @XmlTransient
+    private Integer score;
 
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "testSetResults")
@@ -51,9 +54,6 @@ public class TestResult {
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_itestCases")
     private List<TestCase> testCases;
-
-    @XmlTransient
-    private Integer score;
 
     public Integer getId() {
         return id;
@@ -117,6 +117,10 @@ public class TestResult {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public void setScore (int scr){
+    	this.score = scr;
     }
 
     public Integer getScore() {
