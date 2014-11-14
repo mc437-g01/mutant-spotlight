@@ -2,7 +2,6 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.calculatescore;
 
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
-import br.unicamp.ic.mc437.g1.entity.TestSetResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
 import org.apache.commons.io.FileUtils;
@@ -10,7 +9,10 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Steps
 public class CalculateScoreSteps {
@@ -65,14 +68,13 @@ public class CalculateScoreSteps {
             }
         }
         if (!testResultFound) {
-            testResultDAO.save(testResultLoaded);
+            //testResultDAO.save(testResultLoaded);
         }
 
         loadedTestResults.put(testFileName, testResultLoaded);
 	}
 
 	@Given("the test list page loaded")
-	@Pending
 	public void givenTheTestListPageLoaded() {
         log.debug("givenTheTestListPageLoaded");
 
@@ -80,15 +82,25 @@ public class CalculateScoreSteps {
 	}
 
     @When("I choose a test")
-    @Pending
     public void whenIChooseATest() {
+        List<WebElement> tableRows = retrieveTableRows();
 
+        int randomRow = new Random().nextInt((tableRows.size()) + 1);
+        WebElement tableRow = tableRows.get(randomRow);
+        List<WebElement> tds = tableRow.findElements(By.tagName("td"));
+        WebElement td = tds.get(1);
+        td.findElement(By.tagName("a")).click();
     }
 
     @When("I choose the test $testFileName")
-    @Pending
     public void whenIChooseTheTest(String testFileName) {
-        // TODO
+        List<WebElement> tableRows = retrieveTableRows();
+        for (WebElement tableRow : tableRows) {
+            List<WebElement> tds = tableRow.findElements(By.tagName("td"));
+            WebElement nameTd = tds.get(1); // get the name column
+            nameTd.findElement(By.tagName("label"));
+        }
+
     }
 
 	@Then("the system redirects to result show page")
@@ -120,4 +132,17 @@ public class CalculateScoreSteps {
 	public void thenTheCalulatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
 		// TODO
 	}
+
+    public List<WebElement> retrieveTableRows() {
+        //getting the table
+        WebElement baseTable = driver.findElement(By.id("result_table"));
+        WebElement tBody = baseTable.findElement(By.tagName("tbody"));
+        List<WebElement> tableRows = tBody.findElements(By.tagName("tr"));
+
+        //getting a random row in the table
+        int rowCount = driver.findElements(By.xpath("//table[@id='result_table']/tbody/tr")).size();
+        Assert.assertTrue("No lines were found in the list results page", rowCount > 0);
+
+        return tableRows;
+    }
 }
