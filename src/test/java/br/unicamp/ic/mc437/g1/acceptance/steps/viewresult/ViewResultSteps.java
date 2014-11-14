@@ -35,7 +35,7 @@ import br.unicamp.ic.mc437.g1.util.XmlUtils;
  */
 @Steps
 public class ViewResultSteps {
-	private static final Logger log = LoggerFactory.getLogger(ViewResultSteps.class);
+	private final Logger log = LoggerFactory.getLogger(ViewResultSteps.class);
 	
 	//url of the random chosen result
 	private String random_result_url;
@@ -48,17 +48,30 @@ public class ViewResultSteps {
 
     @Value("classpath:acceptance/step_files/test_result_1.xml")
     private org.springframework.core.io.Resource testResult1Resource;
+    
+    @Value("classpath:acceptance/step_files/cruise_result.toxml")
+    private org.springframework.core.io.Resource cruiseResultResource;
+    
+    @Value("classpath:acceptance/step_files/cashier_result.toxml")
+    private org.springframework.core.io.Resource cachierResultResource;
 
     @Autowired
     private TestResultDAO testResultDAO;
 
     private TestResult testResult1;
+    private TestResult testResult2;
+    private TestResult testResult3;
+
+    @Value("${server.endpoint}")
+    private String serverEndpoint;
 
     @Given("there are results in the system")
     public void givenResultsInTheSystem() throws IOException {
         List<TestResult> testResults = testResultDAO.list();
         if (testResults == null || testResults.isEmpty()) {
-            testResult1 = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
+            
+        	// Primeiro teste
+        	testResult1 = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
             testResult1.setName("test result 1");
             testResult1.setEmail("test@email.com");
             Calendar calendar = Calendar.getInstance();
@@ -67,6 +80,28 @@ public class ViewResultSteps {
             
             testResult1.setDate(calendar.getTime());
             testResult1 = testResultDAO.save(testResult1);
+            
+            // Teste 2 - cruise_result.toxml
+            testResult2 = XmlUtils.readValue(cruiseResultResource.getInputStream(), TestResult.class);
+            testResult2.setName("cruise result");
+            testResult2.setEmail("test@email.com");
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.clear();
+            calendar2.set(2014, 11, 14);
+            
+            testResult2.setDate(calendar2.getTime());
+            testResult2 = testResultDAO.save(testResult2);
+            
+            // Teste 3 - cachier_result.toxml
+            testResult3 = XmlUtils.readValue(cachierResultResource.getInputStream(), TestResult.class);
+            testResult3.setName("cashier result");
+            testResult3.setEmail("sender@email.com");
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.clear();
+            calendar3.set(2014, 11, 14);
+            
+            testResult3.setDate(calendar3.getTime());
+            testResult3 = testResultDAO.save(testResult3);
         }
     }
 
@@ -74,7 +109,7 @@ public class ViewResultSteps {
     public void resultPageLoaded() {
         log.debug("resultsPageLoaded");
 
-        driver.navigate().to("http://localhost:8080/mutant-spotlight/result-list");
+        driver.navigate().to(serverEndpoint + "/result-list");
     }
 	
 	@When("I click a single result to view")
@@ -96,10 +131,8 @@ public class ViewResultSteps {
 			List<WebElement> tds = row.findElements(By.tagName("td"));
 			WebElement td = tds.get(1);
 			String url = td.findElement(By.tagName("a")).getAttribute("href");
-			url = url.replace("http://localhost:8080/mutant-spotlight/result/", "");
-			url = url.replace("localhost:8080/mutant-spotlight/result/", "");
-			url = url.replace("/mutant-spotlight/result/", "");
-			this.random_result_url = "http://localhost:8080/mutant-spotlight/result/".concat(url);
+			url = url.replace(serverEndpoint + "/result/", "");
+			this.random_result_url = serverEndpoint + "/result/" + url;
 			td.findElement(By.tagName("a")).click();
 		}
     }
@@ -116,18 +149,18 @@ public class ViewResultSteps {
 	
 	@Given("homepage loaded")
     public void homePageLoaded() {
-        driver.navigate().to("http://localhost:8080/mutant-spotlight/");
+        driver.navigate().to(serverEndpoint);
     }
 	
 	@When("I load a non-existent result url")
 	public void loadNonExistentResultUrl(){
-		driver.navigate().to("http://localhost:8080/mutant-spotlight/view_result/h40fn903_non_existent");
+		driver.navigate().to(serverEndpoint + "/view_result/h40fn903_non_existent");
 		
 	}
 	
 	@Then("the system redirects me to an error page")
 	public void redirectsErrorPage() {
-		assertEquals("The error page was not correctly loaded", "http://localhost:8080/mutant-spotlight/error/error", driver.getCurrentUrl());
+		assertEquals("The error page was not correctly loaded", serverEndpoint + "/error/error", driver.getCurrentUrl());
 	}
 	
 	@When("I type $criteria on filter input")

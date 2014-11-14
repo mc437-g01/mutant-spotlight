@@ -150,6 +150,9 @@
                         <goals>
                             <goal>unpack-view-resources</goal>
                         </goals>
+                        <configuration>
+                            <storyTimeoutInSecs>600</storyTimeoutInSecs>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

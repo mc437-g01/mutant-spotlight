@@ -76,13 +76,13 @@
 						placeholder="Enter email" name="email">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputName">Nome do Test Case</label>
+					<label for="exampleInputName">Nome do Teste</label>
 					<input id="name"
 						type="text" class="form-control" id="exampleInputName"
 						placeholder="Enter name" name="name">
 				</div>
 				<div class="form-group">
-					<label for="exampleInputFile">File input</label>
+					<label for="exampleInputFile">Arquivo</label>
 					<input id="upload-file" type="file"
 						name="inputFile" id="exampleInputFile">
 					<p class="help-block">Arquivo XML do resultado de testes de

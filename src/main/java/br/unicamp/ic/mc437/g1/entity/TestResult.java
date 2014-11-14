@@ -52,6 +52,9 @@ public class TestResult {
     @XmlElement(name = "_itestCases")
     private List<TestCase> testCases;
 
+    @XmlTransient
+    private Integer score;
+
     public Integer getId() {
         return id;
     }
@@ -116,6 +119,14 @@ public class TestResult {
         this.name = name;
     }
 
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         return "TestResult{" +
@@ -125,8 +136,9 @@ public class TestResult {
                 ", name='" + name + '\'' +
                 ", testSetResults=" + testSetResults +
                 ", mutants=" + mutants +
-                ", models=" + resultModels +
-                ", testCase=" + testCases +
+                ", resultModels=" + resultModels +
+                ", testCases=" + testCases +
+                ", score=" + score +
                 '}';
     }
 }

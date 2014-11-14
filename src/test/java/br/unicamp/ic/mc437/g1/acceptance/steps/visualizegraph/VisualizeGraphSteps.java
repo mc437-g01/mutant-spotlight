@@ -31,7 +31,7 @@ public class VisualizeGraphSteps {
 	
 	private TestResultDAO testResultDao;
 	
-	private static final Logger log = LoggerFactory.getLogger(VisualizeGraphStory.class);
+	private final Logger log = LoggerFactory.getLogger(VisualizeGraphStory.class);
 	
 	@Value("${server.endpoint}")
 	private String serverEndpoint;
