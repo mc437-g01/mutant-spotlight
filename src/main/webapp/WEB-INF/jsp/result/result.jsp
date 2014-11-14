@@ -60,17 +60,23 @@
 
 	<div class="container">
 
+        <%
+        TestResult res = (TestResult) request.getAttribute("result");
+        %>
+
 		<div class="new-result-form">
 			<div class="page-header">
 				<h1>
 					Resultados de Test Case
 					<%=request.getAttribute("id")%>:
 				</h1>
+                <div style="display: none;" id="test_result_score">
+                    <%=res.getScore()%>
+                </div>
 			</div>
 		</div>
 
 		<%
-			TestResult res = (TestResult) request.getAttribute("result");
 			List<TestSetResult> sets = res.getTestSetResults();
 			for (TestSetResult set : sets) {
 		%>
@@ -80,6 +86,9 @@
 				Test Set
 				<%=set.getCod()%>:
 			</div>
+            <div style="display: none;" id="test_set_score">
+                <%=set.getScore()%>
+            </div>
 			<div class="panel-body">
 				<%
 					List<TestCaseResult> cases = set.getTestCaseResults();
