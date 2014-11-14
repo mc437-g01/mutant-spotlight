@@ -3,18 +3,17 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.viewresult;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
 
-import br.unicamp.ic.mc437.g1.entity.TestResult;
-import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
-import br.unicamp.ic.mc437.g1.util.XmlUtils;
-
 import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.openqa.selenium.By;
@@ -23,12 +22,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import br.unicamp.ic.mc437.g1.acceptance.Steps;
-import br.unicamp.ic.mc437.g1.acceptance.steps.SharedSteps;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import br.unicamp.ic.mc437.g1.acceptance.Steps;
+import br.unicamp.ic.mc437.g1.entity.TestResult;
+import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
+import br.unicamp.ic.mc437.g1.util.XmlUtils;
 
 /**
  * @author Carlos Gregoreki
@@ -147,17 +147,31 @@ public class ViewResultSteps {
 	
 	@Then("the system lists only results named $resultName")
 	public void listsResultsWithName(String resultName) {
+		List<WebElement> resultListNames = driver.findElements(By.cssSelector("#result_table tr td:nth-child(2) a"));
 		
+		for (WebElement resultListName : resultListNames) {
+			assertEquals(resultName, resultListName.getText());
+		}
 	}
 	
 	@Then("the system lists only results uploaded by $email")
 	public void listsResultsUploadedBy(String email) {
+		List<WebElement> resultListEmails = driver.findElements(By.cssSelector("#result_table tr td:nth-child(3) a"));
 		
+		for (WebElement resultListEmail : resultListEmails) {
+			assertEquals(email, resultListEmail.getText());
+		}
 	}
 	
 	@Then("the system lists only results uploaded on $date")
-	public void listsResultsUploadedOn(String date) {
+	public void listsResultsUploadedOn(String dateString) throws ParseException {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = dateFormat.parse(dateString);
+		List<WebElement> resultListDates = driver.findElements(By.cssSelector("#result_table tr td:nth-child(3) a"));
 		
+		for (WebElement resultListDate : resultListDates) {
+			assertEquals(date, dateFormat.parse(resultListDate.getText()));
+		}
 	}
 	
 }
