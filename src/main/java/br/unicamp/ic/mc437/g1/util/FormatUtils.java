@@ -20,4 +20,52 @@ public class FormatUtils {
 			throw new RuntimeException("Id not found in key \""+key+"\"");
 		}
 	}
+	
+	public static String extractNumber(String string) {
+		String pattern = "[0-9]+";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(string);
+		if (m.find()) {
+			return m.group();
+		} else {
+			throw new RuntimeException("Number not found in string \""+string+"\"");
+		}
+	}
+	
+	public static String getMutantOperator(String path) {
+		String pattern = "MUT\\$([^\\\\\\$]+)\\$([0-9]+)\\.[^\\.]+$";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(path);
+		if (m.find()) {
+			return m.group(1) + " " + m.group(2);
+		} else {
+			throw new RuntimeException("Id not found in key \""+path+"\"");
+		}
+	}
+	
+	public static String getMutantOperatorName(String path) {
+		String pattern = "MUT\\$([^\\\\\\$]+)\\$([0-9]+)\\.[^\\.]+$";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(path);
+		if (m.find()) {
+			return m.group(1);
+		} else {
+			throw new RuntimeException("Id not found in key \""+path+"\"");
+		}
+	}
+	
+	public static String getMutantOperatorIndex(String path) {
+		String pattern = "MUT\\$([^\\\\\\$]+)\\$([0-9]+)\\.[^\\.]+$";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(path);
+		if (m.find()) {
+			return m.group(2);
+		} else {
+			throw new RuntimeException("Id not found in key \""+path+"\"");
+		}
+	}
+	
+	public static String yesNo(boolean yes) {
+		return yes ? "Sim" : "Não";
+	}
 }

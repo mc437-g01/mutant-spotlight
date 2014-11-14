@@ -24,7 +24,7 @@ public class TestOutput {
     private Integer deathIndex;
 
     @XmlElement(name = "evalFailed")
-    private String evalFailed;
+    private Boolean evalFailed;
 
     @XmlElement(name = "mutantKey")
     private String mutantKey;
@@ -53,11 +53,11 @@ public class TestOutput {
         this.deathIndex = deathIndex;
     }
 
-    public String getEvalFailed() {
+    public Boolean getEvalFailed() {
         return evalFailed;
     }
 
-    public void setEvalFailed(String evalFailed) {
+    public void setEvalFailed(Boolean evalFailed) {
         this.evalFailed = evalFailed;
     }
 

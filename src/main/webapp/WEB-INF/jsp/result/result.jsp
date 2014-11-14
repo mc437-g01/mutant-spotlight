@@ -89,22 +89,15 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Test Case
-						<%=testCase.getId()%>:
-					</div>
-					<div class="panel-body">
-						<p>
-							<b>Path:</b>
-							<%= FormatUtils.getIdFromKey(testCase.getPath()) %></p>
-						<p>
-							<b>Key:</b>
-							<%=testCase.getTestCaseKey()%></p>
+						<%=FormatUtils.getIdFromKey(testCase.getTestCaseKey())%>:
 					</div>
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>Chave</th>
-								<th>Morto?</th>
+								<th>Operador de Mutação</th>
 								<th>Índice</th>
+								<th>Morto?</th>
+								<th>Índice de Morte</th>
 								<th>Compilou?</th>
 							</tr>
 						</thead>
@@ -114,10 +107,11 @@
 										for (TestOutput output : outputs) {
 							%>
 							<tr>
-								<td><%=output.getMutantKey()%></td>
-								<td><%=output.getDead() ? "Sim" : "Não"%></td>
+								<td><%=FormatUtils.getMutantOperatorName(output.getMutantKey())%></td>
+								<td><%=FormatUtils.getMutantOperatorIndex(output.getMutantKey())%></td>
+								<td><%=FormatUtils.yesNo(output.getDead())%></td>
 								<td><%=output.getDeathIndex()%></td>
-								<td><%=output.getEvalFailed()%></td>
+								<td><%=FormatUtils.yesNo(output.getEvalFailed())%></td>
 							</tr>
 							<%
 								}
@@ -148,16 +142,19 @@
 			</div>
 			<div class="panel-body">
 				<p>
-					<b>Context ID:</b>
+					<b>Operador de Mutação:</b>
+					<%=FormatUtils.getMutantOperator(mutant.getPath())%></p>
+				<p>
+					<b>ID de Contexto:</b>
 					<%=mutant.getContextId()%></p>
 				<p>
-					<b>Build Flag:</b>
+					<b>Flag de Build:</b>
 					<%=mutant.getBuildFlag()%></p>
 				<p>
 					<b>Conv Flag:</b>
 					<%=mutant.getConvFlag()%></p>
 				<p>
-					<b>Ignore Error:</b>
+					<b>Ignorar Erro:</b>
 					<%=mutant.getIgnoreErrors()%></p>
 				<p><b>Implementações:</b></p>
 				<table class="table table-hover">
@@ -165,20 +162,21 @@
 						<tr>
 							<th>#</th>
 							<th>Implementação</th>
-							<th>Is Mutant?</th>
+							<th>Mutante?</th>
 						</tr>
 					</thead>
 					<tbody>
 						<%
+							int impCount = 1;
 							List<MutantImplementation> implementations = mutant
 										.getImplementatios();
 								for (MutantImplementation implementation : implementations) {
 						%>
 						<tr>
-							<td><%=implementation.getId()%></td>
+							<td><%=impCount++%></td>
 							<td><a href="#" data-toggle="modal"
 								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
-							<td><%=implementation.getIsMutant()%></td>
+							<td><%=FormatUtils.yesNo(implementation.getIsMutant())%></td>
 
 						</tr>
 						<%
@@ -236,26 +234,27 @@
 				<%=model.getName()%>:
 			</div>
 			<div class="panel-body">
-			
+					
 				<p><b>Implementações:</b></p>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>#</th>
 							<th>Implementação</th>
-							<th>Is Mutant?</th>
+							<th>Mutante?</th>
 						</tr>
 					</thead>
 					<tbody>
 						<%
+							int impCount = 1;
 							List<MutantImplementation> implementations = model.getImplementatios();
 							for (MutantImplementation implementation : implementations) {
 						%>
 						<tr>
-							<td><%=implementation.getId()%></td>
+							<td><%=impCount++%></td>
 							<td><a href="#" data-toggle="modal"
 								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
-							<td><%=implementation.getIsMutant()%></td>
+							<td><%=FormatUtils.yesNo(implementation.getIsMutant())%></td>
 
 						</tr>
 						<%
