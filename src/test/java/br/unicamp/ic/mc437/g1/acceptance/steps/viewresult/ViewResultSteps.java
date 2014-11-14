@@ -35,7 +35,7 @@ import br.unicamp.ic.mc437.g1.util.XmlUtils;
  */
 @Steps
 public class ViewResultSteps {
-	private static final Logger log = LoggerFactory.getLogger(ViewResultSteps.class);
+	private final Logger log = LoggerFactory.getLogger(ViewResultSteps.class);
 	
 	//url of the random chosen result
 	private String random_result_url;
@@ -53,6 +53,9 @@ public class ViewResultSteps {
     private TestResultDAO testResultDAO;
 
     private TestResult testResult1;
+
+    @Value("${server.endpoint}")
+    private String serverEndpoint;
 
     @Given("there are results in the system")
     public void givenResultsInTheSystem() throws IOException {
@@ -74,7 +77,7 @@ public class ViewResultSteps {
     public void resultPageLoaded() {
         log.debug("resultsPageLoaded");
 
-        driver.navigate().to("http://localhost:8080/mutant-spotlight/result-list");
+        driver.navigate().to(serverEndpoint + "/result-list");
     }
 	
 	@When("I click a single result to view")
@@ -96,10 +99,8 @@ public class ViewResultSteps {
 			List<WebElement> tds = row.findElements(By.tagName("td"));
 			WebElement td = tds.get(1);
 			String url = td.findElement(By.tagName("a")).getAttribute("href");
-			url = url.replace("http://localhost:8080/mutant-spotlight/result/", "");
-			url = url.replace("localhost:8080/mutant-spotlight/result/", "");
-			url = url.replace("/mutant-spotlight/result/", "");
-			this.random_result_url = "http://localhost:8080/mutant-spotlight/result/".concat(url);
+			url = url.replace(serverEndpoint + "/result/", "");
+			this.random_result_url = serverEndpoint + "/result/" + url;
 			td.findElement(By.tagName("a")).click();
 		}
     }

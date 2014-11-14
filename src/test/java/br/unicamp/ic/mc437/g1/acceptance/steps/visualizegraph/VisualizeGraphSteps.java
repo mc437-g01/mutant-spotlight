@@ -29,7 +29,7 @@ public class VisualizeGraphSteps {
 	
 	private TestResultDAO testResultDao;
 	
-	private static final Logger log = LoggerFactory.getLogger(VisualizeGraphStory.class);
+	private final Logger log = LoggerFactory.getLogger(VisualizeGraphStory.class);
 	
 	@Then("the percentage of the graph in green for each test case will be: $rows")
 	@Pending
