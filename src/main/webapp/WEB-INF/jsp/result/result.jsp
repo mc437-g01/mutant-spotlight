@@ -26,6 +26,7 @@
 <script
 	src="<%=request.getContextPath()%>/syntax_highlight/highlight.pack.js"></script>
 <script>
+if (window.navigator.userAgent != "JBehave")
 	hljs.initHighlightingOnLoad();
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

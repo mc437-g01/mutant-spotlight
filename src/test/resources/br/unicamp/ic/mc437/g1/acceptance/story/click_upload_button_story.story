@@ -41,3 +41,11 @@ And I fill the name input
 And I select a invalid file to upload
 And I click on upload button
 Then the system shows an invalid file error
+
+Scenario: click on upload button with large file
+Given upload page loaded
+When I fill the email input
+And I fill the name input
+And I select a large file to upload
+And I click on upload button
+Then the system redirects to upload page

@@ -30,6 +30,9 @@ public class ClickUploadButtonSteps {
 
     @Value("classpath:acceptance/step_files/test_result_1.xml")
     private org.springframework.core.io.Resource testResult1Resource;
+    
+    @Value("classpath:acceptance/step_files/cruise_result.toxml")
+    private org.springframework.core.io.Resource cruiseResultResource;
 
     @Value("classpath:acceptance/step_files/invalid_file_1.xml")
     private org.springframework.core.io.Resource invalidFile11Resource;
@@ -55,10 +58,15 @@ public class ClickUploadButtonSteps {
         driver.findElement(By.id("name")).clear();
         driver.findElement(By.id("name")).sendKeys("test result 1");
     }
-
+    
     @When("I select a file to upload")
     public void selectFile() throws IOException {
         driver.findElement(By.id("upload-file")).sendKeys(testResult1Resource.getFile().getAbsolutePath());
+    }
+
+    @When("I select a large file to upload")
+    public void selectLargeFile() throws IOException {
+        driver.findElement(By.id("upload-file")).sendKeys(cruiseResultResource.getFile().getAbsolutePath());
     }
 
     @When("I select a invalid file to upload")
