@@ -1,8 +1,12 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.List,br.unicamp.ic.mc437.g1.entity.Result"
 	%>
 <%@ page import="br.unicamp.ic.mc437.g1.entity.TestResult" %>
+<%
+SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,6 +65,8 @@
 				<tr>
 					<th>ID</<th>
 					<th>Nome</th>
+					<th>Usuário</th>
+					<th>Data de envio</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -71,6 +77,8 @@
 				<tr id="result<%= r.getId() %>">
 					<td style="width:25px;"><%= r.getId() %></td>
 					<td><a href="<%=request.getContextPath()%>/result/<%=r.getId()%>"><%= r.getName() %></a></td>
+					<td><a href="<%=request.getContextPath()%>/result/<%=r.getId()%>"><%= r.getEmail() %></a></td>
+					<td><a href="<%=request.getContextPath()%>/result/<%=r.getId()%>"><%= dateFormat.format(r.getDate()) %></a></td>
 				</tr>
 				<%
 					}
