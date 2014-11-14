@@ -19,5 +19,5 @@ When the user visualizes the report of the uploaded file
 Then the graph of the Test Case will be 100% green
 And the percentage of the graph in green for each test case will be:
 |TEST CASE | GREEN% |
-|TC_01     | 100%   |
-|TC_02     | 50%    |
+|TC_1      | 100%   |
+|TC_2      | 50%    |

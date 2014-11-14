@@ -2,6 +2,7 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.visualizegraph;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
 import br.unicamp.ic.mc437.g1.acceptance.story.VisualizeGraphStory;
@@ -31,10 +33,16 @@ public class VisualizeGraphSteps {
 	
 	private static final Logger log = LoggerFactory.getLogger(VisualizeGraphStory.class);
 	
+	@Value("${server.endpoint}")
+	private String serverEndpoint;
+	
+	@Value("classpath:acceptance/step_files/test_result_1.xml")
+    private org.springframework.core.io.Resource testResult1Resource;
+	
 	@Then("the percentage of the graph in green for each test case will be: $rows")
-	@Pending
 	public void thenThePercentageOfTheGraphInGreenForEachTestCaseWillBe(List<TestCaseRow> rows) {
-		// TODO
+		assertEquals(driver.findElement(By.id("test-case-score-hidden-1")).getText(), rows.get(0).getPercentage());
+		assertEquals(driver.findElement(By.id("test-case-score-hidden-2")).getText(), rows.get(1).getPercentage());
 	}
 
 	@Then("a graph of the test set score shoud be shown")
@@ -73,8 +81,15 @@ public class VisualizeGraphSteps {
 	}
 
 	@Given("the uploaded file is $file")
-	public void givenTheUploadedFileIsTest_result_1xml(String filename) {
-		
+	public void givenTheUploadedFileIsTest_result_1xml(String filename) throws IOException {
+		driver.navigate().to(serverEndpoint + "/new-result");
+		driver.findElement(By.id("email-address")).clear();
+        driver.findElement(By.id("email-address")).sendKeys("teste@teste.com");
+        driver.findElement(By.id("name")).clear();
+        driver.findElement(By.id("name")).sendKeys(filename);
+        driver.findElement(By.id("upload-file")).sendKeys(testResult1Resource.getFile().getAbsolutePath());
+        driver.findElement(By.id("upload")).submit();
+        
 		List<TestResult> lista = testResultDao.list();
 		//get the last testResult inserted
 		TestResult testResult = lista.get(lista.size() -1);
@@ -87,13 +102,26 @@ public class VisualizeGraphSteps {
 		//get the element that has the score information
 		WebElement score_hidden = driver.findElement(By.id("test-set-score-hidden"));
 		//get the info of score and compares
-		assertEquals(score_hidden.getText(), 100); 
+		assertEquals(score_hidden.getText(), "100%"); 
 	}
 
 	@When("the user visualizes the results report")
-	@Pending
 	public void whenTheUserVisualizesTheResultsReport() {
-		// TODO
+		driver.navigate().to("http://localhost:8080/mutant-spotlight/result-list");
+		//get a table
+		WebElement baseTable = driver.findElement(By.id("result_table"));
+        WebElement tBody = baseTable.findElement(By.tagName("tbody"));
+		List<WebElement> tableRows = tBody.findElements(By.tagName("tr"));
+		
+		//count the number of rows in the table
+		int rowCount = driver.findElements(By.xpath("//table[@id='result_table']/tbody/tr")).size();
+		
+		//click on the last item on the table
+		WebElement row = tableRows.get(rowCount -1);
+		List<WebElement> tds = row.findElements(By.tagName("td"));
+		WebElement td = tds.get(1);
+		td.findElement(By.tagName("a")).click();
+
 	}
 
 	@When("the user visualizes the report of the uploaded file")
