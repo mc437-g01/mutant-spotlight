@@ -48,11 +48,19 @@ public class ViewResultSteps {
 
     @Value("classpath:acceptance/step_files/test_result_1.xml")
     private org.springframework.core.io.Resource testResult1Resource;
+    
+    @Value("classpath:acceptance/step_files/cruise_result.toxml")
+    private org.springframework.core.io.Resource cruiseResultResource;
+    
+    @Value("classpath:acceptance/step_files/cashier_result.toxml")
+    private org.springframework.core.io.Resource cachierResultResource;
 
     @Autowired
     private TestResultDAO testResultDAO;
 
     private TestResult testResult1;
+    private TestResult testResult2;
+    private TestResult testResult3;
 
     @Value("${server.endpoint}")
     private String serverEndpoint;
@@ -61,7 +69,9 @@ public class ViewResultSteps {
     public void givenResultsInTheSystem() throws IOException {
         List<TestResult> testResults = testResultDAO.list();
         if (testResults == null || testResults.isEmpty()) {
-            testResult1 = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
+            
+        	// Primeiro teste
+        	testResult1 = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
             testResult1.setName("test result 1");
             testResult1.setEmail("test@email.com");
             Calendar calendar = Calendar.getInstance();
@@ -70,6 +80,28 @@ public class ViewResultSteps {
             
             testResult1.setDate(calendar.getTime());
             testResult1 = testResultDAO.save(testResult1);
+            
+            // Teste 2 - cruise_result.toxml
+            testResult2 = XmlUtils.readValue(cruiseResultResource.getInputStream(), TestResult.class);
+            testResult2.setName("cruise result");
+            testResult2.setEmail("test@email.com");
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.clear();
+            calendar2.set(2014, 11, 14);
+            
+            testResult2.setDate(calendar2.getTime());
+            testResult2 = testResultDAO.save(testResult2);
+            
+            // Teste 3 - cachier_result.toxml
+            testResult3 = XmlUtils.readValue(cachierResultResource.getInputStream(), TestResult.class);
+            testResult3.setName("cashier result");
+            testResult3.setEmail("sender@email.com");
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.clear();
+            calendar3.set(2014, 11, 14);
+            
+            testResult3.setDate(calendar3.getTime());
+            testResult3 = testResultDAO.save(testResult3);
         }
     }
 
