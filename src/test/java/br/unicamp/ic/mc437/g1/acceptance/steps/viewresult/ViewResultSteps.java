@@ -117,18 +117,18 @@ public class ViewResultSteps {
 	
 	@Given("homepage loaded")
     public void homePageLoaded() {
-        driver.navigate().to("http://localhost:8080/mutant-spotlight/");
+        driver.navigate().to(serverEndpoint);
     }
 	
 	@When("I load a non-existent result url")
 	public void loadNonExistentResultUrl(){
-		driver.navigate().to("http://localhost:8080/mutant-spotlight/view_result/h40fn903_non_existent");
+		driver.navigate().to(serverEndpoint + "/view_result/h40fn903_non_existent");
 		
 	}
 	
 	@Then("the system redirects me to an error page")
 	public void redirectsErrorPage() {
-		assertEquals("The error page was not correctly loaded", "http://localhost:8080/mutant-spotlight/error/error", driver.getCurrentUrl());
+		assertEquals("The error page was not correctly loaded", serverEndpoint + "/error/error", driver.getCurrentUrl());
 	}
 	
 	@When("I type $criteria on filter input")
