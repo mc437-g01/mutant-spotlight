@@ -1,21 +1,11 @@
 package br.unicamp.ic.mc437.g1.web.controllers.result;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import br.unicamp.ic.mc437.g1.entity.Result;
 import br.unicamp.ic.mc437.g1.entity.TestCaseResult;
 import br.unicamp.ic.mc437.g1.entity.TestOutput;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.entity.TestSetResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
-
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ResultController {
@@ -123,11 +115,6 @@ public class ResultController {
 		model.addAttribute("results", testResultDAO.list());
 		
 		return "result-list/result-list";
-	}
-	
-
-		
-		
 	}
 	
 }
