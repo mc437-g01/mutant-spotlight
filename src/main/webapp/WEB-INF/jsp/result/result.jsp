@@ -4,7 +4,7 @@
 	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult,
 	br.unicamp.ic.mc437.g1.entity.Mutant,br.unicamp.ic.mc437.g1.entity.MutantImplementation,
 	br.unicamp.ic.mc437.g1.entity.ResultModel,br.unicamp.ic.mc437.g1.entity.TestCase,
-	br.unicamp.ic.mc437.g1.entity.TestCaseEntry"%>
+	br.unicamp.ic.mc437.g1.entity.TestCaseEntry,br.unicamp.ic.mc437.g1.util.FormatUtils"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -77,21 +77,10 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Set
-				<%=set.getId()%>:
+				Test Set
+				<%=set.getCod()%>:
 			</div>
 			<div class="panel-body">
-
-				<p>
-					<b>Cod:</b>
-					<%=set.getCod()%></p>
-				<p>
-					<b>Identifier:</b>
-					<%=set.getIdentifier()%></p>
-				<p>
-					<b>Path:</b>
-					<%=set.getPath()%></p>
-				<br />
 				<%
 					List<TestCaseResult> cases = set.getTestCaseResults();
 						for (TestCaseResult testCase : cases) {
@@ -105,7 +94,7 @@
 					<div class="panel-body">
 						<p>
 							<b>Path:</b>
-							<%=testCase.getPath()%></p>
+							<%= FormatUtils.getIdFromKey(testCase.getPath()) %></p>
 						<p>
 							<b>Key:</b>
 							<%=testCase.getTestCaseKey()%></p>
@@ -113,11 +102,10 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
 								<th>Chave</th>
 								<th>Morto?</th>
 								<th>Índice</th>
-								<th>Eval Falhou?</th>
+								<th>Compilou?</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -126,7 +114,6 @@
 										for (TestOutput output : outputs) {
 							%>
 							<tr>
-								<td style="width: 25px;"><%=output.getId()%></td>
 								<td><%=output.getMutantKey()%></td>
 								<td><%=output.getDead() ? "Sim" : "Não"%></td>
 								<td><%=output.getDeathIndex()%></td>
@@ -330,7 +317,6 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
 								<th>Key</th>
 								<th>Content</th>
 							</tr>
@@ -341,7 +327,6 @@
 								for (TestCaseEntry entry : entries) {
 							%>
 							<tr>
-								<td><%=entry.getId()%></td>
 								<td><%= entry.getKey() %></td>
 								<td><%= entry.getTestCaseEntryValue().toString()%></td>
 
