@@ -83,9 +83,11 @@ public class VisualizeGraphSteps {
 	}
 
 	@Then("the graph of the Test Case will be 100% green")
-	@Pending
 	public void thenTheGraphOfTheTestCaseWillBe100Green() {
-		// TODO
+		//get the element that has the score information
+		WebElement score_hidden = driver.findElement(By.id("test-set-score-hidden"));
+		//get the info of score and compares
+		assertEquals(score_hidden.getText(), 100); 
 	}
 
 	@When("the user visualizes the results report")
