@@ -59,6 +59,24 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 				<h1>Resultados :</h1>
 			</div>
 		</div>
+		
+		<div >
+			<form action="result-list">
+			<table width="100%">
+				<tr>
+					<td align="right"><input type="text" class="form-control" placeholder="Busca" id="criteria" name="criteria"> </td>
+					<td style="width: 100px" align="right"> Filtrar por: </td>
+					<td style="width: 200px" align="left"> <select name="filter-type" class="form-control" id="filter-type">
+							<option value="name">Nome</option>
+							<option value="email">Email</option>
+							<option value="date">Data</option>
+						</select>
+					 </td>
+					<td style="width: 100px" align="right"> <input type="submit" class="btn btn-default" id="search" value="Filtrar"/> </td>
+				</tr>
+			</table>
+			</form>
+		</div>
 
 		<table class="table table-striped" id="result_table">
 			<thead>
