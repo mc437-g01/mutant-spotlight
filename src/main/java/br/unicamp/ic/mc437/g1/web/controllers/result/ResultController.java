@@ -1,10 +1,8 @@
 package br.unicamp.ic.mc437.g1.web.controllers.result;
 
-import br.unicamp.ic.mc437.g1.entity.TestCaseResult;
-import br.unicamp.ic.mc437.g1.entity.TestOutput;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
-import br.unicamp.ic.mc437.g1.entity.TestSetResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
+import br.unicamp.ic.mc437.g1.model.service.ScoreService;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class ResultController {
@@ -29,11 +25,14 @@ public class ResultController {
     @Autowired
     private TestResultDAO testResultDAO;
 
-    @RequestMapping("/new-result")
-	public String renderNewResult(Model model) throws IOException {
+    @Autowired
+    private ScoreService scoreService;
 
-		return "new-result/new-result";
-	}
+    @RequestMapping("/new-result")
+    public String renderNewResult(Model model) throws IOException {
+
+        return "new-result/new-result";
+    }
 
     @RequestMapping("/result/{id}")
     public String renderResult(@PathVariable Integer id, Model model) {
@@ -42,19 +41,19 @@ public class ResultController {
 
     private String renderResult(TestResult testResult, Model model) {
         model.addAttribute("id", testResult.getId());
-		
-		model.addAttribute("result", testResult);
 
-		return "result/result";
-	}
+        model.addAttribute("result", testResult);
 
-	@RequestMapping(value = "/result-upload", method = RequestMethod.POST)
-	public String renderResultUpload(
-			@RequestParam("inputFile") MultipartFile xmlFile,
-			@RequestParam("email") String email,
-			@RequestParam("name") String name,
-			Model model) throws IOException {
-		// TODO: utilizar xmlFile e calcular número de mutantes
+        return "result/result";
+    }
+
+    @RequestMapping(value = "/result-upload", method = RequestMethod.POST)
+    public String renderResultUpload(
+            @RequestParam("inputFile") MultipartFile xmlFile,
+            @RequestParam("email") String email,
+            @RequestParam("name") String name,
+            Model model) throws IOException {
+        // TODO: utilizar xmlFile e calcular número de mutantes
 
         log.debug("{}", xmlFile);
 
@@ -62,42 +61,8 @@ public class ResultController {
         if (testResult == null) {
             return "error/invalid-file-error";
         }
-        
-        int dead;
-        int total;
-        int score;
-        Map<String,Boolean> mapDead = new HashMap<String,Boolean>();
-        for (TestSetResult testSetResult:testResult.getTestSetResults()){
-        		dead = 0;
-        		total = 0;
-        		for ( TestCaseResult testCaseResult:testSetResult.getTestCaseResults()){
-        				for(TestOutput testOutput:testCaseResult.getTestOutputs()){
-        					if ( testOutput.getDead()){
-        						dead++;
-        						mapDead.put(testOutput.getMutantKey(), testOutput.getDead());
-        					}
-        					else{
-        						if (!mapDead.containsKey(testOutput.getMutantKey())){
-        							mapDead.put(testOutput.getMutantKey(), testOutput.getDead());
-        						}
-        					}
-        					total++;
-        				}	
-        		}
-        		score = dead*100/total;
-        		testSetResult.setScore(score);
-        }
-        dead = 0;
-        for (Boolean it:mapDead.values()){
-        	if(it)
-        		dead++;
-        }
-        total = mapDead.size();
-        score = dead*100/total;
-        
-        testResult.setScore(score);
-        
-       
+
+        scoreService.calculateScore(testResult);
 
         testResult.setEmail(email);
         testResult.setName(name);
@@ -105,16 +70,16 @@ public class ResultController {
 
         testResult = testResultDAO.save(testResult);
 
-		model.addAttribute("mutantsKilled", 0);
+        model.addAttribute("mutantsKilled", 0);
 
-		return renderResult(testResult, model);
-	}
-	
-	@RequestMapping("/result-list")
-	public String renderResultList(Model model) {
-		model.addAttribute("results", testResultDAO.list());
-		
-		return "result-list/result-list";
-	}
-	
+        return renderResult(testResult, model);
+    }
+
+    @RequestMapping("/result-list")
+    public String renderResultList(Model model) {
+        model.addAttribute("results", testResultDAO.list());
+
+        return "result-list/result-list";
+    }
+
 }

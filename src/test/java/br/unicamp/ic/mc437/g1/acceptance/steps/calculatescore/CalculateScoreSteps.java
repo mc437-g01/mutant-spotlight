@@ -3,6 +3,7 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.calculatescore;
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
+import br.unicamp.ic.mc437.g1.model.service.ScoreService;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
 import org.apache.commons.io.FileUtils;
 import org.jbehave.core.annotations.Given;
@@ -45,10 +46,13 @@ public class CalculateScoreSteps {
     @Autowired
     private TestResultDAO testResultDAO;
 
+    @Autowired
+    private ScoreService scoreService;
+
     @Value("${server.endpoint}")
     private String serverEndpoint;
 
-    private int testResultScore;
+    private Integer testResultScore;
     private Map<Integer, Integer> testSetScoreMap;
 
     public CalculateScoreSteps() {
@@ -73,6 +77,7 @@ public class CalculateScoreSteps {
             }
         }
         if (!testResultFound) {
+            scoreService.calculateScore(testResultLoaded);
             testResultDAO.save(testResultLoaded);
         }
 
@@ -90,7 +95,7 @@ public class CalculateScoreSteps {
     public void whenIChooseATest() {
         List<WebElement> tableRows = retrieveTableRows();
 
-        int randomRow = new Random().nextInt((tableRows.size()) + 1);
+        int randomRow = new Random().nextInt((tableRows.size()));
         WebElement tableRow = tableRows.get(randomRow);
         List<WebElement> tds = tableRow.findElements(By.tagName("td"));
         WebElement td = tds.get(1);
@@ -123,9 +128,40 @@ public class CalculateScoreSteps {
 
     @Then("show the calculated score for test result")
     public void thenShowTheCalculatedScoreForTestResult() {
-        WebElement testResultScoreElement = driver.findElement(By.id("test_result_score"));
-        testResultScore = parseInt(testResultScoreElement.getText());
+        String attribute = driver.findElement(By.id("test_result_score")).getAttribute("score");
+        Assert.assertNotNull("Test result score could not be found", attribute);
+
+        testResultScore = parseInt(attribute);
     }
+
+    @Then("show the calculated scores for test sets")
+    public void thenShowTheCalculatedScoresForTestSets() {
+        List<WebElement> testSetScoreElements = driver.findElements(By.xpath("//div[@id='test_set_score']"));
+        Assert.assertTrue("Test result score could not be found", testSetScoreElements != null && !testSetScoreElements.isEmpty());
+
+        testSetScoreMap = new HashMap<Integer, Integer>();
+        for (final WebElement testSetScoreElement : testSetScoreElements) {
+            Integer testSetId = parseInt(testSetScoreElement.getAttribute("test_set_id"));
+            Integer score = parseInt(testSetScoreElement.getAttribute("score"));
+
+            Assert.assertNotNull("TestSetId must not be null", testSetId);
+            Assert.assertNotNull("Score of testSetId " + testSetId + " must not be null", score);
+            testSetScoreMap.put(testSetId, score);
+        }
+    }
+
+	@Then("the calculated score for test result is $score%")
+	public void thenTheCalculatedScoreForTestResultIs(Integer score) {
+		Assert.assertEquals(testResultScore, score);
+	}
+
+	@Then("the calculated scores for test sets is:$rows")
+	public void thenTheCalculatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
+        for (final TestSetScore testSetScore : testSetScores) {
+            int score = testSetScoreMap.get(testSetScore.getTestSetId());
+            Assert.assertEquals(score, testSetScore.getScore());
+        }
+	}
 
     private Integer parseInt(Object value) {
         if (value instanceof Integer) {
@@ -138,34 +174,6 @@ public class CalculateScoreSteps {
         }
         return null;
     }
-
-    @Then("show the calculated scores for test sets")
-    public void thenShowTheCalculatedScoresForTestSets() {
-        List<WebElement> testSetScoreElements = driver.findElements(By.xpath("//div[@id='test_set_score']"));
-        for (final WebElement testSetScoreElement : testSetScoreElements) {
-            Integer testSetId = parseInt(testSetScoreElement.getAttribute("test_set_id"));
-            Integer score = parseInt(testSetScoreElement.getText());
-
-            Assert.assertNotNull("TestSetId must not be null", testSetId);
-            Assert.assertNotNull("Score of testSetId " + testSetId + " must not be null", score);
-            testSetScoreMap.put(testSetId, score);
-        }
-    }
-
-	@Then("the calculated score for test result is $score%")
-	@Pending
-	public void thenTheCalculatedScoreForTestResultIs(int score) {
-		Assert.assertEquals(testResultScore, score);
-	}
-
-	@Then("the calculated scores for test sets is:$rows")
-	@Pending
-	public void thenTheCalculatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
-        for (final TestSetScore testSetScore : testSetScores) {
-            int score = testSetScoreMap.get(testSetScore.getTestSetId());
-            Assert.assertEquals(score, testSetScore.getScore());
-        }
-	}
 
     private List<WebElement> retrieveTableRows() {
         //getting the table

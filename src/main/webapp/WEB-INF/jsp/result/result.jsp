@@ -72,8 +72,7 @@ if (window.navigator.userAgent != "JBehave")
 					Resultados do Teste
 					<%=((TestResult) request.getAttribute("result")).getName()%>:
 				</h1>
-                <div style="display: none;" id="test_result_score">
-                    <%=res.getScore()%>
+                <div style="display: none;" id="test_result_score" score="<%=res.getScore()%>">
                 </div>
 			</div>
 		</div>
@@ -88,8 +87,7 @@ if (window.navigator.userAgent != "JBehave")
 				Conjunto de Testes
 				<%=extractNumber(set.getCod())%>:
 			</div>
-            <div style="display: none;" id="test_set_score">
-                <%=set.getScore()%>
+            <div style="display: none;" id="test_set_score" test_set_id='<%=set.getCod().replace("TS_", "")%>' score="<%=set.getScore()%>">
             </div>
 			<div class="panel-body">
 				<%
