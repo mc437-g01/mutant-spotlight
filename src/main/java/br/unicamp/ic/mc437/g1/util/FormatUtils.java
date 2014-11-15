@@ -21,15 +21,30 @@ public class FormatUtils {
 		}
 	}
 	
-	public static String extractNumber(String string) {
+	public static String getSetFromKey(String key) {
+		String pattern = "\\\\([^\\\\]+)\\\\[^\\\\]+$";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(key);
+		if (m.find()) {
+			return m.group(1);
+		} else {
+			throw new RuntimeException("Id not found in key \""+key+"\"");
+		}
+	}
+	
+	public static String extractNumber(String string, int index) {
 		String pattern = "[0-9]+";
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(string);
-		if (m.find()) {
+		if (m.find(index)) {
 			return m.group();
 		} else {
 			throw new RuntimeException("Number not found in string \""+string+"\"");
 		}
+	}
+	
+	public static String extractNumber(String string) {
+		return extractNumber(string, 0);
 	}
 	
 	public static String getMutantOperator(String path) {

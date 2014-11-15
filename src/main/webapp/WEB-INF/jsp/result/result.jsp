@@ -4,7 +4,8 @@
 	br.unicamp.ic.mc437.g1.entity.TestSetResult,br.unicamp.ic.mc437.g1.entity.TestCaseResult,
 	br.unicamp.ic.mc437.g1.entity.Mutant,br.unicamp.ic.mc437.g1.entity.MutantImplementation,
 	br.unicamp.ic.mc437.g1.entity.ResultModel,br.unicamp.ic.mc437.g1.entity.TestCase,
-	br.unicamp.ic.mc437.g1.entity.TestCaseEntry,br.unicamp.ic.mc437.g1.util.FormatUtils"%>
+	br.unicamp.ic.mc437.g1.entity.TestCaseEntry,
+	static br.unicamp.ic.mc437.g1.util.FormatUtils.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,8 +69,8 @@ if (window.navigator.userAgent != "JBehave")
 		<div class="new-result-form">
 			<div class="page-header">
 				<h1>
-					Resultados de Test Case
-					<%=request.getAttribute("id")%>:
+					Resultados do Teste
+					<%=((TestResult) request.getAttribute("result")).getName()%>:
 				</h1>
                 <div style="display: none;" id="test_result_score">
                     <%=res.getScore()%>
@@ -84,8 +85,8 @@ if (window.navigator.userAgent != "JBehave")
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Test Set
-				<%=set.getCod()%>:
+				Conjunto de Testes
+				<%=extractNumber(set.getCod())%>:
 			</div>
             <div style="display: none;" id="test_set_score">
                 <%=set.getScore()%>
@@ -98,8 +99,8 @@ if (window.navigator.userAgent != "JBehave")
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Test Case
-						<%=FormatUtils.getIdFromKey(testCase.getTestCaseKey())%>:
+						Caso de Teste
+						<%=extractNumber(getIdFromKey(testCase.getTestCaseKey()))%>:
 					</div>
 					<table class="table table-hover">
 						<thead>
@@ -117,11 +118,11 @@ if (window.navigator.userAgent != "JBehave")
 										for (TestOutput output : outputs) {
 							%>
 							<tr>
-								<td><%=FormatUtils.getMutantOperatorName(output.getMutantKey())%></td>
-								<td><%=FormatUtils.getMutantOperatorIndex(output.getMutantKey())%></td>
-								<td><%=FormatUtils.yesNo(output.getDead())%></td>
-								<td><%=output.getDeathIndex()%></td>
-								<td><%=FormatUtils.yesNo(output.getEvalFailed())%></td>
+								<td><%=getMutantOperatorName(output.getMutantKey())%></td>
+								<td><%=getMutantOperatorIndex(output.getMutantKey())%></td>
+								<td><%=yesNo(output.getDead())%></td>
+								<td><%=output.getDead() ? output.getDeathIndex() : "-"%></td>
+								<td><%=yesNo(!output.getEvalFailed())%></td>
 							</tr>
 							<%
 								}
@@ -139,7 +140,7 @@ if (window.navigator.userAgent != "JBehave")
 			}
 		%>
 
-		<h3>Mutants:</h3>
+		<h3>Mutantes:</h3>
 
 		<%
 			List<Mutant> mutants = res.getMutants();
@@ -153,7 +154,7 @@ if (window.navigator.userAgent != "JBehave")
 			<div class="panel-body">
 				<p>
 					<b>Operador de Mutação:</b>
-					<%=FormatUtils.getMutantOperator(mutant.getPath())%></p>
+					<%=getMutantOperator(mutant.getPath())%></p>
 				<p>
 					<b>ID de Contexto:</b>
 					<%=mutant.getContextId()%></p>
@@ -165,7 +166,7 @@ if (window.navigator.userAgent != "JBehave")
 					<%=mutant.getConvFlag()%></p>
 				<p>
 					<b>Ignorar Erro:</b>
-					<%=mutant.getIgnoreErrors()%></p>
+					<%=yesNo(mutant.getIgnoreErrors())%></p>
 				<p><b>Implementações:</b></p>
 				<table class="table table-hover">
 					<thead>
@@ -186,7 +187,7 @@ if (window.navigator.userAgent != "JBehave")
 							<td><%=impCount++%></td>
 							<td><a href="#" data-toggle="modal"
 								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
-							<td><%=FormatUtils.yesNo(implementation.getIsMutant())%></td>
+							<td><%=yesNo(implementation.getIsMutant())%></td>
 
 						</tr>
 						<%
@@ -201,7 +202,7 @@ if (window.navigator.userAgent != "JBehave")
 					tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel<%=implementation.getId()%>"
 					aria-hidden="true">
-					<div class="modal-dialog">
+					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">
@@ -232,7 +233,7 @@ if (window.navigator.userAgent != "JBehave")
 			}
 		%>
 		
-		<h3>Result Models:</h3>
+		<h3>Modelos do Resultado:</h3>
 
 		<%
 			List<ResultModel> models = res.getResultModels();
@@ -264,7 +265,7 @@ if (window.navigator.userAgent != "JBehave")
 							<td><%=impCount++%></td>
 							<td><a href="#" data-toggle="modal"
 								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
-							<td><%=FormatUtils.yesNo(implementation.getIsMutant())%></td>
+							<td><%=yesNo(implementation.getIsMutant())%></td>
 
 						</tr>
 						<%
@@ -279,7 +280,7 @@ if (window.navigator.userAgent != "JBehave")
 					tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel<%=implementation.getId()%>"
 					aria-hidden="true">
-					<div class="modal-dialog">
+					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">
@@ -309,7 +310,7 @@ if (window.navigator.userAgent != "JBehave")
 			}
 		%>
 		
-		<h3>Test Cases:</h3>
+		<h3>Casos de Teste:</h3>
 
 		<%
 			List<TestCase> testCases = res.getTestCases();
@@ -317,17 +318,16 @@ if (window.navigator.userAgent != "JBehave")
 				%>
 				<div class="panel panel-default">
 				<div class="panel-heading">
-					Test Case
-					<%=testCase.getId()%>:
+					Casos de Teste
 				</div>
 				<div class="panel-body">
-				
-					<p><b>Entries:</b></p>
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>Key</th>
-								<th>Content</th>
+								<th>Conjunto</th>
+								<th>Caso de Teste</th>
+								<th>Nome</th>
+								<!-- <th>Content</th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -336,9 +336,10 @@ if (window.navigator.userAgent != "JBehave")
 								for (TestCaseEntry entry : entries) {
 							%>
 							<tr>
-								<td><%= entry.getKey() %></td>
-								<td><%= entry.getTestCaseEntryValue().toString()%></td>
-
+								<td><%= extractNumber(getIdFromKey(entry.getKey())) %></td>
+								<td><%= extractNumber(getSetFromKey(entry.getKey())) %></td>
+								<td><%= entry.getTestCaseEntryValue().getName() %></td>
+								<!-- <td><%= entry.getTestCaseEntryValue().toString()%></td> -->
 							</tr>
 							<%
 								}

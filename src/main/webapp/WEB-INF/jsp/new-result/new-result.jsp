@@ -70,7 +70,7 @@
 			<form role="form" action="result-upload" method="POST"
 				enctype="multipart/form-data" onsubmit="return validateForm()">
                     <div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
+					<label for="exampleInputEmail1">Endereço de Email</label>
 					<input id="email-address"
 						type="email" class="form-control" id="exampleInputEmail1"
 						placeholder="Enter email" name="email">
