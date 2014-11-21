@@ -20,6 +20,8 @@
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/<%=org.webjars.AssetLocator.getWebJarPath("jquery.min.js")%>'></script>
 <script type='text/javascript'
+	src='<%=request.getContextPath()%>/<%=org.webjars.AssetLocator.getWebJarPath("less.js")%>'></script>
+<script type='text/javascript'
 	src='<%=request.getContextPath()%>/<%=org.webjars.AssetLocator
 					.getWebJarPath("js/bootstrap.min.js")%>'></script>
 <link rel="stylesheet"
@@ -31,9 +33,9 @@ if (window.navigator.userAgent != "JBehave")
 	hljs.initHighlightingOnLoad();
 </script>
 <script type='text/javascript'
- 	src='<%=request.getContextPath()%>/javascript/highcharts.js'> </script>
- 							 
-	
+	src='<%=request.getContextPath()%>/javascript/highcharts.js'> </script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mutant Spotlight</title>
 </head>
@@ -66,24 +68,44 @@ if (window.navigator.userAgent != "JBehave")
 
 	<div class="container">
 
-        <%
+		<%
         TestResult res = (TestResult) request.getAttribute("result");
         %>
 
 		<div class="new-result-form">
 			<div class="page-header">
-			<div class="row">
-				<div class="col-md-8"><h1>
-					Resultados do Teste
-					<%=((TestResult) request.getAttribute("result")).getName()%>:
-				</h1></div>
-				<div class="col-md-4"> <div id="test_final_result"></div>
-			</div>
-				
-                <div style="display: none;" id="test_result_score" score="<%=res.getScore()%>">
-                </div>
-                
-                <script>
+				<div class="row">
+					<div class="col-md-8">
+						<h1>
+							Resultados do Teste
+							<%=((TestResult) request.getAttribute("result")).getName()%>:
+						</h1>
+					</div>
+					<div class="col-md-4">
+						<!-- <div id="test_final_result"></div> -->
+						<div class="radial-progress" data-progress="<%= res.getScore() %>">
+							<div class="circle">
+								<div class="mask full">
+									<div class="fill"></div>
+								</div>
+								<div class="mask half">
+									<div class="fill"></div>
+									<div class="fill fix"></div>
+								</div>
+								<div class="shadow"></div>
+							</div>
+							<div class="inset">
+								<div class="percentage"></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div style="display: none;" id="test_result_score"
+					score="<%=res.getScore()%>"></div>
+
+				<script>
 					$(function () {
 					    $('#test_final_result').highcharts({
 					    	colors: ['#50B432', '#000000'],
@@ -128,7 +150,7 @@ if (window.navigator.userAgent != "JBehave")
 					    });
 					});
 					
-				</script> 	
+				</script>
 			</div>
 		</div>
 
@@ -138,14 +160,16 @@ if (window.navigator.userAgent != "JBehave")
 			for (TestSetResult set : sets) {
 		%>
 
-		<div class="panel panel-default">
-			<div class="panel-heading">
-			<div class="row">
-				<div class="col-md-8">
-					Conjunto de Testes
-					<%=extractNumber(set.getCod())%>:
-				</div>
-				<script>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-md-8">
+								Conjunto de Testes
+								<%=extractNumber(set.getCod())%>:
+							</div>
+							<script>
 $(function () {
     $('#graph_<%= countSet %>').highcharts({
     	colors: ['#50B432', '#000000'],
@@ -156,8 +180,8 @@ $(function () {
             plotBackgroundColor: null,
             plotBorderWidth: 1,//null,
             plotShadow: false,
-            width: 100,
-            height: 100,
+            width: 75,
+            height: 75,
         },
         
         title: {
@@ -184,66 +208,88 @@ $(function () {
             name: 'Score',
             data: [
                 ['Score',  parseFloat($("#test_set_score<%= countSet %>").attr("score")) ],
-                ['anti-score', 100 - parseFloat($("#test_set_score<%= countSet %>").attr("score"))],
-            ]
-        }]
-    });
-});
+                ['anti-score', 100 - parseFloat($("#test_set_score<%= countSet %>
+						")
+																			.attr(
+																					"score")) ], ]
+												} ]
+											});
+						});
+					</script>
 
-</script> 			
-				
-				<div class="col-md-4"><div id=graph_<%= countSet %>></div></div>
-				
-			</div>
-		</div>
-            <div style="display: none;" id="test_set_score<%= countSet++ %>" test_set_id='<%=set.getCod().replace("TS_", "")%>' score="<%=set.getScore()%>">
-            </div>
-			<div class="panel-body">
-				<%
+						</div>
+					</div>
+					<div style="display: none;" id="test_set_score<%= countSet++ %>"
+						test_set_id='<%=set.getCod().replace("TS_", "")%>'
+						score="<%=set.getScore()%>"></div>
+					<div class="panel-body">
+						<div >
+							<div class="radial-progress"
+								data-progress="<%= set.getScore() %>">
+								<div class="circle">
+									<div class="mask full">
+										<div class="fill"></div>
+									</div>
+									<div class="mask half">
+										<div class="fill"></div>
+										<div class="fill fix"></div>
+									</div>
+									<div class="shadow"></div>
+								</div>
+								<div class="inset">
+									<div class="percentage"></div>
+								</div>
+							</div>
+						</div>
+						<%
 					List<TestCaseResult> cases = set.getTestCaseResults();
 						for (TestCaseResult testCase : cases) {
 				%>
 
-				<div class="panel panel-default">
-					<div class="panel-heading">
-					<div class="row">
-						<div class="col-md-8">Caso de Teste
-						<%=extractNumber(getIdFromKey(testCase.getTestCaseKey()))%>:</div>
-						
-					</div>
-						
-					</div>
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Operador de Mutação</th>
-								<th>Índice</th>
-								<th>Morto?</th>
-								<th>Índice de Morte</th>
-								<th>Compilou?</th>
-							</tr>
-						</thead>
-						<tbody>
-							<%
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-md-8">
+										Caso de Teste
+										<%=extractNumber(getIdFromKey(testCase.getTestCaseKey()))%>:
+									</div>
+
+								</div>
+
+							</div>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Operador de Mutação</th>
+										<th>Índice</th>
+										<th>Morto?</th>
+										<th>Índice de Morte</th>
+										<th>Compilou?</th>
+									</tr>
+								</thead>
+								<tbody>
+									<%
 								List<TestOutput> outputs = testCase.getTestOutputs();
 										for (TestOutput output : outputs) {
 							%>
-							<tr>
-								<td><%=getMutantOperatorName(output.getMutantKey())%></td>
-								<td><%=getMutantOperatorIndex(output.getMutantKey())%></td>
-								<td><%=yesNo(output.getDead())%></td>
-								<td><%=output.getDead() ? output.getDeathIndex() : "-"%></td>
-								<td><%=yesNo(!output.getEvalFailed())%></td>
-							</tr>
-							<%
+									<tr>
+										<td><%=getMutantOperatorName(output.getMutantKey())%></td>
+										<td><%=getMutantOperatorIndex(output.getMutantKey())%></td>
+										<td><%=yesNo(output.getDead())%></td>
+										<td><%=output.getDead() ? output.getDeathIndex() : "-"%></td>
+										<td><%=yesNo(!output.getEvalFailed())%></td>
+									</tr>
+									<%
 								}
 							%>
-						</tbody>
-					</table>
-				</div>
-				<%
+								</tbody>
+							</table>
+						</div>
+						<%
 					}
 				%>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -278,7 +324,9 @@ $(function () {
 				<p>
 					<b>Ignorar Erro:</b>
 					<%=yesNo(mutant.getIgnoreErrors())%></p>
-				<p><b>Implementações:</b></p>
+				<p>
+					<b>Implementações:</b>
+				</p>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -343,21 +391,23 @@ $(function () {
 		<%
 			}
 		%>
-		
+
 		<h3>Modelos do Resultado:</h3>
 
 		<%
 			List<ResultModel> models = res.getResultModels();
 			for (ResultModel model : models) {
 		%>
-			<div class="panel panel-default">
+		<div class="panel panel-default">
 			<div class="panel-heading">
 				Modelo
 				<%=model.getName()%>:
 			</div>
 			<div class="panel-body">
-					
-				<p><b>Implementações:</b></p>
+
+				<p>
+					<b>Implementações:</b>
+				</p>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -420,56 +470,55 @@ $(function () {
 		<%
 			}
 		%>
-		
+
 		<h3>Casos de Teste:</h3>
 
 		<%
 			List<TestCase> testCases = res.getTestCases();
 			for (TestCase testCase : testCases) {
 				%>
-				<div class="panel panel-default">
-				<div class="panel-heading">
-					Casos de Teste
-				</div>
-				<div class="panel-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Conjunto</th>
-								<th>Caso de Teste</th>
-								<th>Nome</th>
-								<!-- <th>Content</th> -->
-							</tr>
-						</thead>
-						<tbody>
-							<%
+		<div class="panel panel-default">
+			<div class="panel-heading">Casos de Teste</div>
+			<div class="panel-body">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Conjunto</th>
+							<th>Caso de Teste</th>
+							<th>Nome</th>
+							<!-- <th>Content</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<%
 								List<TestCaseEntry> entries = testCase.getTestCaseEntries();
 								for (TestCaseEntry entry : entries) {
 							%>
-							<tr>
-								<td><%= extractNumber(getIdFromKey(entry.getKey())) %></td>
-								<td><%= extractNumber(getSetFromKey(entry.getKey())) %></td>
-								<td><%= entry.getTestCaseEntryValue().getName() %></td>
-								<!-- <td><%= entry.getTestCaseEntryValue().toString()%></td> -->
-							</tr>
-							<%
+						<tr>
+							<td><%= extractNumber(getIdFromKey(entry.getKey())) %></td>
+							<td><%= extractNumber(getSetFromKey(entry.getKey())) %></td>
+							<td><%= entry.getTestCaseEntryValue().getName() %></td>
+							<!-- <td><%= entry.getTestCaseEntryValue().toString()%></td> -->
+						</tr>
+						<%
 								}
 							%>
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
 			</div>
-			<%
+		</div>
+		<%
 			}
 		%>
 
 
 	</div>
 	<!-- /.container -->
-
-
-		
-
 </body>
+
+<script>
+	$('head style[type="text/css"]').attr('type', 'text/less');
+	less.refreshStyles();
+</script>
 
 </html>
