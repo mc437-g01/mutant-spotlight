@@ -158,7 +158,7 @@ public class CalculateScoreSteps {
 	@Then("the calculated scores for test sets is:$rows")
 	public void thenTheCalculatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
         for (final TestSetScore testSetScore : testSetScores) {
-            int score = testSetScoreMap.get(testSetScore.getTestSetId());
+            Integer score = testSetScoreMap.get(testSetScore.getTestSetId());
             Assert.assertEquals(score, testSetScore.getScore());
         }
 	}

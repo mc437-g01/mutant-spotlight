@@ -6,24 +6,24 @@ import org.jbehave.core.annotations.Parameter;
 @AsParameters
 public class TestSetScore {
 	@Parameter(name="TEST SET")
-	private int testSetId;
+	private Integer testSetId;
 	
 	@Parameter(name="SCORE (%)")
-	private int score;
+	private Integer score;
 
-	public int getTestSetId() {
+	public Integer getTestSetId() {
 		return testSetId;
 	}
 
-	public void setTestSetId(int testSetId) {
+	public void setTestSetId(Integer testSetId) {
 		this.testSetId = testSetId;
 	}
 
-	public int getScore() {
+	public Integer getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(Integer score) {
 		this.score = score;
 	}
 
