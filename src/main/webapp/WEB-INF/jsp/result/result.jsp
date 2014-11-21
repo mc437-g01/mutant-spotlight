@@ -30,6 +30,10 @@
 if (window.navigator.userAgent != "JBehave")
 	hljs.initHighlightingOnLoad();
 </script>
+<script type='text/javascript'
+ 	src='<%=request.getContextPath()%>/javascript/highcharts.js'> </script>
+ 							 
+	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mutant Spotlight</title>
 </head>
@@ -68,26 +72,131 @@ if (window.navigator.userAgent != "JBehave")
 
 		<div class="new-result-form">
 			<div class="page-header">
-				<h1>
+			<div class="row">
+				<div class="col-md-8"><h1>
 					Resultados do Teste
 					<%=((TestResult) request.getAttribute("result")).getName()%>:
-				</h1>
+				</h1></div>
+				<div class="col-md-4"> <div id="test_final_result"></div>
+			</div>
+				
                 <div style="display: none;" id="test_result_score" score="<%=res.getScore()%>">
                 </div>
+                
+                <script>
+					$(function () {
+					    $('#test_final_result').highcharts({
+					    	colors: ['#50B432', '#000000'],
+					    	credits: {
+					            enabled: false
+					        },
+					        chart: {
+					            plotBackgroundColor: null,
+					            plotBorderWidth: 1,//null,
+					            plotShadow: false,
+					            width: 100,
+					            height: 100,
+					        },
+					        
+					        title: {
+					            text: ''
+					        },
+					        tooltip: {
+					            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+					        },
+					        plotOptions: {
+					            pie: {
+					                allowPointSelect: true,
+					                cursor: 'pointer',
+					                dataLabels: {
+					                    enabled: false,
+					                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+					                    style: {
+					                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+					                    }
+					                }
+					            }
+					        },
+					        series: [{
+					            type: 'pie',
+					            name: 'Score',
+					            data: [
+					                ['Score',  parseFloat($("#test_result_score").attr("score")) ],
+					                ['anti-score', 100 - parseFloat($("#test_result_score").attr("score"))],
+					            ]
+					        }]
+					    });
+					});
+					
+				</script> 	
 			</div>
 		</div>
 
 		<%
 			List<TestSetResult> sets = res.getTestSetResults();
+			int countSet = 0;
 			for (TestSetResult set : sets) {
 		%>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Conjunto de Testes
-				<%=extractNumber(set.getCod())%>:
+			<div class="row">
+				<div class="col-md-8">
+					Conjunto de Testes
+					<%=extractNumber(set.getCod())%>:
+				</div>
+				<script>
+$(function () {
+    $('#graph_<%= countSet %>').highcharts({
+    	colors: ['#50B432', '#000000'],
+    	credits: {
+            enabled: false
+        },
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: 1,//null,
+            plotShadow: false,
+            width: 100,
+            height: 100,
+        },
+        
+        title: {
+            text: ''
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Score',
+            data: [
+                ['Score',  parseFloat($("#test_set_score<%= countSet %>").attr("score")) ],
+                ['anti-score', 100 - parseFloat($("#test_set_score<%= countSet %>").attr("score"))],
+            ]
+        }]
+    });
+});
+
+</script> 			
+				
+				<div class="col-md-4"><div id=graph_<%= countSet %>></div></div>
+				
 			</div>
-            <div style="display: none;" id="test_set_score" test_set_id='<%=set.getCod().replace("TS_", "")%>' score="<%=set.getScore()%>">
+		</div>
+            <div style="display: none;" id="test_set_score<%= countSet++ %>" test_set_id='<%=set.getCod().replace("TS_", "")%>' score="<%=set.getScore()%>">
             </div>
 			<div class="panel-body">
 				<%
@@ -97,8 +206,12 @@ if (window.navigator.userAgent != "JBehave")
 
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Caso de Teste
-						<%=extractNumber(getIdFromKey(testCase.getTestCaseKey()))%>:
+					<div class="row">
+						<div class="col-md-8">Caso de Teste
+						<%=extractNumber(getIdFromKey(testCase.getTestCaseKey()))%>:</div>
+						
+					</div>
+						
 					</div>
 					<table class="table table-hover">
 						<thead>
@@ -353,6 +466,9 @@ if (window.navigator.userAgent != "JBehave")
 
 	</div>
 	<!-- /.container -->
+
+
+		
 
 </body>
 
