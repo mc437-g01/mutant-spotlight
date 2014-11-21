@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.*;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static org.jbehave.core.reporters.Format.HTML;
 import static org.jbehave.core.reporters.Format.IDE_CONSOLE;
@@ -22,7 +23,7 @@ import static org.jbehave.core.reporters.Format.TXT;
  */
 public abstract class AbstractSpringJBehaveStory extends JUnitStory {
 
-    private static final int STORY_TIMEOUT = 120;
+    private static final int STORY_TIMEOUT_IN_SECONDS = Long.valueOf(TimeUnit.MINUTES.toSeconds(30)).intValue();
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -37,7 +38,7 @@ public abstract class AbstractSpringJBehaveStory extends JUnitStory {
     private EmbedderControls embedderControls() {
         return new EmbedderControls()
                 .doIgnoreFailureInView(true)
-                .useStoryTimeoutInSecs(STORY_TIMEOUT);
+                .useStoryTimeoutInSecs(STORY_TIMEOUT_IN_SECONDS);
     }
 
     @Override

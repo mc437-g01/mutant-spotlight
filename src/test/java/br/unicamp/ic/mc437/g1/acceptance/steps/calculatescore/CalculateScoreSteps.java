@@ -6,6 +6,7 @@ import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.model.service.ScoreService;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
 import org.apache.commons.io.FileUtils;
+import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Pending;
 import org.jbehave.core.annotations.Then;
@@ -59,29 +60,37 @@ public class CalculateScoreSteps {
         loadedTestResults = new HashMap<String, TestResult>();
     }
 
+    @BeforeScenario
+    public void beforeScenario() {
+        testSetScoreMap = new HashMap<Integer, Integer>();
+        testResultScore = null;
+    }
+
 	@Given("there is the test $testFileName in the system")
 	public void givenThereIsTheTestInTheSystem(String testFileName) throws IOException {
-        String basePath = testResourcesBasePath.getFile().getAbsolutePath();
+        if (!loadedTestResults.containsKey(testFileName)) {
+            String basePath = testResourcesBasePath.getFile().getAbsolutePath();
 
-        File file = FileUtils.getFile(basePath + File.separator + testFileName + ".xml");
-        TestResult testResultLoaded = XmlUtils.readValue(FileUtils.readFileToString(file), TestResult.class);
-        testResultLoaded.setName(testFileName);
-        testResultLoaded.setEmail("test@test.com");
+            File file = FileUtils.getFile(basePath + File.separator + testFileName + ".xml");
+            TestResult testResultLoaded = XmlUtils.readValue(FileUtils.readFileToString(file), TestResult.class);
+            testResultLoaded.setName(testFileName);
+            testResultLoaded.setEmail("test@test.com");
 
-        boolean testResultFound = false;
-        for (TestResult testResult : testResultDAO.list()) {
-            if (testResult.getName().equals(testResult.getName())) {
-                // test result found in database
-                testResultFound = true;
-                break;
+            boolean testResultFound = false;
+            for (TestResult testResult : testResultDAO.list()) {
+                if (testResult.getName().equals(testResultLoaded.getName())) {
+                    // test result found in database
+                    testResultFound = true;
+                    break;
+                }
             }
-        }
-        if (!testResultFound) {
-            scoreService.calculateScore(testResultLoaded);
-            testResultDAO.save(testResultLoaded);
-        }
+            if (!testResultFound) {
+                scoreService.calculateScore(testResultLoaded);
+                testResultDAO.save(testResultLoaded);
+            }
 
-        loadedTestResults.put(testFileName, testResultLoaded);
+            loadedTestResults.put(testFileName, testResultLoaded);
+        }
 	}
 
 	@Given("the test list page loaded")
@@ -152,14 +161,14 @@ public class CalculateScoreSteps {
 
 	@Then("the calculated score for test result is $score%")
 	public void thenTheCalculatedScoreForTestResultIs(Integer score) {
-		Assert.assertEquals(testResultScore, score);
+		Assert.assertEquals(score, testResultScore);
 	}
 
 	@Then("the calculated scores for test sets is:$rows")
 	public void thenTheCalculatedScoresForTestSetsIs(List<TestSetScore> testSetScores) {
         for (final TestSetScore testSetScore : testSetScores) {
             Integer score = testSetScoreMap.get(testSetScore.getTestSetId());
-            Assert.assertEquals(score, testSetScore.getScore());
+            Assert.assertEquals(testSetScore.getScore(), score);
         }
 	}
 
