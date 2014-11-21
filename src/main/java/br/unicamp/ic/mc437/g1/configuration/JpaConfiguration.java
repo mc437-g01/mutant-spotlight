@@ -60,9 +60,9 @@ public class JpaConfiguration {
     Properties additionalProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", "create");
+                setProperty("hibernate.hbm2ddl.auto", "none");
                 setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-                setProperty("hibernate.onnection.useUnicode", "true");
+                setProperty("hibernate.connection.useUnicode", "true");
                 setProperty("hibernate.connection.characterEncoding", "UTF-8");
                 setProperty("hibernate.show_sq", "true");
                 setProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");

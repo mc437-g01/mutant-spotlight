@@ -119,8 +119,8 @@ public class CalculateScoreSteps {
         List<WebElement> tableRows = retrieveTableRows();
         for (WebElement tableRow : tableRows) {
             List<WebElement> tds = tableRow.findElements(By.tagName("td"));
-            WebElement nameTd = tds.get(1); // get the name column
-            String currentTestFileName = nameTd.findElement(By.tagName("a")).getText();
+            WebElement nameTd = tds.get(1).findElement(By.tagName("a")); // get the name column
+            String currentTestFileName = nameTd.getText();
             if (testFileName.equals(currentTestFileName)) {
                 fileLinkFound = nameTd;
                 break;
