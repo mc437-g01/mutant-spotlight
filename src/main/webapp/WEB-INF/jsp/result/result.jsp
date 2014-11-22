@@ -30,10 +30,11 @@
 	href="<%=request.getContextPath()%>/syntax_highlight/styles/default.css">
 <script
 	src="<%=request.getContextPath()%>/syntax_highlight/highlight.pack.js"></script>
-<script>
+
+<%--<script>
 	if (window.navigator.userAgent != "JBehave")
 		hljs.initHighlightingOnLoad();
-</script>
+</script>--%>
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/javascript/highcharts.js'>
 	
@@ -128,9 +129,9 @@
 							</div>
 						</div>
 					</div>
-					<div style="display: none;" id="test_set_score<%= countSet %>"
-						test_set_id='<%=set.getCod().replace("TS_", "")%>'
-						score="<%=set.getScore()%>"></div>
+                    <div style="display: none;" id="test_set_score"
+                         test_set_id='<%=set.getCod()%>'
+                         score="<%=set.getScore()%>"></div>
 					<div class="panel-body">
 						<div>
 						<b>Score:</b>

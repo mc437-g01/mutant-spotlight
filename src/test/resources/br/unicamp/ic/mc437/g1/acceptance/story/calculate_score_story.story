@@ -26,8 +26,8 @@ And the calculated score for test result is 100%
 And show the calculated scores for test sets
 And the calculated scores for test sets is:
 |TEST SET | SCORE (%) |
-|1        | 100       |
-|2        | 100       |
+|TS_01    | 100       |
+|TS_02    | 100       |
 
 Scenario: check the score of test result 2
 Given the test list page loaded
@@ -38,7 +38,7 @@ And the calculated score for test result is 50%
 And show the calculated scores for test sets
 And the calculated scores for test sets is:
 |TEST SET | SCORE (%) |
-|1        | 0         |
-|2        | 50        |
+|TS_01    | 0         |
+|TS_02    | 50        |
 
 

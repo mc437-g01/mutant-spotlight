@@ -54,7 +54,7 @@ public class CalculateScoreSteps {
     private String serverEndpoint;
 
     private Integer testResultScore;
-    private Map<Integer, Integer> testSetScoreMap;
+    private Map<String, Integer> testSetScoreMap;
 
     public CalculateScoreSteps() {
         loadedTestResults = new HashMap<String, TestResult>();
@@ -62,7 +62,7 @@ public class CalculateScoreSteps {
 
     @BeforeScenario
     public void beforeScenario() {
-        testSetScoreMap = new HashMap<Integer, Integer>();
+        testSetScoreMap = new HashMap<String, Integer>();
         testResultScore = null;
     }
 
@@ -148,9 +148,9 @@ public class CalculateScoreSteps {
         List<WebElement> testSetScoreElements = driver.findElements(By.xpath("//div[@id='test_set_score']"));
         Assert.assertTrue("Test result score could not be found", testSetScoreElements != null && !testSetScoreElements.isEmpty());
 
-        testSetScoreMap = new HashMap<Integer, Integer>();
+        testSetScoreMap = new HashMap<String, Integer>();
         for (final WebElement testSetScoreElement : testSetScoreElements) {
-            Integer testSetId = parseInt(testSetScoreElement.getAttribute("test_set_id"));
+            String testSetId = testSetScoreElement.getAttribute("test_set_id");
             Integer score = parseInt(testSetScoreElement.getAttribute("score"));
 
             Assert.assertNotNull("TestSetId must not be null", testSetId);

@@ -31,7 +31,7 @@ public class ClickUploadButtonSteps {
     @Value("classpath:acceptance/step_files/test_result_1.xml")
     private org.springframework.core.io.Resource testResult1Resource;
     
-    @Value("classpath:acceptance/step_files/cruise_result.toxml")
+    @Value("classpath:acceptance/step_files/cruise_result.xml")
     private org.springframework.core.io.Resource cruiseResultResource;
 
     @Value("classpath:acceptance/step_files/invalid_file_1.xml")

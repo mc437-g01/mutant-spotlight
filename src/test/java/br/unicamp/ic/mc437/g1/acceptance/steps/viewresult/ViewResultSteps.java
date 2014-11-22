@@ -49,12 +49,9 @@ public class ViewResultSteps {
     @Value("classpath:acceptance/step_files/test_result_1.xml")
     private org.springframework.core.io.Resource testResult1Resource;
     
-    @Value("classpath:acceptance/step_files/cruise_result.toxml")
+    @Value("classpath:acceptance/step_files/test_result_2.toxml")
     private org.springframework.core.io.Resource cruiseResultResource;
     
-    @Value("classpath:acceptance/step_files/cashier_result.toxml")
-    private org.springframework.core.io.Resource cachierResultResource;
-
     @Autowired
     private TestResultDAO testResultDAO;
 
@@ -91,17 +88,6 @@ public class ViewResultSteps {
             
             testResult2.setDate(calendar2.getTime());
             testResult2 = testResultDAO.save(testResult2);
-            
-            // Teste 3 - cachier_result.toxml
-            testResult3 = XmlUtils.readValue(cachierResultResource.getInputStream(), TestResult.class);
-            testResult3.setName("cashier result");
-            testResult3.setEmail("sender@email.com");
-            Calendar calendar3 = Calendar.getInstance();
-            calendar3.clear();
-            calendar3.set(2014, 11, 14);
-            
-            testResult3.setDate(calendar3.getTime());
-            testResult3 = testResultDAO.save(testResult3);
         }
     }
 
