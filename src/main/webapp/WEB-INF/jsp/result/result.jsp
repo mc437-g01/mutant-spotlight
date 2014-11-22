@@ -426,9 +426,4 @@
 	<!-- /.container -->
 </body>
 
-<script>
-	$('head style[type="text/css"]').attr('type', 'text/less');
-	less.refreshStyles();
-</script>
-
 </html>
