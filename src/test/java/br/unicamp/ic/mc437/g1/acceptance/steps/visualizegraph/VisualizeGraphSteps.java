@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import br.unicamp.ic.mc437.g1.acceptance.Steps;
@@ -31,8 +32,6 @@ public class VisualizeGraphSteps {
 	@Resource(name = "firefoxDriver")
     private WebDriver driver;
 	
-	private TestResultDAO testResultDao;
-	
 	private final Logger log = LoggerFactory.getLogger(VisualizeGraphStory.class);
 	
 	@Value("${server.endpoint}")
@@ -43,10 +42,17 @@ public class VisualizeGraphSteps {
 	
 	@Then("the percentage of the graph in green for each test case will be: $rows")
 	public void thenThePercentageOfTheGraphInGreenForEachTestCaseWillBe(List<TestCaseRow> rows) {
-		System.out.println(driver.findElement(By.id("test_set_score1")).getAttribute("score").toString() + " " + rows.get(0).getPercentage().toString() );
-		System.out.println(driver.findElement(By.id("test_set_score2")).getAttribute("score").toString() + " " + rows.get(1).getPercentage().toString() );
-		assertEquals(driver.findElement(By.id("test_set_score1")).getAttribute("score").toString(), rows.get(0).getPercentage().toString());
-		assertEquals(driver.findElement(By.id("test_set_score2")).getAttribute("score").toString(), rows.get(1).getPercentage().toString());
+		String element_score = driver.findElement(By.id("test_set_score0")).getAttribute("score").toString();
+		String element_score2 = driver.findElement(By.id("test_set_score1")).getAttribute("score").toString();
+		
+		String row1_score = rows.get(0).getPercentage().toString().replace("%", "");
+		String row2_score = rows.get(1).getPercentage().toString().replace("%", "");
+		
+		System.out.println(element_score + " " + element_score2);
+		System.out.println(row1_score + " " + row2_score);
+		
+		assertEquals(element_score,  row1_score);
+		assertEquals(element_score2, row2_score);
 	}
 
 	@Then("a graph of the test set score shoud be shown")
@@ -74,6 +80,7 @@ public class VisualizeGraphSteps {
 		// TODO
 	}
 	
+	@Autowired
 	private TestResultDAO testResultDAO;
 
     private TestResult testResult1;
@@ -148,11 +155,6 @@ public class VisualizeGraphSteps {
         driver.findElement(By.id("upload-file")).sendKeys(testResult1Resource.getFile().getAbsolutePath());
         driver.findElement(By.id("upload")).submit();
         
-		List<TestResult> lista = testResultDao.list();
-		//get the last testResult inserted
-		TestResult testResult = lista.get(lista.size() -1);
-		//get its filename and compare
-		assertEquals(filename, testResult.getName()); 
 	}
 
 	@Then("the graph of the Test Case will be 100% green")
@@ -160,7 +162,7 @@ public class VisualizeGraphSteps {
 		//get the element that has the score information
 		WebElement score_hidden = driver.findElement(By.id("test_result_score"));
 		//get the info of score and compares
-		assertEquals(score_hidden.getText(), "100%"); 
+		assertEquals(score_hidden.getAttribute("score").toString(), "100"); 
 	}
 
 	@When("the user visualizes the results report")
