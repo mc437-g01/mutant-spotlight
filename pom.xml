@@ -16,6 +16,7 @@
         <jbehave.version>3.9.5</jbehave.version>
         <selenium.version>2.43.1</selenium.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
+        <hibernate-search.version>4.5.1.Final</hibernate-search.version>
         <spring.version>4.0.5.RELEASE</spring.version>
         <h2.version>1.4.182</h2.version>
     </properties>
@@ -74,6 +75,12 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+        
+        <dependency>
+		   <groupId>org.hibernate</groupId>
+		   <artifactId>hibernate-search-orm</artifactId>
+		   <version>${hibernate-search.version}</version>
+		</dependency>
 
         <dependency>
             <groupId>junit</groupId>

@@ -11,6 +11,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 /**
  * Created by fernandogoncalves on 10/17/14.
  */
@@ -26,9 +29,11 @@ public class MutantMapState {
     @XmlAttribute(name = "isMutant")
     private Boolean isMutant;
 
+    @Field
     @XmlElement(name = "name")
     private String name;
 
+    @IndexedEmbedded
     @OneToOne(cascade = CascadeType.ALL)
     @XmlElement(name = "transition")
     private StateTransition transition;

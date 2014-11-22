@@ -9,6 +9,9 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 import java.util.List;
 
 /**
@@ -23,6 +26,7 @@ public class TestCase {
     @XmlTransient
     private Integer id;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "entry")
     private List<TestCaseEntry> testCaseEntries;

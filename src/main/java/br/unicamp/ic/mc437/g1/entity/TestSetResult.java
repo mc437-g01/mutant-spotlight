@@ -1,18 +1,19 @@
 package br.unicamp.ic.mc437.g1.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.List;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 @Entity
 @XmlRootElement
@@ -23,15 +24,19 @@ public class TestSetResult {
     @XmlTransient
     private Integer id;
 
+    @Field
     @XmlElement(name = "id")
     private String identifier;
 
+    @Field
     @XmlElement(name = "cod")
     private String cod;
 
+    @Field
     @XmlElement(name = "path")
     private String path;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "testCaseResults")
     private List<TestCaseResult> testCaseResults;

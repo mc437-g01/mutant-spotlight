@@ -1,5 +1,7 @@
 package br.unicamp.ic.mc437.g1.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.List;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 /**
  * Created by fernandogoncalves on 10/17/14.
@@ -23,9 +27,11 @@ public class TestCaseEntryValue {
     @XmlTransient
     private Integer id;
 
+    @Field
     @XmlElement(name = "name")
     private String name;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "data")
     private List<TestCaseEntryValueData> datas;
