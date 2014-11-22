@@ -11,6 +11,8 @@ public interface TestResultDAO {
 
     TestResult findById(Integer id);
 
+    List<TestResult> list();
+
     List<TestResult> list(String criteria);
 
     TestResult save(TestResult testResult);

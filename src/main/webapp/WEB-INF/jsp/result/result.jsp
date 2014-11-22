@@ -124,7 +124,7 @@
 						<div class="row">
 							<div class="col-md-8">
 								Conjunto de Testes
-								<%=extractNumber(set.getCod())%>:
+								<%=set.getCod()%>:
 							</div>
 						</div>
 					</div>

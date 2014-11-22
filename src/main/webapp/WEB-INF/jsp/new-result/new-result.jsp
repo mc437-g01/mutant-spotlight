@@ -88,7 +88,7 @@
 					<p class="help-block">Arquivo XML do resultado de testes de
 						mutantes</p>
 				</div>
-				<button id="upload" type="submit" class="btn btn-default">Submit</button>
+				<button id="upload" type="submit" class="btn btn-default">Enviar</button>
 			</form>
 		</div>
 

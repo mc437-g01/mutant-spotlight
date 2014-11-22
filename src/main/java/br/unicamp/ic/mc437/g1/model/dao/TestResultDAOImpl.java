@@ -30,6 +30,11 @@ public class TestResultDAOImpl implements TestResultDAO {
         return entityManager.find(TestResult.class, id);
     }
 
+    @Override
+    public List<TestResult> list() {
+        return entityManager.createQuery("SELECT t FROM TestResult t", TestResult.class).getResultList();
+    }
+
 	@Override
 	@SuppressWarnings("unchecked")
     public List<TestResult> list(String criteria) {
