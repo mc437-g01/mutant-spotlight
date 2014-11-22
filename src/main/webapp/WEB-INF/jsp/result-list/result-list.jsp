@@ -64,14 +64,9 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			<form action="result-list">
 			<table width="100%">
 				<tr>
-					<td align="right"><input type="text" class="form-control" placeholder="Busca" id="criteria" name="criteria"> </td>
-					<td style="width: 100px" align="right"> Filtrar por: </td>
-					<td style="width: 200px" align="left"> <select name="filter-type" class="form-control" id="filter-type">
-							<option value="name">Nome</option>
-							<option value="email">Email</option>
-							<option value="date">Data</option>
-						</select>
-					 </td>
+					<td align="right">
+						<input type="text" class="form-control" placeholder="Busca" id="criteria" name="criteria" value="<%=request.getAttribute("criteria") %>" autofocus />
+					</td>
 					<td style="width: 100px" align="right"> <input type="submit" class="btn btn-default" id="search" value="Filtrar"/> </td>
 				</tr>
 			</table>

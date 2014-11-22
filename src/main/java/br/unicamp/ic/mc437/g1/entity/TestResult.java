@@ -1,9 +1,9 @@
 package br.unicamp.ic.mc437.g1.entity;
 
-import br.unicamp.ic.mc437.g1.util.StrangeDateAdapter;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +13,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
+import br.unicamp.ic.mc437.g1.util.StrangeDateAdapter;
+
+@Indexed
 @Entity
 @XmlRootElement(name = "iTestResult")
 public class TestResult {
@@ -30,27 +36,34 @@ public class TestResult {
     @XmlJavaTypeAdapter(StrangeDateAdapter.class)
     private Date date;
 
+    @Field
     @XmlTransient
     private String email;
 
+    @Field
     @XmlTransient
     private String name;
     
+    @Field
     @XmlTransient
     private Integer score;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "testSetResults")
     private List<TestSetResult> testSetResults;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_imutants")
     private List<Mutant> mutants;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_imodel")
     private List<ResultModel> resultModels;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "_itestCases")
     private List<TestCase> testCases;

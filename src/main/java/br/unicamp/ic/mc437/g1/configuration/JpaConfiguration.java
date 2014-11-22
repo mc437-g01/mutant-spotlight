@@ -66,6 +66,8 @@ public class JpaConfiguration {
                 setProperty("hibernate.connection.characterEncoding", "UTF-8");
                 setProperty("hibernate.show_sq", "true");
                 setProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+                setProperty("hibernate.search.default.directory_provider", "filesystem");
+                setProperty("hibernate.search.default.indexBase", System.getProperty("user.dir") + "/.lucene/indexes");
             }
         };
     }

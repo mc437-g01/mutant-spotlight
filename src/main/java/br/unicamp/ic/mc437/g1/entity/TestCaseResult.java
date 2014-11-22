@@ -1,5 +1,7 @@
 package br.unicamp.ic.mc437.g1.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,9 @@ import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.List;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 @Entity
 @XmlRootElement
@@ -20,12 +24,15 @@ public class TestCaseResult {
     @XmlTransient
     private Integer id;
 
+    @Field
     @XmlElement(name = "path")
     private String path;
 
+    @Field
     @XmlElement(name = "_testCaseKey")
     private String testCaseKey;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "testCaseExecutingOutput_MutantList")
     private List<TestOutput> testOutputs;

@@ -4,6 +4,8 @@ package br.unicamp.ic.mc437.g1.entity;
  * Created by fernandogoncalves on 10/17/14.
  */
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.List;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 @Entity
 @XmlRootElement
@@ -28,9 +32,11 @@ public class MutantMap {
     @XmlAttribute(name = "isMutant")
     private Boolean isMutant;
 
+    @Field
     @XmlElement(name = "name")
     private String name;
 
+    @IndexedEmbedded
     @OneToMany(cascade = CascadeType.ALL)
     @XmlElement(name = "state")
     private List<MutantMapState> mutantMapStates;

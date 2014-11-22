@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+
 /**
  * Created by fernandogoncalves on 10/17/14.
  */
@@ -39,6 +41,7 @@ public class StateTransitionGuard {
     @XmlElement(name = "pushState")
     private String pushState;
 
+    @Field
     @XmlElement(name = "targetState")
     private String targetState;
 

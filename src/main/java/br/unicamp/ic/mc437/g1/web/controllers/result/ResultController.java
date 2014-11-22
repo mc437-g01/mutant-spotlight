@@ -4,6 +4,7 @@ import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.model.service.ScoreService;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 public class ResultController {
@@ -76,8 +78,10 @@ public class ResultController {
     }
 
     @RequestMapping("/result-list")
-    public String renderResultList(Model model) {
-        model.addAttribute("results", testResultDAO.list());
+    public String renderResultList(Model model,
+    		@RequestParam(value = "criteria", required = false) String criteria) {
+    	model.addAttribute("criteria", Objects.toString(criteria, ""));
+        model.addAttribute("results", testResultDAO.list(criteria));
 
         return "result-list/result-list";
     }

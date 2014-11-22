@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+
 @Entity
 @XmlRootElement
 public class TestOutput {
@@ -26,6 +28,7 @@ public class TestOutput {
     @XmlElement(name = "evalFailed")
     private Boolean evalFailed;
 
+    @Field
     @XmlElement(name = "mutantKey")
     private String mutantKey;
 

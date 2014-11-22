@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.hibernate.search.annotations.Field;
+
 /**
  * Created by fernandogoncalves on 10/17/14.
  */
@@ -24,15 +26,19 @@ public class TestCaseEntryValueDataTestOutput {
     @XmlAttribute(name = "expectedFault")
     private Boolean expectedFault;
 
+    @Field
     @XmlElement(name = "enterState")
     private String enterState;
 
+    @Field
     @XmlElement(name = "enterTransition")
     private String enterTransition;
 
+    @Field
     @XmlElement(name = "livingState")
     private String livingState;
 
+    @Field
     @XmlElement(name = "output")
     private String output;
 
