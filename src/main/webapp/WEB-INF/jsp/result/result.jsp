@@ -17,6 +17,8 @@
 					.getWebJarPath("css/bootstrap-theme.min.css")%>'> -->
 <link rel='stylesheet'
 	href='<%=request.getContextPath()%>/css/index.css'>
+<link rel='stylesheet' type="text/css"
+	href='<%=request.getContextPath()%>/css/graph.css'>
 <script type='text/javascript'
 	src='<%=request.getContextPath()%>/<%=org.webjars.AssetLocator.getWebJarPath("jquery.min.js")%>'></script>
 <script type='text/javascript'
@@ -29,11 +31,13 @@
 <script
 	src="<%=request.getContextPath()%>/syntax_highlight/highlight.pack.js"></script>
 <script>
-if (window.navigator.userAgent != "JBehave")
-	hljs.initHighlightingOnLoad();
+	if (window.navigator.userAgent != "JBehave")
+		hljs.initHighlightingOnLoad();
 </script>
 <script type='text/javascript'
-	src='<%=request.getContextPath()%>/javascript/highcharts.js'> </script>
+	src='<%=request.getContextPath()%>/javascript/highcharts.js'>
+	
+</script>
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -83,7 +87,7 @@ if (window.navigator.userAgent != "JBehave")
 					</div>
 					<div class="col-md-4">
 						<!-- <div id="test_final_result"></div> -->
-						<div class="radial-progress" data-progress="<%= res.getScore() %>">
+						<div id="graph-score-final" class="radial-progress" data-progress="<%= res.getScore() %>">
 							<div class="circle">
 								<div class="mask full">
 									<div class="fill"></div>
@@ -104,53 +108,6 @@ if (window.navigator.userAgent != "JBehave")
 
 				<div style="display: none;" id="test_result_score"
 					score="<%=res.getScore()%>"></div>
-
-				<script>
-					$(function () {
-					    $('#test_final_result').highcharts({
-					    	colors: ['#50B432', '#000000'],
-					    	credits: {
-					            enabled: false
-					        },
-					        chart: {
-					            plotBackgroundColor: null,
-					            plotBorderWidth: 1,//null,
-					            plotShadow: false,
-					            width: 100,
-					            height: 100,
-					        },
-					        
-					        title: {
-					            text: ''
-					        },
-					        tooltip: {
-					            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-					        },
-					        plotOptions: {
-					            pie: {
-					                allowPointSelect: true,
-					                cursor: 'pointer',
-					                dataLabels: {
-					                    enabled: false,
-					                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-					                    style: {
-					                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-					                    }
-					                }
-					            }
-					        },
-					        series: [{
-					            type: 'pie',
-					            name: 'Score',
-					            data: [
-					                ['Score',  parseFloat($("#test_result_score").attr("score")) ],
-					                ['anti-score', 100 - parseFloat($("#test_result_score").attr("score"))],
-					            ]
-					        }]
-					    });
-					});
-					
-				</script>
 			</div>
 		</div>
 
@@ -169,62 +126,15 @@ if (window.navigator.userAgent != "JBehave")
 								Conjunto de Testes
 								<%=extractNumber(set.getCod())%>:
 							</div>
-							<script>
-$(function () {
-    $('#graph_<%= countSet %>').highcharts({
-    	colors: ['#50B432', '#000000'],
-    	credits: {
-            enabled: false
-        },
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: 1,//null,
-            plotShadow: false,
-            width: 75,
-            height: 75,
-        },
-        
-        title: {
-            text: ''
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
-            }
-        },
-        series: [{
-            type: 'pie',
-            name: 'Score',
-            data: [
-                ['Score',  parseFloat($("#test_set_score<%= countSet %>").attr("score")) ],
-                ['anti-score', 100 - parseFloat($("#test_set_score<%= countSet %>
-						")
-																			.attr(
-																					"score")) ], ]
-												} ]
-											});
-						});
-					</script>
-
 						</div>
 					</div>
-					<div style="display: none;" id="test_set_score<%= countSet++ %>"
+					<div style="display: none;" id="test_set_score<%= countSet %>"
 						test_set_id='<%=set.getCod().replace("TS_", "")%>'
 						score="<%=set.getScore()%>"></div>
 					<div class="panel-body">
-						<div >
-							<div class="radial-progress"
+						<div>
+						<b>Score:</b>
+							<div id="graph-score-set-<%= countSet++ %>" class="radial-progress-small"
 								data-progress="<%= set.getScore() %>">
 								<div class="circle">
 									<div class="mask full">
