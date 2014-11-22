@@ -3,6 +3,7 @@ package br.unicamp.ic.mc437.g1.acceptance.steps.visualizegraph;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import br.unicamp.ic.mc437.g1.acceptance.story.VisualizeGraphStory;
 import br.unicamp.ic.mc437.g1.acceptance.steps.viewresult.ViewResultSteps;
 import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
+import br.unicamp.ic.mc437.g1.util.XmlUtils;
 
 @Steps
 public class VisualizeGraphSteps {
@@ -41,8 +43,10 @@ public class VisualizeGraphSteps {
 	
 	@Then("the percentage of the graph in green for each test case will be: $rows")
 	public void thenThePercentageOfTheGraphInGreenForEachTestCaseWillBe(List<TestCaseRow> rows) {
-		assertEquals(driver.findElement(By.id("test-case-score-hidden-1")).getText(), rows.get(0).getPercentage());
-		assertEquals(driver.findElement(By.id("test-case-score-hidden-2")).getText(), rows.get(1).getPercentage());
+		System.out.println(driver.findElement(By.id("test_set_score1")).getAttribute("score").toString() + " " + rows.get(0).getPercentage().toString() );
+		System.out.println(driver.findElement(By.id("test_set_score2")).getAttribute("score").toString() + " " + rows.get(1).getPercentage().toString() );
+		assertEquals(driver.findElement(By.id("test_set_score1")).getAttribute("score").toString(), rows.get(0).getPercentage().toString());
+		assertEquals(driver.findElement(By.id("test_set_score2")).getAttribute("score").toString(), rows.get(1).getPercentage().toString());
 	}
 
 	@Then("a graph of the test set score shoud be shown")
@@ -51,7 +55,7 @@ public class VisualizeGraphSteps {
 		WebElement grafico;
 		try {
 			//try to find the graph 
-			grafico = driver.findElement(By.id("test-result-set-graph"));
+			grafico = driver.findElement(By.id("graph-score-final"));
 			//everything was fine. it found the graph. 
 			//trivial assertEquals.
 			assertEquals(1,1);
@@ -65,15 +69,69 @@ public class VisualizeGraphSteps {
 	}
 
 	@Given("that the user has access to the system")
-	@Pending
+	//@Pending
 	public void givenThatTheUserHasAccessToTheSystem() {
 		// TODO
 	}
 	
+	private TestResultDAO testResultDAO;
+
+    private TestResult testResult1;
+    private TestResult testResult2;
+    private TestResult testResult3;
+    
+    @Value("classpath:acceptance/step_files/cruise_result.toxml")
+    private org.springframework.core.io.Resource cruiseResultResource;
+    
+    @Value("classpath:acceptance/step_files/cashier_result.toxml")
+    private org.springframework.core.io.Resource cachierResultResource;
+
+	
 	@Given("a test set has been upload")
 	public void givenATestSetHasBeenUpload() {
 		try {
-			(new ViewResultSteps()).givenResultsInTheSystem();
+			List<TestResult> testResults = testResultDAO.list();
+			if (testResults == null || testResults.isEmpty()) {
+
+				// Primeiro teste
+				testResult1 = XmlUtils.readValue(
+						testResult1Resource.getInputStream(), TestResult.class);
+				testResult1.setName("test result 1");
+				testResult1.setEmail("test@email.com");
+				Calendar calendar = Calendar.getInstance();
+				calendar.clear();
+				calendar.set(2014, 11, 7);
+
+				testResult1.setDate(calendar.getTime());
+				testResult1 = testResultDAO.save(testResult1);
+
+				// Teste 2 - cruise_result.toxml
+				testResult2 = XmlUtils
+						.readValue(cruiseResultResource.getInputStream(),
+								TestResult.class);
+				testResult2.setName("cruise result");
+				testResult2.setEmail("test@email.com");
+				Calendar calendar2 = Calendar.getInstance();
+				calendar2.clear();
+				calendar2.set(2014, 11, 14);
+
+				testResult2.setDate(calendar2.getTime());
+				testResult2 = testResultDAO.save(testResult2);
+
+				// Teste 3 - cachier_result.toxml
+				testResult3 = XmlUtils.readValue(
+						cachierResultResource.getInputStream(),
+						TestResult.class);
+				testResult3.setName("cashier result");
+				testResult3.setEmail("sender@email.com");
+				Calendar calendar3 = Calendar.getInstance();
+				calendar3.clear();
+				calendar3.set(2014, 11, 14);
+
+				testResult3.setDate(calendar3.getTime());
+				testResult3 = testResultDAO.save(testResult3);
+			}
+			    
 		} catch(Exception E){
 			E.printStackTrace();
 		}
@@ -100,7 +158,7 @@ public class VisualizeGraphSteps {
 	@Then("the graph of the Test Case will be 100% green")
 	public void thenTheGraphOfTheTestCaseWillBe100Green() {
 		//get the element that has the score information
-		WebElement score_hidden = driver.findElement(By.id("test-set-score-hidden"));
+		WebElement score_hidden = driver.findElement(By.id("test_result_score"));
 		//get the info of score and compares
 		assertEquals(score_hidden.getText(), "100%"); 
 	}
@@ -125,7 +183,7 @@ public class VisualizeGraphSteps {
 	}
 
 	@When("the user visualizes the report of the uploaded file")
-	@Pending
+	//@Pending
 	public void whenTheUserVisualizesTheReportOfTheUploadedFile() {
 		// TODO		
 		
