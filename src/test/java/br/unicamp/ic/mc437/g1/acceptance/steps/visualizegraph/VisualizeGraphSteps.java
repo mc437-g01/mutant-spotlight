@@ -42,8 +42,8 @@ public class VisualizeGraphSteps {
 	
 	@Then("the percentage of the graph in green for each test case will be: $rows")
 	public void thenThePercentageOfTheGraphInGreenForEachTestCaseWillBe(List<TestCaseRow> rows) {
-		String element_score = driver.findElement(By.id("test_set_score0")).getAttribute("score").toString();
-		String element_score2 = driver.findElement(By.id("test_set_score1")).getAttribute("score").toString();
+		String element_score = driver.findElement(By.id("graph-score-set-0")).getAttribute("data-progress").toString();
+		String element_score2 = driver.findElement(By.id("graph-score-set-1")).getAttribute("data-progress").toString();
 		
 		String row1_score = rows.get(0).getPercentage().toString().replace("%", "");
 		String row2_score = rows.get(1).getPercentage().toString().replace("%", "");
@@ -157,9 +157,9 @@ public class VisualizeGraphSteps {
 	@Then("the graph of the Test Case will be 100% green")
 	public void thenTheGraphOfTheTestCaseWillBe100Green() {
 		//get the element that has the score information
-		WebElement score_hidden = driver.findElement(By.id("test_result_score"));
+		WebElement score_hidden = driver.findElement(By.id("graph-score-final"));
 		//get the info of score and compares
-		assertEquals(score_hidden.getAttribute("score").toString(), "100"); 
+		assertEquals(score_hidden.getAttribute("data-progress").toString(), "100"); 
 	}
 
 	@When("the user visualizes the results report")
