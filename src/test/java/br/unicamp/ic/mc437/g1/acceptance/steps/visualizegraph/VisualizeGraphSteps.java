@@ -48,9 +48,6 @@ public class VisualizeGraphSteps {
 		String row1_score = rows.get(0).getPercentage().toString().replace("%", "");
 		String row2_score = rows.get(1).getPercentage().toString().replace("%", "");
 		
-		System.out.println(element_score + " " + element_score2);
-		System.out.println(row1_score + " " + element_score2);
-		
 		assertEquals(element_score,  row1_score);
 		assertEquals(element_score2, row2_score);
 	}
