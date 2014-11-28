@@ -19,12 +19,12 @@ Given there are results in the system
 And results page loaded
 When I type test result 1 on filter input
 And I click the search button
-Then the system lists only results named test result 1
+Then the system lists results named test result 1
 
 Scenario: Filter results by email
 Given there are results in the system
 And results page loaded
 When I type test@email.com on filter input
 And I click the search button
-Then the system lists only results uploaded by test@email.com
+Then the system lists results uploaded by test@email.com
 
