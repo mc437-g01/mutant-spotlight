@@ -79,7 +79,7 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					<th>ID</<th>
 					<th>Nome</th>
 					<th>Usuário</th>
-					<th>Data de envio</th>
+					<th>Data</th>
 				</tr>
 			</thead>
 			<tbody>
