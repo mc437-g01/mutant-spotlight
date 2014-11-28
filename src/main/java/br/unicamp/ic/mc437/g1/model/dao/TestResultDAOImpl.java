@@ -1,5 +1,6 @@
 package br.unicamp.ic.mc437.g1.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,8 @@ import javax.persistence.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,8 @@ import br.unicamp.ic.mc437.g1.entity.TestResult;
 @Repository
 @Transactional
 public class TestResultDAOImpl implements TestResultDAO {
+
+    private static final Logger logEx = LoggerFactory.getLogger(TestResultDAOImpl.class);
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -43,7 +48,6 @@ public class TestResultDAOImpl implements TestResultDAO {
     	
     	Query query;
     	if (criteria != null && !criteria.isEmpty()) {
-    		
     		try {
     			query = fullTextEntityManager.createFullTextQuery(
     					qb.keyword().onFields(
@@ -79,15 +83,15 @@ public class TestResultDAOImpl implements TestResultDAO {
     							"testCases.testCaseEntries.testCaseEntryValue.datas.testCaseEntryValueDataTestOutput.output"
     							).ignoreFieldBridge().matching(criteria).createQuery(),
     					TestResult.class);
+
+                return query.getResultList();
+
     		} catch (Exception e) {
-    			e.printStackTrace();
-    			query = entityManager.createQuery("SELECT t FROM TestResult t WHERE 0 = 1", TestResult.class);
+    			logEx.error("Error executing querying. message={}", e.getMessage(), e);
     		}
-    	} else {
-    		query = entityManager.createQuery("SELECT t FROM TestResult t", TestResult.class);
     	}
     	
-        return query.getResultList();
+        return new ArrayList<TestResult>();
     }
 
     @Override
