@@ -258,7 +258,7 @@
 						%>
 						<tr>
 							<td><%=impCount++%></td>
-							<td><a href="#" data-toggle="modal"
+							<td><a href="#" <%--onclick="hljs.highlightBlock($('#myModal<%=implementation.getId()%> pre code')[0]);"--%> data-toggle="modal"
 								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
 							<td><%=yesNo(implementation.getIsMutant())%></td>
 
@@ -338,7 +338,7 @@
 						%>
 						<tr>
 							<td><%=impCount++%></td>
-							<td><a href="#" data-toggle="modal"
+							<td><a href="#" data-toggle="modal" <%--onclick="hljs.highlightBlock($('#myModal<%=implementation.getId()%> pre code')[0]);"--%>
 								data-target="#myModal<%=implementation.getId()%>">Visualizar</a></td>
 							<td><%=yesNo(implementation.getIsMutant())%></td>
 
