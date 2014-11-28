@@ -154,10 +154,6 @@ public class ViewResultSteps {
 		driver.findElement(By.id("criteria")).sendKeys(criteria);
 	}
 	
-	@When("I select the $filterType filter")
-	public void selectNameFilter(String filterType) {
-		new Select(driver.findElement(By.id("filter-type"))).selectByValue(filterType);
-	}
 	
 	@When("I click the search button")
 	public void clickSearchButton() {

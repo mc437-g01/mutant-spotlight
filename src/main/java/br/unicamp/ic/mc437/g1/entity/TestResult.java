@@ -14,8 +14,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DateBridge;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Resolution;
@@ -32,6 +34,8 @@ public class TestResult {
     @XmlTransient
     private Integer id;
 
+    @Field(index=Index.YES, analyze=Analyze.NO)
+    @DateBridge(resolution=Resolution.DAY)
     @XmlElement(name = "_date")
     @XmlJavaTypeAdapter(StrangeDateAdapter.class)
     private Date date;

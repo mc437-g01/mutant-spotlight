@@ -49,6 +49,7 @@ public class TestResultDAOImpl implements TestResultDAO {
     					qb.keyword().onFields(
     							"email",
     							"name",
+    							"date",
     							"testSetResults.id",
     							"testSetResults.cod",
     							"testSetResults.path",
@@ -76,7 +77,7 @@ public class TestResultDAOImpl implements TestResultDAO {
     							"testCases.testCaseEntries.testCaseEntryValue.datas.testCaseEntryValueDataTestOutput.enterTransition",
     							"testCases.testCaseEntries.testCaseEntryValue.datas.testCaseEntryValueDataTestOutput.livingState",
     							"testCases.testCaseEntries.testCaseEntryValue.datas.testCaseEntryValueDataTestOutput.output"
-    							).matching(criteria).createQuery(),
+    							).ignoreFieldBridge().matching(criteria).createQuery(),
     					TestResult.class);
     		} catch (Exception e) {
     			e.printStackTrace();
