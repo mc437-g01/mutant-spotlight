@@ -23,6 +23,8 @@
 </head>
 
 <body>
+    <div class="loader" style="display: none;"></div>
+
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -118,6 +120,10 @@
                 valid = false;
             } else {
                 $('#empty-name-error').addClass("hidden");
+            }
+
+            if (valid) {
+                $(".loader").fadeIn("fast");
             }
 
             return valid;
