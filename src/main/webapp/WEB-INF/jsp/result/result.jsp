@@ -132,6 +132,9 @@
                     <div style="display: none;" id="test_set_score"
                          test_set_id='<%=set.getCod()%>'
                          score="<%=set.getScore()%>"></div>
+                    <div style="display: none;" id="test_set_score<%=countSet%>"
+                         test_set_id='<%=set.getCod()%>'
+                         score="<%=set.getScore()%>"></div>
 					<div class="panel-body">
 						<div>
 						<b>Score:</b>
