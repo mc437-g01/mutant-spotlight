@@ -67,7 +67,7 @@ public class JpaConfiguration {
                 setProperty("hibernate.show_sq", "true");
                 setProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
                 setProperty("hibernate.search.default.directory_provider", "filesystem");
-                setProperty("hibernate.search.default.indexBase", System.getProperty("user.dir") + "/.lucene/indexes");
+                setProperty("hibernate.search.default.indexBase", System.getProperty("user.home") + "/.mutant-spotlight/lucene/indexes");
             }
         };
     }
