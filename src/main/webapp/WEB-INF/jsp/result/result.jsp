@@ -43,9 +43,17 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mutant Spotlight</title>
+
+    <script type="text/javascript">
+        $(window).load(function() {
+            $(".loader").fadeOut("fast");
+        })
+    </script>
 </head>
 
 <body>
+    <div class="loader"></div>
+
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
@@ -165,7 +173,7 @@
 								<div class="row">
 									<div class="col-md-8">
 										Caso de Teste
-										<%=extractNumber(getIdFromKey(testCase.getTestCaseKey()))%>:
+										<%=getIdFromKey(testCase.getTestCaseKey())%>:
 									</div>
 
 								</div>
@@ -409,8 +417,8 @@
 								for (TestCaseEntry entry : entries) {
 							%>
 						<tr>
-							<td><%= extractNumber(getIdFromKey(entry.getKey())) %></td>
-							<td><%= extractNumber(getSetFromKey(entry.getKey())) %></td>
+							<td><%= getIdFromKey(entry.getKey()) %></td>
+							<td><%= getSetFromKey(entry.getKey()) %></td>
 							<td><%= entry.getTestCaseEntryValue().getName() %></td>
 							<!-- <td><%= entry.getTestCaseEntryValue().toString()%></td> -->
 						</tr>

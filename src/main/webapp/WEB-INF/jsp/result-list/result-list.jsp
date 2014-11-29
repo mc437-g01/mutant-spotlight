@@ -25,9 +25,18 @@ SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 					.getWebJarPath("js/bootstrap.min.js")%>'></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mutant Spotlight</title>
+
+
+    <script type="text/javascript">
+        $(window).load(function() {
+            $(".loader").fadeOut("fast");
+        })
+    </script>
 </head>
 
 <body>
+    <div class="loader"></div>
+
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
