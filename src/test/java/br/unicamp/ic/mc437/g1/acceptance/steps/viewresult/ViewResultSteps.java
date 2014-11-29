@@ -1,13 +1,10 @@
 package br.unicamp.ic.mc437.g1.acceptance.steps.viewresult;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -16,11 +13,9 @@ import javax.annotation.Resource;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +61,6 @@ public class ViewResultSteps {
     @Given("there are results in the system")
     public void givenResultsInTheSystem() throws IOException {
         List<TestResult> testResults = testResultDAO.list();
-        if (testResults == null || testResults.isEmpty()) {
-            
         	// Primeiro teste
         	testResult1 = XmlUtils.readValue(testResult1Resource.getInputStream(), TestResult.class);
             testResult1.setName("test result 1");
@@ -78,18 +71,6 @@ public class ViewResultSteps {
             
             testResult1.setDate(calendar.getTime());
             testResult1 = testResultDAO.save(testResult1);
-            
-            // Teste 2 - cruise_result.toxml
-            testResult2 = XmlUtils.readValue(cruiseResultResource.getInputStream(), TestResult.class);
-            testResult2.setName("cruise result");
-            testResult2.setEmail("test@email.com");
-            Calendar calendar2 = Calendar.getInstance();
-            calendar2.clear();
-            calendar2.set(2014, 11, 14);
-            
-            testResult2.setDate(calendar2.getTime());
-            testResult2 = testResultDAO.save(testResult2);
-        }
     }
 
 	@Given("results page loaded")
@@ -141,13 +122,15 @@ public class ViewResultSteps {
 	
 	@When("I load a non-existent result url")
 	public void loadNonExistentResultUrl(){
-		driver.navigate().to(serverEndpoint + "/view_result/h40fn903_non_existent");
+		driver.navigate().to(serverEndpoint + "/result/h40fn903_non_existent");
 		
 	}
 	
 	@Then("the system redirects me to an error page")
 	public void redirectsErrorPage() {
-		assertEquals("The error page was not correctly loaded", serverEndpoint + "/error/error", driver.getCurrentUrl());
+		WebElement errorMessageElement = driver.findElement(By.id("error-message"));
+		
+		assertNotNull(errorMessageElement);
 	}
 	
 	@When("I type $criteria on filter input")
@@ -186,15 +169,4 @@ public class ViewResultSteps {
 		assertEquals(true, anyEquals);
 	}
 	
-//	@Then("the system lists only results uploaded on $date")
-//	public void listsResultsUploadedOn(String dateString) throws ParseException {
-//		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//		Date date = dateFormat.parse(dateString);
-//		List<WebElement> resultListDates = driver.findElements(By.cssSelector("#result_table tr td:nth-child(3) a"));
-//		
-//		for (WebElement resultListDate : resultListDates) {
-//			assertEquals(date, dateFormat.parse(resultListDate.getText()));
-//		}
-//	}
-//	
 }

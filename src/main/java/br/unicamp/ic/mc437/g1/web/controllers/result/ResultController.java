@@ -5,6 +5,7 @@ import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.model.service.ScoreService;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,18 @@ public class ResultController {
     }
 
     @RequestMapping("/result/{id}")
-    public String renderResult(@PathVariable Integer id, Model model) {
-        return renderResult(testResultDAO.findById(id), model);
+    public String renderResult(@PathVariable String id, Model model) {
+    	String response = "error/error";
+    	
+    	if (NumberUtils.isDigits(id)) {
+    		TestResult testResult = testResultDAO.findById(Integer.parseInt(id));
+    		
+    		if (testResult != null) {
+    			response = renderResult(testResult, model);
+    		}
+    	}
+    	
+    	return response;
     }
 
     private String renderResult(TestResult testResult, Model model) {
