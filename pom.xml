@@ -45,6 +45,12 @@
 		    <groupId>org.webjars</groupId>
 		    <artifactId>webjars-locator</artifactId>
 		    <version>0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		            
 		<dependency>
