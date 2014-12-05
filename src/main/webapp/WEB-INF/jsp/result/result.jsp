@@ -9,7 +9,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel='stylesheet'
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+	<link rel='stylesheet'
 	href='<%=request.getContextPath()%>/<%=org.webjars.AssetLocator
 					.getWebJarPath("css/bootstrap.min.css")%>'>
 <!-- <link rel='stylesheet'
@@ -239,10 +241,10 @@
 					<%=mutant.getContextId()%></p>
 				<p>
 					<b>Flag de Build:</b>
-					<%=mutant.getBuildFlag()%></p>
+					<%=yesNo(mutant.getBuildFlag())%></p>
 				<p>
 					<b>Conv Flag:</b>
-					<%=mutant.getConvFlag()%></p>
+					<%=yesNo(mutant.getConvFlag())%></p>
 				<p>
 					<b>Ignorar Erro:</b>
 					<%=yesNo(mutant.getIgnoreErrors())%></p>
