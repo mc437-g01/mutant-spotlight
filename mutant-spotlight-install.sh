@@ -11,8 +11,8 @@ if [ ! -d $TOMCAT_HOME ]; then
     wget http://ftp.unicamp.br/pub/apache/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -O $TOMCAT_HOME.tar.gz
     tar -zxvf $TOMCAT_HOME.tar.gz -C $MUTANT_SPOTLIGHT_HOME
     rm -f $TOMCAT_HOME.tar.gz
-#    wget https://github.com/mc437-g01/mutant-spotlight/raw/master/dist/0.0.1/mutant-spotlight.war
-    mv mutant-spotlight.war $TOMCAT_HOME/webapps
+    wget https://github.com/mc437-g01/mutant-spotlight/raw/master/dist/0.0.1/mutant-spotlight.war -O ~/mutant-spotlight.war
+    mv ~/mutant-spotlight.war $TOMCAT_HOME/webapps
 fi
 
 case "$1" in
