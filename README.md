@@ -3,6 +3,12 @@ Mutant Spotlight
 
 Web app que permite compartilhar resultados de testes de mutação.
 
+# INSTALL
+Rodar esse comando:
+```shell
+$ curl -L https://github.com/mc437-g01/mutant-spotlight/raw/master/mutant-spotlight-install.sh | bash -s start
+```
+
 Hardcore Way
 ========
 
