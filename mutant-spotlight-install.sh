@@ -1,42 +1,53 @@
-#!/bin/sh
+#!/bin/bash
 
 TOMCAT_VERSION=7.0.57
 MUTANT_SPOTLIGHT_HOME=~/.mutant-spotlight
 TOMCAT_HOME=$MUTANT_SPOTLIGHT_HOME/apache-tomcat-$TOMCAT_VERSION
 URL=http://localhost:8080/mutant-spotlight
 
-mkdir -p $MUTANT_SPOTLIGHT_HOME
+mkdir -p $MUTANT_SPOTLIGHT_HOME > /dev/null 2>&1
+
+echo " - mutant-spotlight -"
+echo
 
 if [ ! -d $TOMCAT_HOME ]; then
-    wget http://ftp.unicamp.br/pub/apache/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -O $TOMCAT_HOME.tar.gz
-    tar -zxvf $TOMCAT_HOME.tar.gz -C $MUTANT_SPOTLIGHT_HOME
-    rm -f $TOMCAT_HOME.tar.gz
-    wget https://github.com/mc437-g01/mutant-spotlight/raw/master/dist/0.0.1/mutant-spotlight.war -O ~/mutant-spotlight.war
+    echo -n "Installing... "
+    curl -L http://ftp.unicamp.br/pub/apache/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -o $TOMCAT_HOME.tar.gz > /dev/null 2>&1
+    tar -zxvf $TOMCAT_HOME.tar.gz -C $MUTANT_SPOTLIGHT_HOME > /dev/null 2>&1
+    rm -f $TOMCAT_HOME.tar.gz > /dev/null
+    curl -L https://github.com/mc437-g01/mutant-spotlight/raw/master/dist/0.0.1/mutant-spotlight.war -o ~/mutant-spotlight.war > /dev/null 2>&1
     mv ~/mutant-spotlight.war $TOMCAT_HOME/webapps
+
+    echo "OK"
 fi
 
 case "$1" in
     start)
-            echo -n "Starting mutant-spotlight:"
-            $TOMCAT_HOME/bin/startup.sh
-            echo "Opening mutant-spotlight at $URL..."
+            echo -n "Starting... "
+            $TOMCAT_HOME/bin/startup.sh > /dev/null 2>&1
+            echo "OK"
+            echo "Opening at $URL..."
             sleep 10
             python -m webbrowser $URL
+            
             ;;
    stop) 
-          echo -n "Stopping mutant-spotlight:"
-          $TOMCAT_HOME/bin/shutdown.sh
+          echo -n "Stopping... "
+          $TOMCAT_HOME/bin/shutdown.sh > /dev/null 2>&1
+          echo "OK"
            ;;
    restart)
-          echo -n "Stopping mutant-spotlight:"
-          $TOMCAT_HOME/bin/shutdown.sh
+          echo -n "Stopping... "
+          $TOMCAT_HOME/bin/shutdown.sh > /dev/null 2>&1
           sleep 2
-          echo -n "Starting mutant-spotlight:"
-            $TOMCAT_HOME/bin/startup.sh
-            echo "Opening mutant-spotlight at $URL..."
-	    sleep 10
-            python -m webbrowser $URL
-            ;;
+          echo "OK"
+          echo -n "Starting... "
+          $TOMCAT_HOME/bin/startup.sh > /dev/null 2>&1
+          echo "OK"
+          echo "Opening at $URL..."
+	  sleep 10
+          python -m webbrowser $URL
+          ;;
         *)
           echo "Usage: mutant-spotlight start|stop|restart"
           exit 1
