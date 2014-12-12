@@ -3,7 +3,7 @@
 TOMCAT_VERSION=7.0.57
 MUTANT_SPOTLIGHT_HOME=~/.mutant-spotlight
 TOMCAT_HOME=$MUTANT_SPOTLIGHT_HOME/apache-tomcat-$TOMCAT_VERSION
-URL=http://localhost:8080/mutant-spotlight
+URL=http://localhost:8081/mutant-spotlight
 
 mkdir -p $MUTANT_SPOTLIGHT_HOME > /dev/null 2>&1
 
