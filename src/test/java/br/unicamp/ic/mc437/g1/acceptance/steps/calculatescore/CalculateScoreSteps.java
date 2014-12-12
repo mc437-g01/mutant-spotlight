@@ -5,6 +5,7 @@ import br.unicamp.ic.mc437.g1.entity.TestResult;
 import br.unicamp.ic.mc437.g1.model.dao.TestResultDAO;
 import br.unicamp.ic.mc437.g1.model.service.ScoreService;
 import br.unicamp.ic.mc437.g1.util.XmlUtils;
+import com.google.common.collect.Sets;
 import org.apache.commons.io.FileUtils;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
@@ -24,9 +25,11 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 @Steps
 public class CalculateScoreSteps {
@@ -104,14 +107,37 @@ public class CalculateScoreSteps {
     public void whenIChooseATest() {
         List<WebElement> tableRows = retrieveTableRows();
 
-        int randomRow = new Random().nextInt((tableRows.size()));
-        WebElement tableRow = tableRows.get(randomRow);
-        List<WebElement> tds = tableRow.findElements(By.tagName("td"));
-        WebElement td = tds.get(1);
+        WebElement td;
+        Set<Integer> sortedRows = new HashSet<Integer>();
+        do {
+            int randomRow = new Random().nextInt((tableRows.size()));
+            sortedRows.add(randomRow);
 
+            WebElement tableRow = tableRows.get(randomRow);
+            List<WebElement> tds = tableRow.findElements(By.tagName("td"));
+            td = tds.get(1);
+
+            // check if the test result is valid for this test
+            WebElement nameTd = tds.get(1).findElement(By.tagName("a")); // get the name column
+            String currentTestFileName = nameTd.getText();
+            if (!isValidTestResult(loadedTestResults.keySet(), currentTestFileName)) {
+                td = null;
+            }
+        } while (td == null && sortedRows.size() < tableRows.size());
+
+        Assert.assertNotNull("It was not found a valid test set result in the list", td);
         fileLinkFound = td.findElement(By.tagName("a"));
 
         Assert.assertNotNull("The file was not found in the test result list", fileLinkFound);
+    }
+
+    private boolean isValidTestResult(Set<String> validTestSetResults, String currentTestFileName) {
+        for (String validTestSetResult : validTestSetResults) {
+            if (validTestSetResult.equalsIgnoreCase(currentTestFileName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @When("I choose the test $testFileName")

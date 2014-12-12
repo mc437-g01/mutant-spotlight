@@ -94,7 +94,7 @@ public class ViewResultSteps {
 			//do nothing. nothing to test.
 			this.byPassCauseOfRowCount = true;
 		} else {
-			int random_row = rand.nextInt((rowCount) + 1);
+			int random_row = rand.nextInt((rowCount));
 			WebElement row = tableRows.get(random_row);
 			List<WebElement> tds = row.findElements(By.tagName("td"));
 			WebElement td = tds.get(1);

@@ -164,7 +164,7 @@ public class VisualizeGraphSteps {
 
 	@When("the user visualizes the results report")
 	public void whenTheUserVisualizesTheResultsReport() {
-		driver.navigate().to("http://localhost:8080/mutant-spotlight/result-list");
+		driver.navigate().to(serverEndpoint + "/result-list");
 		//get a table
 		WebElement baseTable = driver.findElement(By.id("result_table"));
         WebElement tBody = baseTable.findElement(By.tagName("tbody"));
