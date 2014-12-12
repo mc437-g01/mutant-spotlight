@@ -15,6 +15,9 @@ if [ ! -d $TOMCAT_HOME ]; then
     curl -L http://ftp.unicamp.br/pub/apache/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz -o $TOMCAT_HOME.tar.gz > /dev/null 2>&1
     tar -zxvf $TOMCAT_HOME.tar.gz -C $MUTANT_SPOTLIGHT_HOME > /dev/null 2>&1
     rm -f $TOMCAT_HOME.tar.gz > /dev/null
+    # configuring tomcat to run on port 8081
+    sed -e 's/port="8080/port="8081/g' -i.bak $TOMCAT_HOME/conf/server.xml 
+
     curl -L https://github.com/mc437-g01/mutant-spotlight/raw/master/dist/0.0.1/mutant-spotlight.war -o ~/mutant-spotlight.war > /dev/null 2>&1
     mv ~/mutant-spotlight.war $TOMCAT_HOME/webapps
 
